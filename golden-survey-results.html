@@ -12,22 +12,106 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f5f3ee; color: #2d2d2d; min-height: 100vh; }
 
-  .hero { background: linear-gradient(135deg, #2c5f2e 0%, #4a8c4c 50%, #6aab5e 100%); color: white; padding: 56px 40px 48px; text-align: center; position: relative; overflow: hidden; }
+  .hero { background: linear-gradient(135deg, #2c5f2e 0%, #4a8c4c 50%, #6aab5e 100%); color: white; padding: 48px 40px 40px; text-align: center; position: relative; overflow: hidden; }
   .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,0.05); }
   .hero::after  { content:''; position:absolute; bottom:-80px; left:-40px; width:250px; height:250px; border-radius:50%; background:rgba(255,255,255,0.04); }
   .hero h1 { font-size:2.2rem; font-weight:700; letter-spacing:-0.5px; margin-bottom:10px; }
   .hero p  { font-size:1.05rem; opacity:0.85; max-width:600px; margin:0 auto; }
 
-  .stats-row { display:flex; gap:16px; padding:28px 32px; justify-content:center; flex-wrap:wrap; background:#fff; border-bottom:1px solid #e8e4dc; }
-  .stat-card { background:#f5f3ee; border-radius:12px; padding:20px 28px; text-align:center; min-width:130px; }
-  .stat-card .num   { font-size:2.4rem; font-weight:800; color:#2c5f2e; line-height:1; }
+  .stats-row { display:flex; gap:16px; padding:20px 32px; justify-content:center; flex-wrap:wrap; background:#fff; border-bottom:1px solid #e8e4dc; }
+  .stat-card { background:#f5f3ee; border-radius:12px; padding:16px 24px; text-align:center; min-width:120px; }
+  .stat-card .num   { font-size:2.2rem; font-weight:800; color:#2c5f2e; line-height:1; }
   .stat-card .label { font-size:0.78rem; color:#666; margin-top:6px; text-transform:uppercase; letter-spacing:0.5px; }
 
+  /* ── Top-level tab navigation ── */
+  .nav-tabs-container {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+    border-bottom: 2px solid #e8e4dc;
+    padding: 0 24px;
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs-container::-webkit-scrollbar { display: none; }
+  .nav-tab-btn {
+    padding: 14px 20px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #777;
+    transition: all 0.2s;
+    white-space: nowrap;
+    margin-bottom: -2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-tab-btn:hover { color: #2c5f2e; background: #f5f3ee; }
+  .nav-tab-btn.active { color: #2c5f2e; border-bottom-color: #2c5f2e; }
+  .nav-tab-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e8f0e9;
+    color: #2c5f2e;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .nav-tab-btn.active .nav-tab-num { background: #2c5f2e; color: white; }
+
+  /* ── Tab panels ── */
+  .tab-panel { display: none; animation: fadeIn 0.25s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Section header ── */
   .section-header { padding:28px 32px 4px; max-width:1400px; margin:0 auto; }
   .section-header h3 { font-size:1.15rem; font-weight:700; color:#1a3d1c; padding-bottom:8px; border-bottom:3px solid #2c5f2e; display:inline-block; }
   .section-header p  { font-size:0.85rem; color:#666; margin-top:6px; }
 
-  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:20px; padding:16px 32px 24px; max-width:1400px; margin:0 auto; }
+  /* ── Bottom prev/next nav ── */
+  .tab-footer-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .tab-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border: 2px solid #2c5f2e;
+    border-radius: 24px;
+    background: transparent;
+    color: #2c5f2e;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-nav-btn:hover:not(:disabled) { background: #2c5f2e; color: white; }
+  .tab-nav-btn:disabled { border-color: #ddd; color: #ccc; cursor: default; }
+  .tab-progress { font-size: 0.82rem; color: #999; font-weight: 500; }
+  .tab-progress strong { color: #2c5f2e; }
+
+  /* ── Grid + cards ── */
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:20px; padding:16px 32px 8px; max-width:1400px; margin:0 auto; }
   .grid-wide { grid-column:1/-1; }
 
   .card { background:#fff; border-radius:16px; padding:24px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
@@ -82,7 +166,7 @@
   .sp-50 { background:linear-gradient(135deg,#784212,#ca6f1e); color:white; }
   .sp-65 { background:linear-gradient(135deg,#512e5f,#8e44ad); color:white; }
 
-  /* Tabs */
+  /* Inner view-toggle tabs (grouped/radar) */
   .tab-row { display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
   .tab-btn { padding:6px 16px; border-radius:20px; border:2px solid #ddd; background:#f5f3ee; font-size:0.8rem; font-weight:600; cursor:pointer; transition:all 0.2s; color:#555; }
   .tab-btn.active { background:#2c5f2e; border-color:#2c5f2e; color:white; }
@@ -111,7 +195,43 @@
   .wc-legend { display:flex; gap:12px; margin-top:10px; flex-wrap:wrap; align-items:center; font-size:0.78rem; color:#666; }
   .wc-legend-swatch { display:inline-block; width:24px; height:10px; border-radius:5px; margin-right:4px; vertical-align:middle; }
 
-  footer { text-align:center; padding:24px; font-size:0.78rem; color:#999; border-top:1px solid #e8e4dc; margin-top:12px; }
+  footer { text-align:center; padding:24px; font-size:0.78rem; color:#999; border-top:1px solid #e8e4dc; margin-top:4px; }
+
+  /* ── Cost Analysis Tab ── */
+  .cost-disclaimer { background:linear-gradient(135deg,#fff8e1,#fffde7); border-left:4px solid #f9a825; border-radius:0 12px 12px 0; padding:14px 18px; font-size:0.83rem; color:#5d4037; line-height:1.55; margin-bottom:16px; }
+  .cost-disclaimer strong { color:#e65100; }
+  .cost-table-wrap { overflow-x:auto; }
+  .cost-table { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:720px; }
+  .cost-table th { padding:10px 12px; text-align:left; font-size:0.76rem; font-weight:700; color:#555; background:#f5f3ee; white-space:nowrap; cursor:pointer; user-select:none; border-bottom:2px solid #e8e4dc; transition:background 0.15s; }
+  .cost-table th:hover { background:#e8f0e9; color:#2c5f2e; }
+  .cost-table th.sorted-asc::after  { content:' ↑'; color:#2c5f2e; }
+  .cost-table th.sorted-desc::after { content:' ↓'; color:#2c5f2e; }
+  .cost-table td { padding:9px 12px; border-bottom:1px solid #f0ede8; vertical-align:middle; }
+  .cost-table tr:last-child td { border-bottom:none; }
+  .cost-table tr:hover td { background:#f9f8f5; }
+  .cost-table .stars { color:#2c5f2e; letter-spacing:1px; white-space:nowrap; font-size:0.85rem; }
+  .cost-table .dim-stars { color:#ddd; letter-spacing:1px; }
+  .tier-badge { display:inline-block; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:700; white-space:nowrap; }
+  .tier-badge-1 { background:#2c5f2e; color:white; }
+  .tier-badge-2 { background:#1565c0; color:white; }
+  .tier-badge-3 { background:#888; color:white; }
+  .tier-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+  .tier-card { border-radius:16px; padding:22px 22px 18px; box-shadow:0 2px 10px rgba(0,0,0,0.07); }
+  .tier-card h3 { font-size:1rem; font-weight:800; margin-bottom:3px; }
+  .tier-card .tier-sub { font-size:0.78rem; opacity:0.7; margin-bottom:14px; display:block; }
+  .tier-card .tier-rationale { font-size:0.81rem; line-height:1.6; margin-top:14px; border-top:1px solid rgba(0,0,0,0.08); padding-top:12px; }
+  .tier-pills { display:flex; flex-wrap:wrap; gap:6px; }
+  .tier-pill { border-radius:20px; padding:5px 12px; font-size:0.79rem; font-weight:600; }
+  .tier-card-1 { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border:1px solid #c8e6c9; }
+  .tier-card-1 h3 { color:#1b5e20; }
+  .tier-card-1 .tier-pill { background:#2c5f2e; color:white; }
+  .tier-card-2 { background:linear-gradient(135deg,#e3f2fd,#e8f4fd); border:1px solid #bbdefb; }
+  .tier-card-2 h3 { color:#0d47a1; }
+  .tier-card-2 .tier-pill { background:#1565c0; color:white; }
+  .tier-card-3 { background:linear-gradient(135deg,#f3e5f5,#fce4f8); border:1px solid #e1bee7; }
+  .tier-card-3 h3 { color:#4a148c; }
+  .tier-card-3 .tier-pill { background:#6a1b9a; color:white; }
+  .bubble-note { font-size:0.78rem; color:#777; text-align:center; margin-top:8px; }
 </style>
 </head>
 <body>
@@ -142,107 +262,246 @@
 
   <div class="stats-row" id="statsRow"></div>
 
-  <!-- ── Section 1: Overview ── -->
-  <div class="section-header">
-    <h3>Community Overview</h3>
-    <p>Who responded and how connected they feel to Golden</p>
-  </div>
-  <div class="grid">
-    <div class="card"><h2>Age Range</h2><div class="chart-wrap sm"><canvas id="ageChart"></canvas></div></div>
-    <div class="card">
-      <h2>Feel Connected to Golden Community?</h2>
-      <div class="callout"><div class="big" id="disconnPct">–</div><div class="sub">feel only "somewhat" connected or less — a clear case for community space</div></div>
-      <div class="chart-wrap sm"><canvas id="connChart"></canvas></div>
-    </div>
-    <div class="card"><h2>How Long in Golden?</h2><div class="chart-wrap sm"><canvas id="timeChart"></canvas></div></div>
-    <div class="card"><h2>Realistic Usage Frequency</h2><div class="chart-wrap sm"><canvas id="freqChart"></canvas></div></div>
-    <div class="card"><h2>What's Most Missing in Golden?</h2><div class="hbar-list" id="missingBars"></div></div>
-    <div class="card"><h2>How Respondents Describe Themselves</h2><div class="chart-wrap md"><canvas id="descChart"></canvas></div></div>
+  <!-- Tab navigation -->
+  <div class="nav-tabs-container" id="navTabs">
+    <button class="nav-tab-btn active" onclick="showTab(0)">
+      <span class="nav-tab-num">1</span>Community Overview
+    </button>
+    <button class="nav-tab-btn" onclick="showTab(1)">
+      <span class="nav-tab-num">2</span>Interests by Age
+    </button>
+    <button class="nav-tab-btn" onclick="showTab(2)">
+      <span class="nav-tab-num">3</span>Participation &amp; Involvement
+    </button>
+    <button class="nav-tab-btn" onclick="showTab(3)">
+      <span class="nav-tab-num">4</span>Community Voice
+    </button>
+    <button class="nav-tab-btn" onclick="showTab(4)">
+      <span class="nav-tab-num">5</span>Cost Analysis
+    </button>
   </div>
 
-  <!-- ── Section 2: Age × Interest ── -->
-  <div class="section-header">
-    <h3>Space Interests by Age Group</h3>
-    <p>Percentage of respondents in each age group who selected each activity</p>
-  </div>
-  <div class="grid">
-    <div class="card grid-wide">
-      <h2>% Interested in Each Activity — by Age Group</h2>
-      <div class="tab-row">
-        <button class="tab-btn active" onclick="showView('grouped')">Grouped Bars</button>
-        <button class="tab-btn" onclick="showView('radar')">Radar</button>
+  <!-- ── Tab 1: Community Overview ── -->
+  <div class="tab-panel active" id="tab-panel-0">
+    <div class="section-header">
+      <h3>Community Overview</h3>
+      <p>Who responded and how connected they feel to Golden</p>
+    </div>
+    <div class="grid">
+      <div class="card"><h2>Age Range</h2><div class="chart-wrap sm"><canvas id="ageChart"></canvas></div></div>
+      <div class="card">
+        <h2>Feel Connected to Golden Community?</h2>
+        <div class="callout"><div class="big" id="disconnPct">–</div><div class="sub">feel only "somewhat" connected or less — a clear case for community space</div></div>
+        <div class="chart-wrap sm"><canvas id="connChart"></canvas></div>
       </div>
-      <div id="view-grouped" class="chart-wrap lg"><canvas id="groupedChart"></canvas></div>
-      <div id="view-radar"   class="chart-wrap lg" style="display:none"><canvas id="radarChart"></canvas></div>
-      <div class="legend-row" id="ageLegend"></div>
+      <div class="card"><h2>How Long in Golden?</h2><div class="chart-wrap sm"><canvas id="timeChart"></canvas></div></div>
+      <div class="card"><h2>Realistic Usage Frequency</h2><div class="chart-wrap sm"><canvas id="freqChart"></canvas></div></div>
+      <div class="card"><h2>What's Most Missing in Golden?</h2><div class="hbar-list" id="missingBars"></div></div>
+      <div class="card"><h2>How Respondents Describe Themselves</h2><div class="chart-wrap md"><canvas id="descChart"></canvas></div></div>
     </div>
-
-    <div class="card grid-wide">
-      <h2>Interest Heatmap — % of Each Age Group Selecting Activity</h2>
-      <div class="heatmap-wrap"><table class="heatmap" id="heatmapTable"></table></div>
-      <p style="font-size:0.73rem;color:#999;margin-top:12px">Color intensity reflects % of that age group selecting the activity. Darker = higher interest.</p>
-    </div>
-
-    <div class="card grid-wide">
-      <h2>Age Group Spotlight — Distinctive Interests</h2>
-      <div class="spotlight-grid" id="spotlightGrid"></div>
+    <div class="tab-footer-nav">
+      <button class="tab-nav-btn" disabled>&larr; Previous</button>
+      <span class="tab-progress"><strong>1</strong> / 5</span>
+      <button class="tab-nav-btn" onclick="showTab(1)">Interests by Age &rarr;</button>
     </div>
   </div>
 
-  <!-- ── Section 3: Participation ── -->
-  <div class="section-header">
-    <h3>Participation &amp; Involvement</h3>
-    <p>How likely people are to use the space and how they want to contribute</p>
-  </div>
-  <div class="grid">
-    <div class="card grid-wide">
-      <h2>Likelihood of Participation by Activity</h2>
-      <div class="stacked-list" id="likelyBars"></div>
-      <div class="legend-row">
-        <div class="legend-item"><div class="legend-swatch" style="background:#2c5f2e"></div>Very Likely</div>
-        <div class="legend-item"><div class="legend-swatch" style="background:#6aab5e"></div>Somewhat Likely</div>
-        <div class="legend-item"><div class="legend-swatch" style="background:#c5d9c6"></div>Not Likely</div>
-      </div>
+  <!-- ── Tab 2: Age × Interest ── -->
+  <div class="tab-panel" id="tab-panel-1">
+    <div class="section-header">
+      <h3>Space Interests by Age Group</h3>
+      <p>Percentage of respondents in each age group who selected each activity</p>
     </div>
-    <div class="card"><h2>Ways People Want to Be Involved</h2><div class="hbar-list" id="involveBars"></div></div>
-    <div class="card"><h2>What Would Make It Easier to Participate?</h2><div class="hbar-list" id="easierBars"></div></div>
-    <div class="card"><h2>Overall Space Interests (All Ages)</h2><div class="hbar-list" id="interestBars"></div></div>
-  </div>
-
-  <!-- ── Section 4: Community Voice ── -->
-  <div class="section-header">
-    <h3>Community Voice</h3>
-    <p>Most frequent words from open-ended survey responses</p>
-  </div>
-  <div class="grid">
-    <div class="card grid-wide">
-      <h2>Word Cloud — What the Community is Saying</h2>
-      <div class="wc-filter-row">
-        <label>Show:</label>
-        <button class="filter-btn active" onclick="setFilter('all',this)">All Words</button>
-        <button class="filter-btn" onclick="setFilter('top20',this)">Top 20</button>
-        <button class="filter-btn" onclick="setFilter('top40',this)">Top 40</button>
-        <button class="filter-btn" onclick="setFilter('top80',this)">All 80</button>
-      </div>
-      <div id="cloud-container">
-        <svg id="cloud-svg" viewBox="0 0 960 520" preserveAspectRatio="xMidYMid meet"></svg>
-      </div>
-      <div class="source-note">
-        <strong>Source fields</strong> — words drawn from respondents' free-text answers to:
-        <div class="source-fields">
-          <span class="field-pill">What makes it hard to feel connected?</span>
-          <span class="field-pill">What would make the space welcoming?</span>
-          <span class="field-pill">What skills could you share?</span>
-          <span class="field-pill">How would you design the space?</span>
+    <div class="grid">
+      <div class="card grid-wide">
+        <h2>% Interested in Each Activity — by Age Group</h2>
+        <div class="tab-row">
+          <button class="tab-btn active" onclick="showView('grouped')">Grouped Bars</button>
+          <button class="tab-btn" onclick="showView('radar')">Radar</button>
         </div>
-        <div class="wc-legend">
-          <span><span class="wc-legend-swatch" style="background:linear-gradient(90deg,#2c5f2e,#5ea55f)"></span> Larger / darker = mentioned more often</span>
-          <span style="color:#bbb">·</span>
-          <span>Hover a word to see its count</span>
-          <span style="color:#bbb">·</span>
-          <span>Common words &amp; survey option text removed</span>
+        <div id="view-grouped" class="chart-wrap lg"><canvas id="groupedChart"></canvas></div>
+        <div id="view-radar"   class="chart-wrap lg" style="display:none"><canvas id="radarChart"></canvas></div>
+        <div class="legend-row" id="ageLegend"></div>
+      </div>
+
+      <div class="card grid-wide">
+        <h2>Interest Heatmap — % of Each Age Group Selecting Activity</h2>
+        <div class="heatmap-wrap"><table class="heatmap" id="heatmapTable"></table></div>
+        <p style="font-size:0.73rem;color:#999;margin-top:12px">Color intensity reflects % of that age group selecting the activity. Darker = higher interest.</p>
+      </div>
+
+      <div class="card grid-wide">
+        <h2>Age Group Spotlight — Distinctive Interests</h2>
+        <div class="spotlight-grid" id="spotlightGrid"></div>
+      </div>
+    </div>
+    <div class="tab-footer-nav">
+      <button class="tab-nav-btn" onclick="showTab(0)">&larr; Community Overview</button>
+      <span class="tab-progress"><strong>2</strong> / 5</span>
+      <button class="tab-nav-btn" onclick="showTab(2)">Participation &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Tab 3: Participation ── -->
+  <div class="tab-panel" id="tab-panel-2">
+    <div class="section-header">
+      <h3>Participation &amp; Involvement</h3>
+      <p>How likely people are to use the space and how they want to contribute</p>
+    </div>
+    <div class="grid">
+      <div class="card grid-wide">
+        <h2>Likelihood of Participation by Activity</h2>
+        <div class="stacked-list" id="likelyBars"></div>
+        <div class="legend-row">
+          <div class="legend-item"><div class="legend-swatch" style="background:#2c5f2e"></div>Very Likely</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#6aab5e"></div>Somewhat Likely</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#c5d9c6"></div>Not Likely</div>
         </div>
       </div>
+      <div class="card"><h2>Ways People Want to Be Involved</h2><div class="hbar-list" id="involveBars"></div></div>
+      <div class="card"><h2>What Would Make It Easier to Participate?</h2><div class="hbar-list" id="easierBars"></div></div>
+      <div class="card"><h2>Overall Space Interests (All Ages)</h2><div class="hbar-list" id="interestBars"></div></div>
+    </div>
+    <div class="tab-footer-nav">
+      <button class="tab-nav-btn" onclick="showTab(1)">&larr; Interests by Age</button>
+      <span class="tab-progress"><strong>3</strong> / 5</span>
+      <button class="tab-nav-btn" onclick="showTab(3)">Community Voice &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Tab 4: Community Voice ── -->
+  <div class="tab-panel" id="tab-panel-3">
+    <div class="section-header">
+      <h3>Community Voice</h3>
+      <p>Most frequent words from open-ended survey responses</p>
+    </div>
+    <div class="grid">
+      <div class="card grid-wide">
+        <h2>Word Cloud — What the Community is Saying</h2>
+        <div class="wc-filter-row">
+          <label>Show:</label>
+          <button class="filter-btn active" onclick="setFilter('all',this)">All Words</button>
+          <button class="filter-btn" onclick="setFilter('top20',this)">Top 20</button>
+          <button class="filter-btn" onclick="setFilter('top40',this)">Top 40</button>
+          <button class="filter-btn" onclick="setFilter('top80',this)">All 80</button>
+        </div>
+        <div id="cloud-container">
+          <svg id="cloud-svg" viewBox="0 0 960 520" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="source-note">
+          <strong>Source fields</strong> — words drawn from respondents' free-text answers to:
+          <div class="source-fields">
+            <span class="field-pill">What makes it hard to feel connected?</span>
+            <span class="field-pill">What would make the space welcoming?</span>
+            <span class="field-pill">What skills could you share?</span>
+            <span class="field-pill">How would you design the space?</span>
+          </div>
+          <div class="wc-legend">
+            <span><span class="wc-legend-swatch" style="background:linear-gradient(90deg,#2c5f2e,#5ea55f)"></span> Larger / darker = mentioned more often</span>
+            <span style="color:#bbb">&middot;</span>
+            <span>Hover a word to see its count</span>
+            <span style="color:#bbb">&middot;</span>
+            <span>Common words &amp; survey option text removed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-footer-nav">
+      <button class="tab-nav-btn" onclick="showTab(2)">&larr; Participation</button>
+      <span class="tab-progress"><strong>4</strong> / 5</span>
+      <button class="tab-nav-btn" onclick="showTab(4)">Cost Analysis &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Tab 5: Cost Analysis ── -->
+  <div class="tab-panel" id="tab-panel-4">
+    <div class="section-header">
+      <h3>Startup Cost Analysis</h3>
+      <p>Equipment, utilities &amp; operational costs per activity — space/rent excluded. Benchmark: Clear Creek Makerspace quality level.</p>
+    </div>
+    <div class="grid">
+      <div class="card grid-wide">
+        <div class="cost-disclaimer">
+          <strong>Note:</strong> All estimates cover equipment, utilities, and operational consumables only — physical space cost is excluded.
+          Equipment quality benchmark: <strong>Clear Creek Makerspace</strong> (Golden, CO), which invested $250k+ across Fab Lab, Metal Shop, and Woodshop in 7,500 sq ft.
+          Bubble size below reflects monthly operating cost; position reflects interest vs. upfront investment.
+        </div>
+        <h2>Interest vs. Investment (bubble = monthly ops cost)</h2>
+        <div class="chart-wrap" style="height:380px">
+          <canvas id="costBubbleChart"></canvas>
+        </div>
+        <p class="bubble-note">Hover over bubbles for details &bull; X = overall community interest &bull; Y = upfront cost midpoint &bull; Bubble size = monthly operating cost</p>
+      </div>
+
+      <div class="card grid-wide">
+        <h2>Full Comparison — click any column header to sort</h2>
+        <div class="cost-table-wrap">
+          <table class="cost-table" id="costTable">
+            <thead>
+              <tr>
+                <th data-col="0">Activity</th>
+                <th data-col="1">Interest %</th>
+                <th data-col="2">Top Priorities</th>
+                <th data-col="3">Upfront Cost</th>
+                <th data-col="4">Monthly Ops</th>
+                <th data-col="5">Buildout</th>
+                <th data-col="6">Ongoing</th>
+                <th data-col="7">Tier</th>
+              </tr>
+            </thead>
+            <tbody id="costTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card grid-wide">
+        <h2>Recommended Rollout Tiers</h2>
+        <div class="tier-cards">
+          <div class="tier-card tier-card-1">
+            <h3>Tier 1 — Start Now</h3>
+            <span class="tier-sub">High interest &bull; Low-medium cost &bull; Simple compliance</span>
+            <div class="tier-pills">
+              <span class="tier-pill">Talks / Events / Clubs</span>
+              <span class="tier-pill">Outdoor Skills</span>
+              <span class="tier-pill">Repair Clinics</span>
+              <span class="tier-pill">Sewing / Fiber Arts</span>
+            </div>
+            <p class="tier-rationale">
+              Talks and events provide foundational infrastructure every other activity shares — chairs, A/V, tables. Outdoor skills are nearly free to launch with strong, consistent community interest. Repair clinics and sewing both have solid demand, low compliance burden, and grow well incrementally.
+            </p>
+          </div>
+          <div class="tier-card tier-card-2">
+            <h3>Tier 2 — Plan &amp; Fund</h3>
+            <span class="tier-sub">Strong passion signal &bull; Medium investment &bull; Manageable compliance</span>
+            <div class="tier-pills">
+              <span class="tier-pill">3D Printing / Design</span>
+              <span class="tier-pill">Painting / Printmaking</span>
+              <span class="tier-pill">Woodworking</span>
+            </div>
+            <p class="tier-rationale">
+              3D Printing ranks <strong>#1 in top priorities</strong> despite modest overall interest — enthusiasts are highly motivated. Painting has a strong passion-to-cost ratio; watch supply burn. Woodworking has consistent demand and manageable buildout with the right safety investment (SawStop is non-negotiable).
+            </p>
+          </div>
+          <div class="tier-card tier-card-3">
+            <h3>Tier 3 — Long Game</h3>
+            <span class="tier-sub">High cost or compliance &bull; Or weaker demand signal</span>
+            <div class="tier-pills">
+              <span class="tier-pill">Community Kitchen</span>
+              <span class="tier-pill">Ceramics</span>
+              <span class="tier-pill">Metalworking / Welding</span>
+              <span class="tier-pill">Small Business Dev</span>
+            </div>
+            <p class="tier-rationale">
+              Community Kitchen is the most desired activity but carries the highest regulatory and capital bar — health dept certification, licensed HVAC/fire contractor, NSF equipment. Ceramics shows many curious but few committed (only 5 top-priority picks). Metalworking has the lowest passion signal and highest ongoing safety burden; revisit after woodshop is established. Small Business Dev absorbs into the events space.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-footer-nav">
+      <button class="tab-nav-btn" onclick="showTab(3)">&larr; Community Voice</button>
+      <span class="tab-progress"><strong>5</strong> / 5</span>
+      <button class="tab-nav-btn" disabled>End &check;</button>
     </div>
   </div>
 
@@ -417,6 +676,41 @@ function showView(v) {
 }
 
 // ═══════════════════════════════════════════════════════════
+// TAB NAVIGATION
+// ═══════════════════════════════════════════════════════════
+const TAB_COUNT = 5;
+let currentTab = 0;
+
+function showTab(idx) {
+  // Hide all panels
+  for (let i = 0; i < TAB_COUNT; i++) {
+    document.getElementById('tab-panel-' + i).classList.remove('active');
+  }
+  // Update nav buttons
+  document.querySelectorAll('.nav-tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i === idx);
+  });
+  // Show target panel
+  document.getElementById('tab-panel-' + idx).classList.add('active');
+  currentTab = idx;
+
+  // If switching to Community Voice tab, redraw cloud (ensures correct sizing)
+  if (idx === 3) {
+    drawCloud(getWords(currentFilter));
+  }
+
+  // Scroll to top of nav
+  document.getElementById('navTabs').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'ArrowRight' && currentTab < TAB_COUNT - 1) showTab(currentTab + 1);
+  if (e.key === 'ArrowLeft'  && currentTab > 0)             showTab(currentTab - 1);
+});
+
+// ═══════════════════════════════════════════════════════════
 // MAIN — called after CSV parse
 // ═══════════════════════════════════════════════════════════
 function buildDashboard(rows) {
@@ -479,6 +773,14 @@ function buildDashboard(rows) {
     <div class="stat-card"><div class="num">${Math.round(veryLikelyClasses/n*100)}%</div><div class="label">Very Likely: Classes</div></div>
   `;
   document.getElementById('disconnPct').textContent = disconnPct + '%';
+
+  // Temporarily show all panels so charts render at correct size
+  for (let i = 0; i < TAB_COUNT; i++) {
+    const p = document.getElementById('tab-panel-' + i);
+    p.style.display = 'block';
+    p.style.visibility = 'hidden';
+    p.style.position = 'absolute';
+  }
 
   // ── Age donut ─────────────────────────────────────────────
   const ageOrder = AGE_ORDER.filter(a => ageCounts[a]);
@@ -632,12 +934,24 @@ function buildDashboard(rows) {
   document.getElementById('footerBar').innerHTML =
     `Survey: "Help Shape a New Place to Gather in Golden" &bull; ${n} responses &bull; Latest response: ${latest}`;
 
+  // Restore panels — show only the first tab
+  for (let i = 0; i < TAB_COUNT; i++) {
+    const p = document.getElementById('tab-panel-' + i);
+    p.style.display = '';
+    p.style.visibility = '';
+    p.style.position = '';
+    p.classList.toggle('active', i === 0);
+  }
+
   // Show dashboard
   document.getElementById('loading').style.display   = 'none';
   document.getElementById('dashboard').style.display = 'block';
 
-  // ── Word cloud (init after dashboard is visible) ──────────
+  // ── Word cloud (draw after dashboard is visible — will redraw when tab 4 opens) ──
   drawCloud(getWords('all'));
+
+  // ── Cost Analysis tab ──
+  buildCostTab();
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -786,6 +1100,161 @@ function setFilter(filter, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   drawCloud(getWords(filter));
+}
+
+// ═══════════════════════════════════════════════════════════
+// COST ANALYSIS TAB
+// ═══════════════════════════════════════════════════════════
+const COST_DATA = [
+  { name:'Outdoor Skills',         interest:55, topPriority:16, upfrontLow:5,   upfrontHigh:15,  monthlyLow:300,  monthlyHigh:700,  buildout:1, ongoing:2, tier:1 },
+  { name:'Talks / Events / Clubs', interest:48, topPriority:13, upfrontLow:8,   upfrontHigh:18,  monthlyLow:150,  monthlyHigh:300,  buildout:1, ongoing:1, tier:1 },
+  { name:'Small Business Dev',     interest:23, topPriority:6,  upfrontLow:3,   upfrontHigh:10,  monthlyLow:200,  monthlyHigh:400,  buildout:1, ongoing:1, tier:3 },
+  { name:'Repair Clinics',         interest:47, topPriority:9,  upfrontLow:8,   upfrontHigh:17,  monthlyLow:250,  monthlyHigh:500,  buildout:2, ongoing:2, tier:1 },
+  { name:'Sewing / Fiber Arts',    interest:46, topPriority:9,  upfrontLow:12,  upfrontHigh:25,  monthlyLow:250,  monthlyHigh:500,  buildout:2, ongoing:2, tier:1 },
+  { name:'Painting / Printmaking', interest:39, topPriority:14, upfrontLow:8,   upfrontHigh:22,  monthlyLow:600,  monthlyHigh:1800, buildout:2, ongoing:2, tier:2 },
+  { name:'3D Printing / Design',   interest:38, topPriority:18, upfrontLow:10,  upfrontHigh:28,  monthlyLow:400,  monthlyHigh:1000, buildout:2, ongoing:3, tier:2 },
+  { name:'Ceramics',               interest:47, topPriority:5,  upfrontLow:18,  upfrontHigh:40,  monthlyLow:500,  monthlyHigh:1100, buildout:3, ongoing:3, tier:3 },
+  { name:'Woodworking',            interest:49, topPriority:11, upfrontLow:25,  upfrontHigh:50,  monthlyLow:500,  monthlyHigh:1000, buildout:4, ongoing:4, tier:2 },
+  { name:'Community Kitchen',      interest:60, topPriority:16, upfrontLow:35,  upfrontHigh:70,  monthlyLow:1000, monthlyHigh:2200, buildout:5, ongoing:4, tier:3 },
+  { name:'Metalworking / Welding', interest:49, topPriority:4,  upfrontLow:20,  upfrontHigh:45,  monthlyLow:300,  monthlyHigh:800,  buildout:5, ongoing:5, tier:3 },
+];
+
+let costSortCol = 1;   // default: interest
+let costSortDir = -1;  // -1 = desc
+
+function starsHtml(n) {
+  return '<span class="stars">' + '★'.repeat(n) + '</span><span class="dim-stars">' + '☆'.repeat(5 - n) + '</span>';
+}
+
+function tierLabel(t) {
+  return t === 1 ? 'Start Now' : t === 2 ? 'Plan & Fund' : 'Long Game';
+}
+
+function renderCostTable(col, dir) {
+  costSortCol = col;
+  costSortDir = dir;
+
+  // Numeric value for sorting each column index
+  const getVal = (d, c) => {
+    switch(c) {
+      case 0: return d.name.toLowerCase();
+      case 1: return d.interest;
+      case 2: return d.topPriority;
+      case 3: return (d.upfrontLow + d.upfrontHigh) / 2;
+      case 4: return (d.monthlyLow + d.monthlyHigh) / 2;
+      case 5: return d.buildout;
+      case 6: return d.ongoing;
+      case 7: return d.tier;
+      default: return 0;
+    }
+  };
+
+  const sorted = [...COST_DATA].sort((a, b) => {
+    const va = getVal(a, col), vb = getVal(b, col);
+    if (typeof va === 'string') return dir * va.localeCompare(vb);
+    return dir * (va - vb);
+  });
+
+  const tbody = document.getElementById('costTableBody');
+  tbody.innerHTML = sorted.map(d => `
+    <tr>
+      <td><strong>${d.name}</strong></td>
+      <td>${d.interest}%</td>
+      <td>${d.topPriority}</td>
+      <td>$${d.upfrontLow}–${d.upfrontHigh}k</td>
+      <td>$${d.monthlyLow.toLocaleString()}–${d.monthlyHigh.toLocaleString()}/mo</td>
+      <td>${starsHtml(d.buildout)}</td>
+      <td>${starsHtml(d.ongoing)}</td>
+      <td><span class="tier-badge tier-badge-${d.tier}">${tierLabel(d.tier)}</span></td>
+    </tr>`).join('');
+
+  // Update sort indicators
+  document.querySelectorAll('#costTable th').forEach(th => {
+    th.classList.remove('sorted-asc', 'sorted-desc');
+    if (+th.dataset.col === col) th.classList.add(dir === 1 ? 'sorted-asc' : 'sorted-desc');
+  });
+}
+
+function sortCostTable(th) {
+  const col = +th.dataset.col;
+  const dir = (col === costSortCol) ? -costSortDir : -1;
+  renderCostTable(col, dir);
+}
+
+function buildCostTab() {
+  // Wire up sortable headers
+  document.querySelectorAll('#costTable th').forEach(th => {
+    th.addEventListener('click', () => sortCostTable(th));
+  });
+
+  // Initial table render (sorted by interest desc)
+  renderCostTable(1, -1);
+
+  // Bubble chart
+  const tierColors  = { 1:'#2c5f2e', 2:'#1565c0', 3:'#6a1b9a' };
+  const tierAlphas  = { 1:'#2c5f2ecc', 2:'#1565c0cc', 3:'#6a1b9acc' };
+  const tierLabels  = { 1:'Tier 1 — Start Now', 2:'Tier 2 — Plan & Fund', 3:'Tier 3 — Long Game' };
+
+  const datasets = [1, 2, 3].map(tier => ({
+    label: tierLabels[tier],
+    data: COST_DATA.filter(d => d.tier === tier).map(d => {
+      const monthlyMid = (d.monthlyLow + d.monthlyHigh) / 2;
+      return {
+        x: d.interest,
+        y: (d.upfrontLow + d.upfrontHigh) / 2,
+        r: Math.max(6, 5 * Math.sqrt(monthlyMid / 225)),
+        name: d.name,
+        topPriority: d.topPriority,
+        monthlyMid: monthlyMid,
+        upfrontRange: `$${d.upfrontLow}–${d.upfrontHigh}k`,
+      };
+    }),
+    backgroundColor: tierAlphas[tier],
+    borderColor: tierColors[tier],
+    borderWidth: 2,
+  }));
+
+  new Chart(document.getElementById('costBubbleChart').getContext('2d'), {
+    type: 'bubble',
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: { display:true, text:'Overall Community Interest (%)', font:{size:12} },
+          min: 10, max: 70,
+          grid: { color:'#f0ede8' },
+        },
+        y: {
+          title: { display:true, text:'Upfront Cost — midpoint ($ thousands)', font:{size:12} },
+          min: 0, max: 80,
+          grid: { color:'#f0ede8' },
+        },
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const d = ctx.raw;
+              return [
+                ' ' + d.name,
+                ` Interest: ${d.x}%  |  Top priorities: ${d.topPriority}`,
+                ` Upfront: ${d.upfrontRange}`,
+                ` Monthly ops: ~$${Math.round(d.monthlyMid).toLocaleString()}/mo`,
+              ];
+            },
+            title: () => '',
+          },
+          backgroundColor:'#1a3d1c',
+          padding:12,
+          cornerRadius:10,
+          displayColors:false,
+        },
+        legend: { position:'bottom', labels:{ padding:20, font:{size:12} } },
+      },
+    },
+  });
 }
 </script>
 </body>
