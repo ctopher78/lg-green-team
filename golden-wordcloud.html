@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Community Survey — Word Cloud</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f5f3ee;
+    color: #2d2d2d;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #2c5f2e 0%, #4a8c4c 50%, #6aab5e 100%);
+    color: white;
+    padding: 40px 40px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:260px; height:260px; border-radius:50%; background:rgba(255,255,255,0.05); }
+  .hero::after  { content:''; position:absolute; bottom:-70px; left:-40px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,0.04); }
+  .hero h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 6px; position: relative; }
+  .hero p  { font-size: 0.95rem; opacity: 0.8; position: relative; }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 24px;
+    background: #fff;
+    border-bottom: 1px solid #e8e4dc;
+    flex-wrap: wrap;
+  }
+  .controls label { font-size: 0.8rem; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  .filter-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid #ddd;
+    background: #f5f3ee;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+    color: #555;
+  }
+  .filter-btn.active { background: #2c5f2e; border-color: #2c5f2e; color: white; }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 8px;
+  }
+
+  #cloud-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 960px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #cloud-svg { display: block; width: 100%; }
+
+  /* Tooltip */
+  .tooltip {
+    position: fixed;
+    background: #1a3d1c;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 100;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .tooltip .word   { font-weight: 700; font-size: 1rem; }
+  .tooltip .count  { opacity: 0.75; font-size: 0.78rem; margin-top: 1px; }
+
+  /* Legend / Source note */
+  .source-note {
+    max-width: 960px;
+    width: 100%;
+    margin: 12px auto 0;
+    background: white;
+    border-radius: 14px;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  .source-note strong { color: #2c5f2e; }
+  .source-fields { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .field-pill {
+    background: #e8f5e9;
+    color: #2c5f2e;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.74rem;
+    font-weight: 600;
+  }
+
+  .legend-row {
+    display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; align-items: center;
+    font-size: 0.78rem; color: #666;
+  }
+  .legend-swatch {
+    display: inline-block; width: 24px; height: 10px; border-radius: 5px; margin-right: 4px; vertical-align: middle;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Community Voice — Word Cloud</h1>
+  <p>Most frequent words from open-ended survey responses &mdash; Golden, Colorado</p>
+</div>
+
+<div class="controls">
+  <label>Show:</label>
+  <button class="filter-btn active" onclick="setFilter('all',this)">All Words</button>
+  <button class="filter-btn" onclick="setFilter('top20',this)">Top 20</button>
+  <button class="filter-btn" onclick="setFilter('top40',this)">Top 40</button>
+  <button class="filter-btn" onclick="setFilter('top80',this)">All 80</button>
+</div>
+
+<div class="main">
+  <div id="cloud-container">
+    <svg id="cloud-svg" viewBox="0 0 960 520" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
+
+  <div class="source-note">
+    <strong>Source fields</strong> — words drawn from respondents' free-text answers to:
+    <div class="source-fields">
+      <span class="field-pill">What makes it hard to feel connected?</span>
+      <span class="field-pill">What would make the space welcoming?</span>
+      <span class="field-pill">What skills could you share?</span>
+      <span class="field-pill">How would you design the space?</span>
+    </div>
+    <div class="legend-row">
+      <span><span class="legend-swatch" style="background:linear-gradient(90deg,#2c5f2e,#5ea55f)"></span> Larger / darker = mentioned more often</span>
+      <span style="color:#bbb">·</span>
+      <span>Hover a word to see its count</span>
+      <span style="color:#bbb">·</span>
+      <span>Common words &amp; survey option text removed</span>
+    </div>
+  </div>
+</div>
+
+<footer>Survey: "Help Shape a New Place to Gather in Golden" &bull; 77 responses &bull; March 2026</footer>
+
+<div class="tooltip" id="tooltip">
+  <div class="word" id="tt-word"></div>
+  <div class="count" id="tt-count"></div>
+</div>
+
+<script>
+// ── Word data ────────────────────────────────────────────────
+const ALL_WORDS = [
+  {"text":"pricing","count":18},{"text":"atmosphere","count":18},
+  {"text":"mix","count":13},{"text":"free","count":13},
+  {"text":"ages","count":12},{"text":"programming","count":12},{"text":"kids","count":12},
+  {"text":"open","count":11},{"text":"events","count":11},{"text":"classes","count":11},
+  {"text":"spaces","count":10},{"text":"library","count":10},{"text":"work","count":10},
+  {"text":"area","count":9},{"text":"cooking","count":9},{"text":"age","count":9},
+  {"text":"outdoor","count":8},{"text":"love","count":8},
+  {"text":"activities","count":7},{"text":"center","count":7},{"text":"learn","count":7},
+  {"text":"sewing","count":7},{"text":"art","count":7},{"text":"opportunities","count":7},
+  {"text":"location","count":7},{"text":"meet","count":7},{"text":"design","count":7},
+  {"text":"adults","count":6},{"text":"welcoming","count":6},
+  {"text":"downtown","count":5},{"text":"cozy","count":5},{"text":"beer","count":5},
+  {"text":"food","count":5},{"text":"natural","count":5},{"text":"light","count":5},
+  {"text":"music","count":5},{"text":"style","count":5},{"text":"areas","count":5},
+  {"text":"family","count":5},{"text":"accessible","count":5},{"text":"children","count":5},
+  {"text":"friends","count":5},{"text":"older","count":5},{"text":"locals","count":5},
+  {"text":"skills","count":5},{"text":"technology","count":5},{"text":"school","count":5},
+  {"text":"groups","count":5},
+  {"text":"gardening","count":4},{"text":"bike","count":4},{"text":"small","count":4},
+  {"text":"central","count":4},{"text":"nice","count":4},{"text":"kitchen","count":4},
+  {"text":"hours","count":4},{"text":"repair","count":4},{"text":"friendly","count":4},
+  {"text":"foothills","count":4},{"text":"together","count":4},{"text":"connect","count":4},
+  {"text":"students","count":4},{"text":"share","count":4},{"text":"maker","count":4},
+  {"text":"business","count":4},{"text":"woodworking","count":4},{"text":"easy","count":4},
+  {"text":"makerspace","count":4},
+  {"text":"flexible","count":3},{"text":"mixed","count":3},{"text":"couches","count":3},
+  {"text":"chairs","count":3},{"text":"places","count":3},{"text":"dance","count":3},
+  {"text":"indoor","count":3},{"text":"outside","count":3},{"text":"plants","count":3},
+  {"text":"teens","count":3},{"text":"arts","count":3},{"text":"families","count":3},
+  {"text":"residents","count":3},
+];
+
+// ── Color scale ───────────────────────────────────────────────
+// Bins by count: high (≥10) → dark green, mid (5-9) → mid green, low (3-4) → muted teal
+const colorScale = d => {
+  if (d.count >= 14) return '#1a3d1c';
+  if (d.count >= 10) return '#2c5f2e';
+  if (d.count >= 7)  return '#3d7a3f';
+  if (d.count >= 5)  return '#5ea55f';
+  if (d.count >= 4)  return '#7ec47e';
+  return '#9ed49f';
+};
+
+// ── Font size scale ───────────────────────────────────────────
+const maxCount = ALL_WORDS[0].count;
+const minCount = ALL_WORDS[ALL_WORDS.length - 1].count;
+const sizeScale = d3.scaleLog()
+  .domain([minCount, maxCount])
+  .range([14, 72])
+  .clamp(true);
+
+// ── State ─────────────────────────────────────────────────────
+let currentFilter = 'all';
+let layoutRunning = false;
+
+function getWords(filter) {
+  if (filter === 'top20') return ALL_WORDS.slice(0, 20);
+  if (filter === 'top40') return ALL_WORDS.slice(0, 40);
+  return ALL_WORDS; // all 80
+}
+
+// ── Tooltip ───────────────────────────────────────────────────
+const tooltip = document.getElementById('tooltip');
+const ttWord  = document.getElementById('tt-word');
+const ttCount = document.getElementById('tt-count');
+
+function showTooltip(e, d) {
+  ttWord.textContent  = d.text;
+  ttCount.textContent = `mentioned ${d.count} time${d.count !== 1 ? 's' : ''}`;
+  tooltip.style.opacity = '1';
+  moveTooltip(e);
+}
+function moveTooltip(e) {
+  tooltip.style.left = (e.clientX + 14) + 'px';
+  tooltip.style.top  = (e.clientY - 36) + 'px';
+}
+function hideTooltip() { tooltip.style.opacity = '0'; }
+
+// ── Cloud layout ──────────────────────────────────────────────
+const W = 960, H = 520;
+const svg = d3.select('#cloud-svg');
+let group = svg.append('g').attr('transform', `translate(${W/2},${H/2})`);
+
+function drawCloud(words) {
+  if (layoutRunning) return;
+  layoutRunning = true;
+  svg.selectAll('g').remove();
+  group = svg.append('g').attr('transform', `translate(${W/2},${H/2})`);
+
+  d3.layout.cloud()
+    .size([W, H])
+    .words(words.map(d => ({ text: d.text, count: d.count, size: sizeScale(d.count) })))
+    .padding(4)
+    .rotate(() => (Math.random() < 0.75 ? 0 : 90))
+    .font('Segoe UI, system-ui, sans-serif')
+    .fontWeight(d => d.count >= 8 ? 700 : 500)
+    .fontSize(d => d.size)
+    .on('end', placed => {
+      layoutRunning = false;
+      group.selectAll('text')
+        .data(placed)
+        .enter().append('text')
+        .style('font-size',    d => d.size + 'px')
+        .style('font-family', 'Segoe UI, system-ui, sans-serif')
+        .style('font-weight', d => d.count >= 8 ? 700 : 500)
+        .style('fill',        d => colorScale(d))
+        .style('cursor',      'default')
+        .attr('text-anchor', 'middle')
+        .attr('transform',   d => `translate(${d.x},${d.y}) rotate(${d.rotate})`)
+        .style('opacity', 0)
+        .text(d => d.text)
+        .on('mouseover', (e, d) => showTooltip(e, d))
+        .on('mousemove', moveTooltip)
+        .on('mouseout',  hideTooltip)
+        .transition().duration(500)
+        .delay((_, i) => i * 18)
+        .style('opacity', 1);
+    })
+    .start();
+}
+
+// ── Filter control ────────────────────────────────────────────
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  drawCloud(getWords(filter));
+}
+
+// ── Init ──────────────────────────────────────────────────────
+drawCloud(getWords('all'));
+</script>
+</body>
+</html>
