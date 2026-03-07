@@ -12,11 +12,16 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f5f3ee; color: #2d2d2d; min-height: 100vh; }
 
-  .hero { background: linear-gradient(135deg, #2c5f2e 0%, #4a8c4c 50%, #6aab5e 100%); color: white; padding: 48px 40px 40px; text-align: center; position: relative; overflow: hidden; }
-  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,0.05); }
-  .hero::after  { content:''; position:absolute; bottom:-80px; left:-40px; width:250px; height:250px; border-radius:50%; background:rgba(255,255,255,0.04); }
-  .hero h1 { font-size:2.2rem; font-weight:700; letter-spacing:-0.5px; margin-bottom:10px; }
-  .hero p  { font-size:1.05rem; opacity:0.85; max-width:600px; margin:0 auto; }
+  .hero {
+    background: linear-gradient(rgba(15,40,15,0.62), rgba(15,40,15,0.72)), url('golden.jpeg') center/cover no-repeat;
+    color: white;
+    padding: 72px 40px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero h1 { font-size:2.6rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:12px; text-shadow:0 2px 12px rgba(0,0,0,0.4); }
+  .hero p  { font-size:1.1rem; opacity:0.9; max-width:600px; margin:0 auto; text-shadow:0 1px 6px rgba(0,0,0,0.3); }
 
   .stats-row { display:flex; gap:16px; padding:20px 32px; justify-content:center; flex-wrap:wrap; background:#fff; border-bottom:1px solid #e8e4dc; }
   .stat-card { background:#f5f3ee; border-radius:12px; padding:16px 24px; text-align:center; min-width:120px; }
