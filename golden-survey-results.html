@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Shape a New Place to Gather in Golden — Survey Results</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f5f3ee; color: #2d2d2d; min-height: 100vh; }
+
+  .hero { background: linear-gradient(135deg, #2c5f2e 0%, #4a8c4c 50%, #6aab5e 100%); color: white; padding: 56px 40px 48px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,0.05); }
+  .hero::after  { content:''; position:absolute; bottom:-80px; left:-40px; width:250px; height:250px; border-radius:50%; background:rgba(255,255,255,0.04); }
+  .hero h1 { font-size:2.2rem; font-weight:700; letter-spacing:-0.5px; margin-bottom:10px; }
+  .hero p  { font-size:1.05rem; opacity:0.85; max-width:600px; margin:0 auto; }
+
+  .stats-row { display:flex; gap:16px; padding:28px 32px; justify-content:center; flex-wrap:wrap; background:#fff; border-bottom:1px solid #e8e4dc; }
+  .stat-card { background:#f5f3ee; border-radius:12px; padding:20px 28px; text-align:center; min-width:130px; }
+  .stat-card .num   { font-size:2.4rem; font-weight:800; color:#2c5f2e; line-height:1; }
+  .stat-card .label { font-size:0.78rem; color:#666; margin-top:6px; text-transform:uppercase; letter-spacing:0.5px; }
+
+  .section-header { padding:28px 32px 4px; max-width:1400px; margin:0 auto; }
+  .section-header h3 { font-size:1.15rem; font-weight:700; color:#1a3d1c; padding-bottom:8px; border-bottom:3px solid #2c5f2e; display:inline-block; }
+  .section-header p  { font-size:0.85rem; color:#666; margin-top:6px; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:20px; padding:16px 32px 24px; max-width:1400px; margin:0 auto; }
+  .grid-wide { grid-column:1/-1; }
+
+  .card { background:#fff; border-radius:16px; padding:24px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+  .card h2 { font-size:0.95rem; font-weight:700; color:#2c5f2e; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:18px; padding-bottom:10px; border-bottom:2px solid #e8f5e9; }
+
+  .chart-wrap { position:relative; }
+  .chart-wrap.sm { height:220px; }
+  .chart-wrap.md { height:280px; }
+  .chart-wrap.lg { height:360px; }
+
+  .hbar-list { display:flex; flex-direction:column; gap:10px; }
+  .hbar-label { display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:4px; color:#333; }
+  .hbar-label .count { font-weight:700; color:#2c5f2e; }
+  .hbar-track { background:#e8f0e9; border-radius:6px; height:10px; overflow:hidden; }
+  .hbar-fill  { height:100%; border-radius:6px; background:linear-gradient(90deg,#2c5f2e,#6aab5e); }
+
+  .stacked-list { display:flex; flex-direction:column; gap:14px; }
+  .stacked-item-label { font-size:0.83rem; color:#444; margin-bottom:5px; font-weight:500; }
+  .stacked-bar { display:flex; height:26px; border-radius:8px; overflow:hidden; width:100%; }
+  .seg { display:flex; align-items:center; justify-content:center; font-size:0.72rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; }
+  .seg.very     { background:#2c5f2e; }
+  .seg.somewhat { background:#6aab5e; }
+  .seg.not      { background:#c5d9c6; color:#555; }
+
+  .legend-row  { display:flex; gap:16px; margin-top:14px; flex-wrap:wrap; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:0.78rem; color:#555; }
+  .legend-swatch { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
+
+  .callout { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border-left:4px solid #2c5f2e; border-radius:0 12px 12px 0; padding:16px 20px; margin-bottom:16px; }
+  .callout .big { font-size:2rem; font-weight:800; color:#2c5f2e; }
+  .callout .sub { font-size:0.85rem; color:#444; margin-top:2px; }
+
+  /* Heatmap */
+  .heatmap-wrap { overflow-x:auto; }
+  .heatmap { width:100%; border-collapse:collapse; font-size:0.78rem; }
+  .heatmap th { padding:8px 10px; text-align:center; font-weight:700; font-size:0.75rem; color:#555; white-space:nowrap; }
+  .heatmap th.row-header { text-align:left; min-width:200px; color:#333; }
+  .heatmap td { padding:8px 10px; text-align:center; font-weight:700; font-size:0.82rem; border-radius:6px; white-space:nowrap; }
+  .heatmap td.row-label { text-align:left; font-weight:500; font-size:0.81rem; color:#333; padding-right:16px; }
+  .heatmap tr { border-bottom:1px solid #f0ede8; }
+  .heatmap tr:last-child { border-bottom:none; }
+
+  /* Age spotlights */
+  .spotlight-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:14px; }
+  .spotlight-card { border-radius:14px; padding:18px 16px; }
+  .spotlight-card .age-badge  { font-size:1.3rem; font-weight:800; margin-bottom:8px; display:block; }
+  .spotlight-card .age-count  { font-size:0.75rem; opacity:0.75; margin-bottom:12px; display:block; }
+  .spotlight-card .top-label  { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; opacity:0.7; margin-bottom:6px; }
+  .spotlight-card .interest-pill { display:inline-block; background:rgba(255,255,255,0.3); border-radius:20px; padding:4px 10px; font-size:0.75rem; font-weight:600; margin:3px 2px; }
+  .spotlight-card .unique-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; opacity:0.7; margin:12px 0 6px; }
+  .sp-24 { background:linear-gradient(135deg,#1a5276,#2980b9); color:white; }
+  .sp-35 { background:linear-gradient(135deg,#1e8449,#27ae60); color:white; }
+  .sp-50 { background:linear-gradient(135deg,#784212,#ca6f1e); color:white; }
+  .sp-65 { background:linear-gradient(135deg,#512e5f,#8e44ad); color:white; }
+
+  /* Tabs */
+  .tab-row { display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+  .tab-btn { padding:6px 16px; border-radius:20px; border:2px solid #ddd; background:#f5f3ee; font-size:0.8rem; font-weight:600; cursor:pointer; transition:all 0.2s; color:#555; }
+  .tab-btn.active { background:#2c5f2e; border-color:#2c5f2e; color:white; }
+
+  /* Loading / error */
+  #loading { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; gap:16px; }
+  #loading .spinner { width:48px; height:48px; border:5px solid #e8f0e9; border-top-color:#2c5f2e; border-radius:50%; animation:spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #loading p { color:#666; font-size:0.9rem; }
+  #error-msg { display:none; background:#fff3cd; border:1px solid #ffc107; border-radius:12px; padding:20px 24px; margin:32px; color:#856404; font-size:0.9rem; line-height:1.6; }
+
+  footer { text-align:center; padding:24px; font-size:0.78rem; color:#999; border-top:1px solid #e8e4dc; margin-top:12px; }
+</style>
+</head>
+<body>
+
+<!-- Hero always visible -->
+<div class="hero">
+  <h1>Help Shape a New Place to Gather in Golden</h1>
+  <p>Community Survey Results &mdash; Golden, Colorado</p>
+</div>
+
+<!-- Loading state -->
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Loading survey data…</p>
+</div>
+
+<!-- Error state -->
+<div id="error-msg">
+  <strong>Could not load survey data.</strong><br>
+  Make sure <code>golden-survey-data.csv</code> is in the same folder as this HTML file,
+  and that you're viewing it over a web server (not a local <code>file://</code> path).<br><br>
+  If testing locally, run: <code>python3 -m http.server 8000</code> and open
+  <code>http://localhost:8000/golden-survey-results.html</code>
+</div>
+
+<!-- Dashboard (hidden until data loads) -->
+<div id="dashboard" style="display:none">
+
+  <div class="stats-row" id="statsRow"></div>
+
+  <!-- ── Section 1: Overview ── -->
+  <div class="section-header">
+    <h3>Community Overview</h3>
+    <p>Who responded and how connected they feel to Golden</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h2>Age Range</h2><div class="chart-wrap sm"><canvas id="ageChart"></canvas></div></div>
+    <div class="card">
+      <h2>Feel Connected to Golden Community?</h2>
+      <div class="callout"><div class="big" id="disconnPct">–</div><div class="sub">feel only "somewhat" connected or less — a clear case for community space</div></div>
+      <div class="chart-wrap sm"><canvas id="connChart"></canvas></div>
+    </div>
+    <div class="card"><h2>How Long in Golden?</h2><div class="chart-wrap sm"><canvas id="timeChart"></canvas></div></div>
+    <div class="card"><h2>Realistic Usage Frequency</h2><div class="chart-wrap sm"><canvas id="freqChart"></canvas></div></div>
+    <div class="card"><h2>What's Most Missing in Golden?</h2><div class="hbar-list" id="missingBars"></div></div>
+    <div class="card"><h2>How Respondents Describe Themselves</h2><div class="chart-wrap md"><canvas id="descChart"></canvas></div></div>
+  </div>
+
+  <!-- ── Section 2: Age × Interest ── -->
+  <div class="section-header">
+    <h3>Space Interests by Age Group</h3>
+    <p>Percentage of respondents in each age group who selected each activity</p>
+  </div>
+  <div class="grid">
+    <div class="card grid-wide">
+      <h2>% Interested in Each Activity — by Age Group</h2>
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="showView('grouped')">Grouped Bars</button>
+        <button class="tab-btn" onclick="showView('radar')">Radar</button>
+      </div>
+      <div id="view-grouped" class="chart-wrap lg"><canvas id="groupedChart"></canvas></div>
+      <div id="view-radar"   class="chart-wrap lg" style="display:none"><canvas id="radarChart"></canvas></div>
+      <div class="legend-row" id="ageLegend"></div>
+    </div>
+
+    <div class="card grid-wide">
+      <h2>Interest Heatmap — % of Each Age Group Selecting Activity</h2>
+      <div class="heatmap-wrap"><table class="heatmap" id="heatmapTable"></table></div>
+      <p style="font-size:0.73rem;color:#999;margin-top:12px">Color intensity reflects % of that age group selecting the activity. Darker = higher interest.</p>
+    </div>
+
+    <div class="card grid-wide">
+      <h2>Age Group Spotlight — Distinctive Interests</h2>
+      <div class="spotlight-grid" id="spotlightGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Participation ── -->
+  <div class="section-header">
+    <h3>Participation &amp; Involvement</h3>
+    <p>How likely people are to use the space and how they want to contribute</p>
+  </div>
+  <div class="grid">
+    <div class="card grid-wide">
+      <h2>Likelihood of Participation by Activity</h2>
+      <div class="stacked-list" id="likelyBars"></div>
+      <div class="legend-row">
+        <div class="legend-item"><div class="legend-swatch" style="background:#2c5f2e"></div>Very Likely</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#6aab5e"></div>Somewhat Likely</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#c5d9c6"></div>Not Likely</div>
+      </div>
+    </div>
+    <div class="card"><h2>Ways People Want to Be Involved</h2><div class="hbar-list" id="involveBars"></div></div>
+    <div class="card"><h2>What Would Make It Easier to Participate?</h2><div class="hbar-list" id="easierBars"></div></div>
+    <div class="card"><h2>Overall Space Interests (All Ages)</h2><div class="hbar-list" id="interestBars"></div></div>
+  </div>
+
+  <footer id="footerBar"></footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CONFIG — edit these if column names change in the CSV
+// ═══════════════════════════════════════════════════════════
+const CSV_FILE = 'golden-survey-data.csv';
+
+const COLS = {
+  timestamp:   'Timestamp',
+  age:         'Age Range',
+  describe:    'Which best describes you?',
+  tenure:      'How long have you lived in or regularly spent time in Golden? ',
+  missing:     'What do you feel is most missing in Golden right now?  ',
+  connected:   ' Do you feel connected to people in Golden outside of your immediate family/friend group or workplace?  ',
+  interests:   'If Golden had a shared community space, which of the following would you be interested in?',
+  frequency:   'How often do you think you might realistically use a space like this?  ',
+  likeClasses: 'If a new shared community space existed in Golden, how likely would you be to participate in the following?   [Taking classes or workshops]',
+  likeEvents:  'If a new shared community space existed in Golden, how likely would you be to participate in the following?   [Attending community events or clubs]',
+  likeMaker:   'If a new shared community space existed in Golden, how likely would you be to participate in the following?   [Using open space / creative / maker space]',
+  likeKitchen: 'If a new shared community space existed in Golden, how likely would you be to participate in the following?   [Using a community kitchen or cafe]',
+  likeKids:    'If a new shared community space existed in Golden, how likely would you be to participate in the following?   [Bringing kids or teens to activities]',
+  likeTalks:   'If a new shared community space existed in Golden, how likely would you be to participate in the following?   [Attending talks or skill-sharing sessions]',
+  involvement: 'Would you be interested in any of the following ways of being involved?  ',
+  easier:      ' What would make it easier for you to participate?  ',
+};
+
+// Known multi-select options (order matters — listed as they appear in form)
+const KNOWN = {
+  missing: [
+    "Creative or maker spaces",
+    "Community gathering spaces that aren't bars",
+    "Opportunities to learn practical skills",
+    "Affordable activities and classes",
+    "Ways to meet new people",
+    "Places for teens to hang out",
+  ],
+  interests: [
+    "Cooking classes or shared kitchen events",
+    "Talks or community discussions",
+    "Outdoor skills or environmental workshops",
+    "Ceramics",
+    "Household repair clinics (fixing small appliances, bikes, gear, etc.)",
+    "Woodworking / Metalworking",
+    "Sewing, Mending, or Fiber Arts",
+    "Clubs (book, film, language, etc.)",
+    "Painting / Drawing / Printmaking",
+    "3D Printing / Design",
+    "Small business development /entrepeneurship",
+  ],
+  involvement: [
+    "Volunteering ocassionally",
+    "Paying for individual classes or workshops",
+    "Becoming a low-cost monthly member",
+    "Helping with events",
+    "Teaching or helping lead activities",
+    "Donating tools, supplies, or equipment",
+  ],
+  easier: [
+    "Evening and weekend hours",
+    "Child-friendly programming",
+    "Being able to drop in without committment",
+  ],
+};
+
+const INTEREST_SHORTS = [
+  'Cooking','Talks','Outdoors','Ceramics','Repair',
+  'Woodworking','Sewing','Clubs','Painting','3D Print','Small Biz'
+];
+
+const AGE_ORDER  = ['24-34','35-49','50-64','65+'];
+const AGE_LABELS = ['24–34','35–49','50–64','65+'];
+const AGE_COLORS = ['#2980b9','#27ae60','#ca6f1e','#8e44ad'];
+
+// ═══════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════
+function countSingle(rows, col) {
+  const c = {};
+  rows.forEach(r => { const v = (r[col]||'').trim(); if (v) c[v] = (c[v]||0)+1; });
+  return c;
+}
+
+function countMulti(rows, col, knownOptions) {
+  const c = {};
+  knownOptions.forEach(o => c[o] = 0);
+  rows.forEach(r => {
+    const val = (r[col]||'').toLowerCase();
+    knownOptions.forEach(o => { if (val.includes(o.toLowerCase())) c[o]++; });
+  });
+  return c;
+}
+
+function countLikelihood(rows, col) {
+  const c = { 'Very Likely':0, 'Somewhat Likely':0, 'Not Likely':0 };
+  rows.forEach(r => { const v = (r[col]||'').trim(); if (c[v] !== undefined) c[v]++; });
+  return c;
+}
+
+// ═══════════════════════════════════════════════════════════
+// RENDERING HELPERS
+// ═══════════════════════════════════════════════════════════
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+Chart.defaults.font.size   = 12;
+const GREEN = ['#2c5f2e','#3a7d3c','#4a9150','#5ea55f','#6aab5e','#7ec47e','#9ed49f','#bde2be'];
+
+function hbars(containerId, labels, values, max) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  labels.forEach((lbl, i) => {
+    const pct = (values[i] / max * 100).toFixed(1);
+    el.innerHTML += `
+      <div>
+        <div class="hbar-label"><span>${lbl}</span><span class="count">${values[i]}</span></div>
+        <div class="hbar-track"><div class="hbar-fill" style="width:${pct}%"></div></div>
+      </div>`;
+  });
+}
+
+function stackedBars(containerId, items) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  items.forEach(item => {
+    const total = item.very + item.somewhat + item.not;
+    if (!total) return;
+    const vp = (item.very    / total * 100).toFixed(1);
+    const sp = (item.somewhat/ total * 100).toFixed(1);
+    const np = (item.not     / total * 100).toFixed(1);
+    el.innerHTML += `
+      <div>
+        <div class="stacked-item-label">${item.label}</div>
+        <div class="stacked-bar">
+          <div class="seg very"     style="width:${vp}%">${vp >= 8 ? item.very : ''}</div>
+          <div class="seg somewhat" style="width:${sp}%">${sp >= 8 ? item.somewhat : ''}</div>
+          <div class="seg not"      style="width:${np}%">${np >= 8 ? item.not : ''}</div>
+        </div>
+      </div>`;
+  });
+}
+
+function heatColor(pct) {
+  const stops = [{p:0,r:250,g:250,b:250},{p:30,r:200,g:230,b:200},{p:55,r:106,g:171,b:94},{p:80,r:44,g:95,b:46}];
+  let lo = stops[0], hi = stops[stops.length-1];
+  for (let i = 0; i < stops.length-1; i++) {
+    if (pct >= stops[i].p && pct <= stops[i+1].p) { lo = stops[i]; hi = stops[i+1]; break; }
+  }
+  const t = (pct-lo.p)/(hi.p-lo.p);
+  const r = Math.round(lo.r+t*(hi.r-lo.r));
+  const g = Math.round(lo.g+t*(hi.g-lo.g));
+  const b = Math.round(lo.b+t*(hi.b-lo.b));
+  return { bg:`rgb(${r},${g},${b})`, text: pct>50?'#fff':'#333' };
+}
+
+// Chart instances (kept for potential later resize)
+let groupedChartInst, radarChartInst;
+
+function showView(v) {
+  document.getElementById('view-grouped').style.display = v==='grouped' ? 'block' : 'none';
+  document.getElementById('view-radar').style.display   = v==='radar'   ? 'block' : 'none';
+  document.querySelectorAll('.tab-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent.toLowerCase().includes(v)));
+}
+
+// ═══════════════════════════════════════════════════════════
+// MAIN — called after CSV parse
+// ═══════════════════════════════════════════════════════════
+function buildDashboard(rows) {
+  const n = rows.length;
+
+  // ── Single-select counts ──────────────────────────────────
+  const ageCounts  = countSingle(rows, COLS.age);
+  const descCounts = countSingle(rows, COLS.describe);
+  const tenureCounts = countSingle(rows, COLS.tenure);
+  const connCounts = countSingle(rows, COLS.connected);
+  const freqCounts = countSingle(rows, COLS.frequency);
+
+  // ── Multi-select counts ───────────────────────────────────
+  const missingCounts    = countMulti(rows, COLS.missing,     KNOWN.missing);
+  const interestCounts   = countMulti(rows, COLS.interests,   KNOWN.interests);
+  const involveCounts    = countMulti(rows, COLS.involvement, KNOWN.involvement);
+  const easierCounts     = countMulti(rows, COLS.easier,      KNOWN.easier);
+
+  // ── Likelihood counts ─────────────────────────────────────
+  const likeData = [
+    { label:'Taking classes or workshops',         ...countLikelihood(rows, COLS.likeClasses) },
+    { label:'Attending community events or clubs', ...countLikelihood(rows, COLS.likeEvents)  },
+    { label:'Talks or skill-sharing sessions',     ...countLikelihood(rows, COLS.likeTalks)   },
+    { label:'Using open / creative / maker space', ...countLikelihood(rows, COLS.likeMaker)   },
+    { label:'Using a community kitchen or café',   ...countLikelihood(rows, COLS.likeKitchen) },
+    { label:'Bringing kids or teens to activities',...countLikelihood(rows, COLS.likeKids)    },
+  ].map(d => ({ label:d.label, very:d['Very Likely'], somewhat:d['Somewhat Likely'], not:d['Not Likely'] }));
+
+  // ── Age × Interest cross-tab ──────────────────────────────
+  const ageN = {};
+  AGE_ORDER.forEach(a => ageN[a] = 0);
+  rows.forEach(r => { const a = (r[COLS.age]||'').trim(); if (ageN[a]!==undefined) ageN[a]++; });
+
+  // For each interest, count per age group
+  const ageByInterest = KNOWN.interests.map(interest => {
+    const byAge = {};
+    AGE_ORDER.forEach(a => {
+      byAge[a] = rows.filter(r =>
+        (r[COLS.age]||'').trim() === a &&
+        (r[COLS.interests]||'').toLowerCase().includes(interest.toLowerCase())
+      ).length;
+    });
+    return { interest, byAge };
+  });
+
+  // ── Key stats ─────────────────────────────────────────────
+  const workFT = rows.filter(r => (r[COLS.describe]||'').toLowerCase().includes('working full')).length;
+  const longResidents = (tenureCounts['4-10 years']||0) + (tenureCounts['10+ years']||0) + (tenureCounts['I grew up here']||0);
+  const monthlyPlus = (freqCounts['Daily']||0) + (freqCounts['Weekly']||0) + (freqCounts['A few times a month']||0);
+  const veryLikelyClasses = likeData[0].very;
+  const disconnected = (connCounts['Somewhat']||0) + (connCounts['Not really']||0) + (connCounts['No, I feel pretty disconnected']||0);
+  const disconnPct = Math.round(disconnected / n * 100);
+
+  // ── Render key stats ──────────────────────────────────────
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card"><div class="num">${n}</div><div class="label">Responses</div></div>
+    <div class="stat-card"><div class="num">${Math.round(workFT/n*100)}%</div><div class="label">Work Full-Time</div></div>
+    <div class="stat-card"><div class="num">${Math.round(longResidents/n*100)}%</div><div class="label">4–10+ Yrs in Golden</div></div>
+    <div class="stat-card"><div class="num">${Math.round(monthlyPlus/n*100)}%</div><div class="label">Would Use Monthly+</div></div>
+    <div class="stat-card"><div class="num">${Math.round(veryLikelyClasses/n*100)}%</div><div class="label">Very Likely: Classes</div></div>
+  `;
+  document.getElementById('disconnPct').textContent = disconnPct + '%';
+
+  // ── Age donut ─────────────────────────────────────────────
+  const ageOrder = AGE_ORDER.filter(a => ageCounts[a]);
+  new Chart(document.getElementById('ageChart'), {
+    type:'doughnut',
+    data:{ labels:ageOrder.map((_,i)=>AGE_LABELS[AGE_ORDER.indexOf(_)]), datasets:[{ data:ageOrder.map(a=>ageCounts[a]||0), backgroundColor:ageOrder.map(a=>AGE_COLORS[AGE_ORDER.indexOf(a)]), borderWidth:2, borderColor:'#fff' }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ boxWidth:14, padding:12 } } } }
+  });
+
+  // ── Connected donut ───────────────────────────────────────
+  const connOrder = ['Yes, very','Somewhat','Not really','No, I feel pretty disconnected'];
+  const connColors = ['#2c5f2e','#6aab5e','#f0c040','#c8860a'];
+  new Chart(document.getElementById('connChart'), {
+    type:'doughnut',
+    data:{ labels:['Yes, very','Somewhat','Not really','Disconnected'], datasets:[{ data:connOrder.map(k=>connCounts[k]||0), backgroundColor:connColors, borderWidth:2, borderColor:'#fff' }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ boxWidth:14, padding:10 } } } }
+  });
+
+  // ── Tenure bar ────────────────────────────────────────────
+  const tenureOrder = ['1-3 years','4-10 years','10+ years','I grew up here'];
+  const tenureLabels = ['1–3 yrs','4–10 yrs','10+ yrs','Grew up here'];
+  new Chart(document.getElementById('timeChart'), {
+    type:'bar',
+    data:{ labels:tenureLabels, datasets:[{ data:tenureOrder.map(k=>tenureCounts[k]||0), backgroundColor:GREEN.slice(0,4), borderRadius:8, borderSkipped:false }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, grid:{ color:'#f0ede8' } }, x:{ grid:{ display:false } } } }
+  });
+
+  // ── Frequency donut ───────────────────────────────────────
+  const freqOrder = ['Daily','Weekly','A few times a month','A few times a year','Not sure','Only for special events / workshops'];
+  const freqLabels = ['Daily','Weekly','Few times/month','Few times/year','Not sure','Special events only'];
+  const freqColors = ['#2c5f2e','#3a7d3c','#5ea55f','#9ed49f','#d5efd6','#f0c040'];
+  new Chart(document.getElementById('freqChart'), {
+    type:'doughnut',
+    data:{ labels:freqLabels, datasets:[{ data:freqOrder.map(k=>freqCounts[k]||0), backgroundColor:freqColors, borderWidth:2, borderColor:'#fff' }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ boxWidth:12, padding:8, font:{ size:11 } } } } }
+  });
+
+  // ── Describe bar ──────────────────────────────────────────
+  const descSorted = Object.entries(descCounts).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  new Chart(document.getElementById('descChart'), {
+    type:'bar',
+    data:{ labels:descSorted.map(d=>d[0]), datasets:[{ data:descSorted.map(d=>d[1]), backgroundColor:GREEN.slice(0,6), borderRadius:8, borderSkipped:false }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ x:{ beginAtZero:true, grid:{ color:'#f0ede8' } }, y:{ grid:{ display:false }, ticks:{ font:{ size:9 } } } } }
+  });
+
+  // ── Missing hbars ─────────────────────────────────────────
+  const missingLabels = ["Creative / maker spaces","Community gathering (not bars)","Learn practical skills","Affordable activities","Ways to meet new people","Places for teens"];
+  hbars('missingBars', missingLabels, KNOWN.missing.map(k=>missingCounts[k]||0), n);
+
+  // ── Overall interest hbars ────────────────────────────────
+  hbars('interestBars', KNOWN.interests.map((_,i)=>INTEREST_SHORTS[i]||_), KNOWN.interests.map(k=>interestCounts[k]||0), n);
+
+  // ── Likelihood stacked bars ───────────────────────────────
+  stackedBars('likelyBars', likeData);
+
+  // ── Involvement + easier hbars ────────────────────────────
+  const invLabels = ["Volunteering occasionally","Paying for classes","Monthly membership","Helping with events","Teaching / leading","Donating tools & supplies"];
+  hbars('involveBars', invLabels, KNOWN.involvement.map(k=>involveCounts[k]||0), n);
+  const easierLabels = ["Evening & weekend hours","Child-friendly programming","Drop-in (no commitment)"];
+  const easierVals   = [KNOWN.easier[0], KNOWN.easier[1], KNOWN.easier[2]].map(k=>easierCounts[k]||0);
+  hbars('easierBars', easierLabels, easierVals, n);
+
+  // ── Age legend ────────────────────────────────────────────
+  const legendEl = document.getElementById('ageLegend');
+  AGE_ORDER.forEach((age, i) => {
+    legendEl.innerHTML += `<div class="legend-item"><div class="legend-swatch" style="background:${AGE_COLORS[i]}"></div>${AGE_LABELS[i]} (n=${ageN[age]||0})</div>`;
+  });
+
+  // ── Grouped bar chart ─────────────────────────────────────
+  const interestLabels = INTEREST_SHORTS;
+  groupedChartInst = new Chart(document.getElementById('groupedChart'), {
+    type:'bar',
+    data:{
+      labels: interestLabels,
+      datasets: AGE_ORDER.map((age, i) => ({
+        label: AGE_LABELS[i],
+        data: ageByInterest.map(d => ageN[age] ? +(d.byAge[age]/ageN[age]*100).toFixed(1) : 0),
+        backgroundColor: AGE_COLORS[i]+'cc',
+        borderColor: AGE_COLORS[i],
+        borderWidth:1, borderRadius:4,
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` } } },
+      scales:{ y:{ beginAtZero:true, max:100, ticks:{ callback:v=>v+'%' }, grid:{ color:'#f0ede8' } }, x:{ grid:{ display:false } } }
+    }
+  });
+
+  // ── Radar chart ───────────────────────────────────────────
+  radarChartInst = new Chart(document.getElementById('radarChart'), {
+    type:'radar',
+    data:{
+      labels: interestLabels,
+      datasets: AGE_ORDER.map((age, i) => ({
+        label: AGE_LABELS[i],
+        data: ageByInterest.map(d => ageN[age] ? +(d.byAge[age]/ageN[age]*100).toFixed(1) : 0),
+        borderColor: AGE_COLORS[i],
+        backgroundColor: AGE_COLORS[i]+'22',
+        borderWidth:2, pointBackgroundColor: AGE_COLORS[i], pointRadius:3,
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.r}%` } } },
+      scales:{ r:{ beginAtZero:true, max:100, ticks:{ stepSize:25, callback:v=>v+'%', font:{ size:9 } }, grid:{ color:'#e0e0e0' }, pointLabels:{ font:{ size:11 } } } }
+    }
+  });
+
+  // ── Heatmap ───────────────────────────────────────────────
+  let html = `<thead><tr>
+    <th class="row-header">Activity</th>
+    ${AGE_ORDER.map((a,i)=>`<th>${AGE_LABELS[i]}<br><span style="font-weight:400;font-size:0.7rem">(n=${ageN[a]||0})</span></th>`).join('')}
+    <th>Overall<br><span style="font-weight:400;font-size:0.7rem">(n=${n})</span></th>
+  </tr></thead><tbody>`;
+  ageByInterest.forEach((d, idx) => {
+    const overallPct = Math.round((interestCounts[d.interest]||0) / n * 100);
+    html += `<tr><td class="row-label">${d.interest}</td>`;
+    AGE_ORDER.forEach(age => {
+      const pct = ageN[age] ? Math.round(d.byAge[age] / ageN[age] * 100) : 0;
+      const c = heatColor(pct);
+      html += `<td style="background:${c.bg};color:${c.text}">${pct}%</td>`;
+    });
+    const oc = heatColor(overallPct);
+    html += `<td style="background:${oc.bg};color:${oc.text};border-left:2px solid #ddd">${overallPct}%</td></tr>`;
+  });
+  html += '</tbody>';
+  document.getElementById('heatmapTable').innerHTML = html;
+
+  // ── Age spotlights (dynamic top interests per group) ──────
+  const spotlightEl = document.getElementById('spotlightGrid');
+  const spClass = ['sp-24','sp-35','sp-50','sp-65'];
+  AGE_ORDER.forEach((age, i) => {
+    const topInterests = ageByInterest
+      .map(d => ({ label: d.interest, pct: ageN[age] ? Math.round(d.byAge[age]/ageN[age]*100) : 0 }))
+      .sort((a,b) => b.pct - a.pct)
+      .slice(0, 4);
+    const pills = topInterests.map(t => `<span class="interest-pill">${t.label.split(' ').slice(0,2).join(' ')} ${t.pct}%</span>`).join('');
+    spotlightEl.innerHTML += `
+      <div class="spotlight-card ${spClass[i]}">
+        <span class="age-badge">${AGE_LABELS[i]}</span>
+        <span class="age-count">n=${ageN[age]||0}</span>
+        <div class="top-label">Top interests (% of group)</div>
+        ${pills}
+      </div>`;
+  });
+
+  // ── Footer ────────────────────────────────────────────────
+  const timestamps = rows.map(r => r[COLS.timestamp]).filter(Boolean);
+  const latest = timestamps.length ? timestamps[timestamps.length-1].split(' ')[0] : '—';
+  document.getElementById('footerBar').innerHTML =
+    `Survey: "Help Shape a New Place to Gather in Golden" &bull; ${n} responses &bull; Latest response: ${latest}`;
+
+  // Show dashboard
+  document.getElementById('loading').style.display   = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+}
+
+// ═══════════════════════════════════════════════════════════
+// LOAD CSV
+// ═══════════════════════════════════════════════════════════
+Papa.parse(CSV_FILE, {
+  download: true,
+  header: true,
+  skipEmptyLines: true,
+  complete: results => {
+    if (!results.data || results.data.length === 0) {
+      showError();
+    } else {
+      buildDashboard(results.data);
+    }
+  },
+  error: () => showError()
+});
+
+function showError() {
+  document.getElementById('loading').style.display   = 'none';
+  document.getElementById('error-msg').style.display = 'block';
+}
+</script>
+</body>
+</html>
