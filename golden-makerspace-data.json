@@ -1,0 +1,65 @@
+{
+  "activities": [
+    { "name": "Outdoor Skills",         "interest": 55, "topPriority": 16, "upfrontLow": 5,  "upfrontHigh": 15, "monthlyLow": 300,  "monthlyHigh": 700,  "buildout": 1, "ongoing": 2, "tier": 1 },
+    { "name": "Talks / Events / Clubs", "interest": 48, "topPriority": 13, "upfrontLow": 8,  "upfrontHigh": 18, "monthlyLow": 150,  "monthlyHigh": 300,  "buildout": 1, "ongoing": 1, "tier": 1 },
+    { "name": "Small Business Dev",     "interest": 23, "topPriority": 6,  "upfrontLow": 3,  "upfrontHigh": 10, "monthlyLow": 200,  "monthlyHigh": 400,  "buildout": 1, "ongoing": 1, "tier": 3 },
+    { "name": "Repair Clinics",         "interest": 47, "topPriority": 9,  "upfrontLow": 8,  "upfrontHigh": 17, "monthlyLow": 250,  "monthlyHigh": 500,  "buildout": 2, "ongoing": 2, "tier": 1 },
+    { "name": "Sewing / Fiber Arts",    "interest": 46, "topPriority": 9,  "upfrontLow": 12, "upfrontHigh": 25, "monthlyLow": 250,  "monthlyHigh": 500,  "buildout": 2, "ongoing": 2, "tier": 1 },
+    { "name": "Painting / Printmaking", "interest": 39, "topPriority": 14, "upfrontLow": 8,  "upfrontHigh": 22, "monthlyLow": 600,  "monthlyHigh": 1800, "buildout": 2, "ongoing": 2, "tier": 2 },
+    { "name": "3D Printing / Design",   "interest": 38, "topPriority": 18, "upfrontLow": 10, "upfrontHigh": 28, "monthlyLow": 400,  "monthlyHigh": 1000, "buildout": 2, "ongoing": 3, "tier": 2 },
+    { "name": "Ceramics",               "interest": 47, "topPriority": 5,  "upfrontLow": 18, "upfrontHigh": 40, "monthlyLow": 500,  "monthlyHigh": 1100, "buildout": 3, "ongoing": 3, "tier": 3 },
+    { "name": "Woodworking",            "interest": 49, "topPriority": 11, "upfrontLow": 25, "upfrontHigh": 50, "monthlyLow": 500,  "monthlyHigh": 1000, "buildout": 4, "ongoing": 4, "tier": 2 },
+    { "name": "Community Kitchen",      "interest": 60, "topPriority": 16, "upfrontLow": 35, "upfrontHigh": 70, "monthlyLow": 1000, "monthlyHigh": 2200, "buildout": 5, "ongoing": 4, "tier": 3 },
+    { "name": "Metalworking / Welding", "interest": 49, "topPriority": 4,  "upfrontLow": 20, "upfrontHigh": 45, "monthlyLow": 300,  "monthlyHigh": 800,  "buildout": 5, "ongoing": 5, "tier": 3 }
+  ],
+  "ccm": {
+    "name": "Clear Creek Makerspace",
+    "address": "9110 W. 44th Avenue, Wheat Ridge, CO 80033",
+    "website": "http://clearcreekmakerspace.com",
+    "operator": "Localworks (501(c)(3) nonprofit)",
+    "founded": 2024,
+    "sqft": 7500,
+    "equipmentValueMin": 250000,
+    "distanceFromGoldenMiles": 7,
+    "publicHours": "Mon–Thu 9am–5pm",
+    "memberHours": "24/7 / 365",
+    "dayPass": 20,
+    "membershipTiers": [
+      { "name": "Discounted", "who": "Students, educators, seniors, veterans", "monthly": 30, "annual": 270 },
+      { "name": "Standard",   "who": "Individual makers, innovators, hobbyists", "monthly": 60, "annual": 540 },
+      { "name": "Household",  "who": "Up to 4 people", "monthly": 180, "annual": 1620 }
+    ],
+    "classPriceExamples": [
+      { "area": "Welding",      "low": 50,  "high": 66  },
+      { "area": "Woodworking",  "low": 12,  "high": 162 },
+      { "area": "Photography",  "low": 40,  "high": 160 }
+    ]
+  },
+  "revenueModel": {
+    "memberMix": { "discounted": 0.20, "standard": 0.70, "household": 0.10 },
+    "memberThresholds": [20, 50, 100, 500],
+    "classScenarios": [5, 10, 15],
+    "avgClassPriceDollars": 40,
+    "avgClassAttendees": 10,
+    "paidClassFraction": 0.80,
+    "dayPassPriceDollars": 20,
+    "estimatedDayPassesPerMonth": 33,
+    "otherRevenue": [
+      { "name": "Tool certifications",    "low": 100,  "high": 300,  "notes": "$20 per cert; grows with membership" },
+      { "name": "Space / event rental",   "low": 300,  "high": 800,  "notes": "$100–200 per booking, 3–5/mo" },
+      { "name": "Grants (nonprofit)",     "low": 1500, "high": 4000, "notes": "Equiv. $20–50k/yr; highly variable" },
+      { "name": "Corporate sponsorships", "low": 500,  "high": 2000, "notes": "Local businesses; requires outreach" },
+      { "name": "Marketplace / sales",    "low": 200,  "high": 500,  "notes": "Member work, supplies, consumables" },
+      { "name": "Donations",              "low": 300,  "high": 1000, "notes": "Especially during launch campaigns" }
+    ],
+    "expenses": [
+      { "name": "Rent (2,500–5,000 sqft industrial/flex in Golden)", "low": 5000, "high": 14000 },
+      { "name": "Utilities (power-heavy for maker equipment)",        "low": 1200, "high": 2500  },
+      { "name": "Insurance (equipment, liability)",                   "low": 500,  "high": 1000  },
+      { "name": "Staffing (1 FT + part-time)",                       "low": 4500, "high": 9000  },
+      { "name": "Equipment maintenance",                             "low": 400,  "high": 1000  },
+      { "name": "Software / payment / admin",                        "low": 300,  "high": 500   },
+      { "name": "Consumables / supplies",                            "low": 300,  "high": 800   }
+    ]
+  }
+}

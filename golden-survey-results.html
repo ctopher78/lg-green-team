@@ -232,6 +232,105 @@
   .tier-card-3 h3 { color:#4a148c; }
   .tier-card-3 .tier-pill { background:#6a1b9a; color:white; }
   .bubble-note { font-size:0.78rem; color:#777; text-align:center; margin-top:8px; }
+
+  /* ── Local Landscape Tab ── */
+  .landscape-intro { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border-left:4px solid #2c5f2e; border-radius:0 12px 12px 0; padding:16px 20px; font-size:0.88rem; color:#1a3d1c; line-height:1.6; }
+  .landscape-intro strong { color:#2c5f2e; }
+
+  .venue-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:16px; padding:16px 32px 8px; max-width:1400px; margin:0 auto; }
+  .venue-card { background:#fff; border-radius:16px; padding:22px 22px 18px; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-top:4px solid #2c5f2e; }
+  .venue-card h3 { font-size:0.95rem; font-weight:700; color:#1a3d1c; margin-bottom:2px; }
+  .venue-card .venue-addr { font-size:0.77rem; color:#888; margin-bottom:12px; }
+  .venue-card .venue-row { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; font-size:0.82rem; margin-bottom:6px; color:#444; line-height:1.4; }
+  .venue-card .venue-row .vk { font-weight:600; color:#555; min-width:90px; flex-shrink:0; }
+  .venue-card .venue-link { display:inline-block; margin-top:12px; font-size:0.78rem; color:#2c5f2e; font-weight:600; text-decoration:none; }
+  .venue-card .venue-link:hover { text-decoration:underline; }
+
+  .drop-in-badge { display:inline-flex; align-items:center; gap:5px; border-radius:20px; padding:3px 10px; font-size:0.75rem; font-weight:700; }
+  .drop-in-yes    { background:#e8f5e9; color:#1b5e20; }
+  .drop-in-limited { background:#fff8e1; color:#e65100; }
+  .drop-in-no     { background:#fce4ec; color:#880e4f; }
+
+  .cov-check  { color:#1b5e20; background:#e8f5e9; border-radius:6px; padding:5px 8px; font-size:0.85rem; display:block; }
+  .cov-partial { color:#7c4700; background:#fff3e0; border-radius:6px; padding:5px 8px; font-size:0.85rem; display:block; }
+  .cov-none   { color:#aaa; background:#f5f5f5; border-radius:6px; padding:5px 8px; font-size:0.85rem; display:block; }
+
+  .gap-card { border-radius:16px; padding:22px 22px 18px; }
+  .gap-card h3 { font-size:1rem; font-weight:800; margin-bottom:4px; }
+  .gap-card .gap-sub { font-size:0.78rem; opacity:0.75; margin-bottom:14px; display:block; }
+  .gap-pills { display:flex; flex-wrap:wrap; gap:6px; }
+  .gap-pill { border-radius:20px; padding:5px 13px; font-size:0.8rem; font-weight:600; }
+  .gap-critical { background:linear-gradient(135deg,#ffebee,#fce4ec); border:1px solid #ef9a9a; }
+  .gap-critical h3 { color:#b71c1c; }
+  .gap-critical .gap-pill { background:#c62828; color:white; }
+  .gap-major { background:linear-gradient(135deg,#fff8e1,#fffde7); border:1px solid #ffe082; }
+  .gap-major h3 { color:#e65100; }
+  .gap-major .gap-pill { background:#e65100; color:white; }
+  .gap-ok { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border:1px solid #a5d6a7; }
+  .gap-ok h3 { color:#1b5e20; }
+  .gap-ok .gap-pill { background:#2c5f2e; color:white; }
+  .gap-ok .gap-note { font-size:0.78rem; color:#444; margin-top:10px; line-height:1.5; border-top:1px solid rgba(0,0,0,0.08); padding-top:10px; }
+
+  .access-table-wrap { overflow-x:auto; }
+  .access-table { width:100%; border-collapse:collapse; font-size:0.81rem; min-width:640px; }
+  .access-table th { padding:9px 12px; text-align:left; font-size:0.75rem; font-weight:700; color:#555; background:#f5f3ee; border-bottom:2px solid #e8e4dc; white-space:nowrap; }
+  .access-table td { padding:9px 12px; border-bottom:1px solid #f0ede8; vertical-align:middle; }
+  .access-table tr:last-child td { border-bottom:none; }
+  .access-table tr:hover td { background:#f9f8f5; }
+  .access-highlight { background:#fff3cd; font-size:0.78rem; color:#5d4037; padding:10px 14px; border-radius:8px; margin-top:12px; line-height:1.5; }
+  .access-highlight strong { color:#bf360c; }
+
+  /* ── Business Plan Tab ── */
+  .bp-intro { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border-left:4px solid #2c5f2e; border-radius:0 12px 12px 0; padding:16px 20px; font-size:0.88rem; color:#1a3d1c; line-height:1.6; }
+  .bp-intro strong { color:#2c5f2e; }
+  .bp-quote { border-left:4px solid #6aab5e; padding:12px 18px; margin:14px 0; font-style:italic; font-size:0.88rem; color:#2c5f2e; background:rgba(106,171,94,0.08); border-radius:0 8px 8px 0; }
+  .bp-program-card { border-radius:16px; padding:22px 22px 18px; box-shadow:0 2px 10px rgba(0,0,0,0.07); }
+  .bp-program-card h3 { font-size:1rem; font-weight:800; margin-bottom:4px; }
+  .bp-program-card .bp-card-sub { font-size:0.78rem; opacity:0.75; margin-bottom:12px; display:block; }
+  .bp-program-card ul { margin:10px 0 0 18px; font-size:0.82rem; line-height:1.7; }
+  .bp-pc-hub  { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border:1px solid #c8e6c9; }
+  .bp-pc-hub  h3 { color:#1b5e20; }
+  .bp-pc-kit  { background:linear-gradient(135deg,#fff3e0,#fff8e1); border:1px solid #ffcc80; }
+  .bp-pc-kit  h3 { color:#bf360c; }
+  .bp-pc-make { background:linear-gradient(135deg,#e3f2fd,#e8f4fd); border:1px solid #bbdefb; }
+  .bp-pc-make h3 { color:#0d47a1; }
+  .bp-pc-out  { background:linear-gradient(135deg,#f3e5f5,#fce4f8); border:1px solid #e1bee7; }
+  .bp-pc-out  h3 { color:#4a148c; }
+  .revenue-matrix { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:560px; }
+  .revenue-matrix th { padding:10px 12px; text-align:left; font-size:0.75rem; font-weight:700; color:#555; background:#f5f3ee; border-bottom:2px solid #e8e4dc; white-space:nowrap; }
+  .revenue-matrix th.num-col { text-align:right; }
+  .revenue-matrix td { padding:9px 12px; border-bottom:1px solid #f0ede8; vertical-align:middle; }
+  .revenue-matrix td.num-col { text-align:right; font-weight:600; color:#1a3d1c; }
+  .revenue-matrix tr:hover td { background:#f9f8f5; }
+  .expense-row-total td { font-weight:800; color:#1a3d1c; border-top:2px solid #e8e4dc; background:#f5f3ee; }
+  .be-callout { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border:2px solid #2c5f2e; border-radius:14px; padding:20px 24px; margin-top:8px; }
+  .be-callout h3 { color:#1b5e20; font-size:1rem; margin-bottom:10px; }
+  .be-callout p { font-size:0.86rem; color:#2d3d2e; line-height:1.65; }
+  .be-callout strong { color:#2c5f2e; }
+  .ccm-stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-top:12px; }
+  .ccm-stat { background:rgba(255,255,255,0.7); border-radius:10px; padding:12px 14px; text-align:center; border:1px solid #c8e6c9; }
+  .ccm-stat .cs-num { font-size:1.6rem; font-weight:800; color:#2c5f2e; line-height:1; }
+  .ccm-stat .cs-lbl { font-size:0.72rem; color:#555; margin-top:4px; text-transform:uppercase; letter-spacing:0.4px; }
+  .ccm-tier-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+  .ccm-tier-card { border-radius:12px; padding:16px 18px; border:1px solid #e0e0e0; background:#fff; }
+  .ccm-tier-card h4 { font-size:0.9rem; font-weight:800; color:#1a3d1c; margin-bottom:2px; }
+  .ccm-tier-card .ctc-who { font-size:0.76rem; color:#666; margin-bottom:10px; display:block; }
+  .ccm-tier-card .ctc-price { font-size:1.4rem; font-weight:800; color:#2c5f2e; }
+  .ccm-tier-card .ctc-annual { font-size:0.76rem; color:#888; margin-top:2px; }
+  .intersection-table { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:520px; }
+  .intersection-table th { padding:9px 12px; text-align:left; font-size:0.75rem; font-weight:700; color:#555; background:#f5f3ee; border-bottom:2px solid #e8e4dc; white-space:nowrap; }
+  .intersection-table td { padding:9px 12px; border-bottom:1px solid #f0ede8; vertical-align:middle; font-size:0.81rem; }
+  .intersection-table tr:hover td { background:#f9f8f5; }
+  .verdict-gap      { background:#ffebee; color:#b71c1c; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:700; white-space:nowrap; display:inline-block; }
+  .verdict-overlap  { background:#e8f5e9; color:#1b5e20; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:700; white-space:nowrap; display:inline-block; }
+  .verdict-partial  { background:#fff8e1; color:#e65100; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:700; white-space:nowrap; display:inline-block; }
+  .feasibility-card { background:linear-gradient(135deg,#fff8e1,#fffde7); border:2px solid #f9a825; border-radius:14px; padding:22px 24px; }
+  .feasibility-card h3 { color:#e65100; font-size:1rem; margin-bottom:12px; }
+  .feasibility-card .phase { margin-bottom:14px; }
+  .feasibility-card .phase-title { font-weight:700; color:#1a3d1c; font-size:0.88rem; margin-bottom:4px; }
+  .feasibility-card p, .feasibility-card li { font-size:0.83rem; color:#3d2a00; line-height:1.65; }
+  .feasibility-card ul { margin:6px 0 0 18px; }
+  .feasibility-card strong { color:#bf360c; }
 </style>
 </head>
 <body>
@@ -279,6 +378,12 @@
     <button class="nav-tab-btn" onclick="showTab(4)">
       <span class="nav-tab-num">5</span>Cost Analysis
     </button>
+    <button class="nav-tab-btn" onclick="showTab(5)">
+      <span class="nav-tab-num">6</span>Local Landscape
+    </button>
+    <button class="nav-tab-btn" onclick="showTab(6)">
+      <span class="nav-tab-num">7</span>Business Plan
+    </button>
   </div>
 
   <!-- ── Tab 1: Community Overview ── -->
@@ -301,7 +406,7 @@
     </div>
     <div class="tab-footer-nav">
       <button class="tab-nav-btn" disabled>&larr; Previous</button>
-      <span class="tab-progress"><strong>1</strong> / 5</span>
+      <span class="tab-progress"><strong>1</strong> / 7</span>
       <button class="tab-nav-btn" onclick="showTab(1)">Interests by Age &rarr;</button>
     </div>
   </div>
@@ -337,7 +442,7 @@
     </div>
     <div class="tab-footer-nav">
       <button class="tab-nav-btn" onclick="showTab(0)">&larr; Community Overview</button>
-      <span class="tab-progress"><strong>2</strong> / 5</span>
+      <span class="tab-progress"><strong>2</strong> / 7</span>
       <button class="tab-nav-btn" onclick="showTab(2)">Participation &rarr;</button>
     </div>
   </div>
@@ -364,7 +469,7 @@
     </div>
     <div class="tab-footer-nav">
       <button class="tab-nav-btn" onclick="showTab(1)">&larr; Interests by Age</button>
-      <span class="tab-progress"><strong>3</strong> / 5</span>
+      <span class="tab-progress"><strong>3</strong> / 7</span>
       <button class="tab-nav-btn" onclick="showTab(3)">Community Voice &rarr;</button>
     </div>
   </div>
@@ -408,7 +513,7 @@
     </div>
     <div class="tab-footer-nav">
       <button class="tab-nav-btn" onclick="showTab(2)">&larr; Participation</button>
-      <span class="tab-progress"><strong>4</strong> / 5</span>
+      <span class="tab-progress"><strong>4</strong> / 7</span>
       <button class="tab-nav-btn" onclick="showTab(4)">Cost Analysis &rarr;</button>
     </div>
   </div>
@@ -500,10 +605,645 @@
     </div>
     <div class="tab-footer-nav">
       <button class="tab-nav-btn" onclick="showTab(3)">&larr; Community Voice</button>
-      <span class="tab-progress"><strong>5</strong> / 5</span>
-      <button class="tab-nav-btn" disabled>End &check;</button>
+      <span class="tab-progress"><strong>5</strong> / 7</span>
+      <button class="tab-nav-btn" onclick="showTab(5)">Local Landscape &rarr;</button>
     </div>
   </div>
+
+  <!-- ── Tab 6: Local Landscape ── -->
+  <div class="tab-panel" id="tab-panel-5">
+    <div class="section-header">
+      <h3>What Already Exists in Golden</h3>
+      <p>Before building something new, we mapped what already exists locally — and where the genuine gaps are</p>
+    </div>
+
+    <div class="grid">
+      <div class="card grid-wide">
+        <div class="landscape-intro">
+          The survey tells us what Golden residents <strong>want</strong>. This analysis answers: what already exists in Golden proper? And where are the genuine gaps — activities the community wants, but nowhere currently offers? We researched every venue in Golden offering classes, creative access, or community programming. The picture is striking: <strong>five of the top-interest activities have zero local options</strong>, and no venue offers flexible drop-in creative or maker access outside of class time.
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue Cards -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>Venues Researched</h3>
+    </div>
+    <div class="venue-grid">
+
+      <div class="venue-card">
+        <h3>Foothills Art Center</h3>
+        <div class="venue-addr">809 15th St, Golden</div>
+        <div class="venue-row"><span class="vk">Programs:</span><span>Painting, Drawing, Watercolor, Plein Air, Printmaking, Collage, Wire Sculpting, Pastel, Ceramics/Pottery, Fiber Arts (basket weaving), Writing, Youth classes</span></div>
+        <div class="venue-row"><span class="vk">Cost:</span><span>Members $40–$80/4-wk session; Non-members up to $350; Figure Drawing free (members) / $20 (non-members)</span></div>
+        <div class="venue-row"><span class="vk">Hours:</span><span>Weekday mornings, afternoons &amp; evenings; some Fridays — no regular weekends</span></div>
+        <div class="venue-row"><span class="vk">Drop-in:</span><span><span class="drop-in-badge drop-in-no">No — registration required</span></span></div>
+        <div class="venue-row"><span class="vk">Note:</span><span>Sessions run 4–8 weeks; classes cancelled if minimum enrollment not met. No open studio access between sessions.</span></div>
+        <a class="venue-link" href="https://foothillsartcenter.org/adult-classes/" target="_blank" rel="noopener">foothillsartcenter.org/adult-classes &rarr;</a>
+      </div>
+
+      <div class="venue-card">
+        <h3>Golden Community Center</h3>
+        <div class="venue-addr">1470 10th St, Golden</div>
+        <div class="venue-row"><span class="vk">Programs:</span><span>Dance (ballet, all ages), Pottery (kids–seniors, multiple levels), Fitness/wellness, Youth camps, Aquatics</span></div>
+        <div class="venue-row"><span class="vk">Cost:</span><span>Youth camps $60–$85/day; class pricing not published online</span></div>
+        <div class="venue-row"><span class="vk">Hours:</span><span>Mon–Thu 5:30am–8pm &bull; Fri 5:30am–7pm &bull; Sat 7am–6pm &bull; Sun 8am–4pm</span></div>
+        <div class="venue-row"><span class="vk">Drop-in:</span><span><span class="drop-in-badge drop-in-no">No — registration required for programs</span></span></div>
+        <div class="venue-row"><span class="vk">Note:</span><span>No open-studio or maker access. Pottery is structured class only.</span></div>
+        <a class="venue-link" href="https://www.cityofgolden.gov/community/recreation/golden_community_center/programs.php" target="_blank" rel="noopener">cityofgolden.gov/gcc/programs &rarr;</a>
+      </div>
+
+      <div class="venue-card">
+        <h3>The Front Porch at GCC</h3>
+        <div class="venue-addr">GCC upper floor, 8th St entrance, Golden</div>
+        <div class="venue-row"><span class="vk">Programs:</span><span>Games, clubs, social events, outdoor adventures, health programs, SilverSneakers/Renew Active; monthly planning meetings (2nd Tue 10:30am)</span></div>
+        <div class="venue-row"><span class="vk">Cost:</span><span>Drop-in activities free; registered classes may have fees</span></div>
+        <div class="venue-row"><span class="vk">Hours:</span><span>Monday–Friday, 8am–2pm <strong>only</strong> — no evenings, no weekends</span></div>
+        <div class="venue-row"><span class="vk">Drop-in:</span><span><span class="drop-in-badge drop-in-limited">Yes — adults 50+ only</span></span></div>
+        <div class="venue-row"><span class="vk">Note:</span><span>Explicitly drop-in for many activities, but audience is 50+ and hours are M–F daytime only. Not available to working adults.</span></div>
+        <a class="venue-link" href="https://www.cityofgolden.gov/community/recreation/golden_community_center/front_porch.php" target="_blank" rel="noopener">cityofgolden.gov/front-porch &rarr;</a>
+      </div>
+
+      <div class="venue-card">
+        <h3>Colorado Mountain Club</h3>
+        <div class="venue-addr">710 10th St, Golden (HQ)</div>
+        <div class="venue-row"><span class="vk">Programs:</span><span>24+ outdoor disciplines: Hiking, Backpacking, Climbing, Mountaineering, Avalanche, Snowshoeing, Trail Running, Fly Fishing, Biking, Wilderness Medicine, Survival, Navigation, Photography</span></div>
+        <div class="venue-row"><span class="vk">Cost:</span><span>CMC membership required for most courses; course fees vary; not listed publicly</span></div>
+        <div class="venue-row"><span class="vk">Hours:</span><span>Year-round; enrollment opens 2–3 months ahead; multi-month courses require advance planning</span></div>
+        <div class="venue-row"><span class="vk">Drop-in:</span><span><span class="drop-in-badge drop-in-no">No — structured courses, membership gated</span></span></div>
+        <div class="venue-row"><span class="vk">Note:</span><span>Best outdoor skills resource in Golden — but requires membership and significant lead time for enrollment.</span></div>
+        <a class="venue-link" href="https://www.cmc.org/education-adventure/schools-courses" target="_blank" rel="noopener">cmc.org/education-adventure &rarr;</a>
+      </div>
+
+      <div class="venue-card">
+        <h3>Jefferson County Library — Golden Branch</h3>
+        <div class="venue-addr">1019 10th St, Golden</div>
+        <div class="venue-row"><span class="vk">Programs:</span><span>Free community events — children's reading, AARP tax help, occasional talks; very limited maker/craft programming at this branch</span></div>
+        <div class="venue-row"><span class="vk">Cost:</span><span>Free for most events</span></div>
+        <div class="venue-row"><span class="vk">Hours:</span><span>Standard library hours; varies seasonally</span></div>
+        <div class="venue-row"><span class="vk">Drop-in:</span><span><span class="drop-in-badge drop-in-yes">Yes — most events no registration</span></span></div>
+        <div class="venue-row"><span class="vk">Note:</span><span>Good for free talks and children's programming, but no adult maker or craft programming at the Golden branch specifically.</span></div>
+        <a class="venue-link" href="https://jeffcolibrary.bibliocommons.com/v2/events" target="_blank" rel="noopener">jeffcolibrary.org/events &rarr;</a>
+      </div>
+
+      <div class="venue-card">
+        <h3>CONNECTs Workspace</h3>
+        <div class="venue-addr">1301 Arapahoe St, Golden</div>
+        <div class="venue-row"><span class="vk">Programs:</span><span>Coworking, private offices, conference room rental, Golden Startup Coffee (networking); no maker equipment, no classes or workshops</span></div>
+        <div class="venue-row"><span class="vk">Cost:</span><span>Day pass available; membership tiers not published</span></div>
+        <div class="venue-row"><span class="vk">Hours:</span><span>Monday–Friday 8am–5pm <strong>only</strong> — no evenings, no weekends</span></div>
+        <div class="venue-row"><span class="vk">Drop-in:</span><span><span class="drop-in-badge drop-in-limited">Yes — day pass, weekdays only</span></span></div>
+        <div class="venue-row"><span class="vk">Note:</span><span>Coworking and networking only. No programming, no maker access, no evenings or weekends.</span></div>
+        <a class="venue-link" href="https://www.connectsworkspace.com/golden" target="_blank" rel="noopener">connectsworkspace.com/golden &rarr;</a>
+      </div>
+
+    </div><!-- /venue-grid -->
+
+    <!-- Coverage Matrix -->
+    <div class="grid" style="margin-top:8px">
+      <div class="card grid-wide">
+        <h2>Coverage Matrix — What Each Venue Offers</h2>
+        <div class="heatmap-wrap">
+          <table class="heatmap">
+            <thead>
+              <tr>
+                <th class="row-header">Activity (Survey Interest)</th>
+                <th>Foothills<br>Art Center</th>
+                <th>Community<br>Center</th>
+                <th>Front Porch<br>(50+, M–F)</th>
+                <th>Colorado<br>Mtn Club</th>
+                <th>Jeffco<br>Library</th>
+                <th>CONNECTs<br>Workspace</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">Cooking / Community Kitchen (60% interest)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">3D Printing / Design (38% interest, #1 priority)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Household Repair Clinics (47% interest)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Woodworking (49% interest)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Metalworking / Welding (49% interest)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Sewing / Fiber Arts (46% interest)</td>
+                <td><span class="cov-partial">◑ Basket weaving only</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Talks / Discussions / Clubs (48–56% interest)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-partial">◑ Seniors M–F only</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-partial">◑ Limited adult programming</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Outdoor Skills (55% interest)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-check">✓ 24+ disciplines</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Painting / Printmaking (39% interest)</td>
+                <td><span class="cov-check">✓ Well covered</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Ceramics / Pottery (47% interest)</td>
+                <td><span class="cov-check">✓ Multiple levels</span></td>
+                <td><span class="cov-check">✓ Kids–seniors</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+              </tr>
+              <tr>
+                <td class="row-label">Small Business Dev (23% interest)</td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-none">—</span></td>
+                <td><span class="cov-partial">◑ Networking only, M–F</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:0.73rem;color:#999;margin-top:12px">✓ = Covered &nbsp;&bull;&nbsp; ◑ = Partial coverage &nbsp;&bull;&nbsp; — = Nothing available in Golden</p>
+      </div>
+
+      <!-- Hours & Access -->
+      <div class="card grid-wide">
+        <h2>Hours &amp; Access Analysis — "Can You Just Show Up?"</h2>
+        <div class="access-table-wrap">
+          <table class="access-table">
+            <thead>
+              <tr>
+                <th>Venue</th>
+                <th>Days Available</th>
+                <th>Hours</th>
+                <th>Drop-in?</th>
+                <th>Cost to Drop In</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Foothills Art Center</strong></td>
+                <td>Weekdays + some Fri</td>
+                <td>9am–7:30pm (class times)</td>
+                <td><span class="drop-in-badge drop-in-no">No</span></td>
+                <td>Session registration required</td>
+              </tr>
+              <tr>
+                <td><strong>Golden Community Center</strong></td>
+                <td>Mon–Sun</td>
+                <td>Closes 8pm weekdays, 4pm Sun</td>
+                <td><span class="drop-in-badge drop-in-no">Programs: No</span></td>
+                <td>Registration required for all programs</td>
+              </tr>
+              <tr>
+                <td><strong>The Front Porch</strong></td>
+                <td>Mon–Fri only</td>
+                <td>8am–2pm only</td>
+                <td><span class="drop-in-badge drop-in-limited">Yes — 50+ only</span></td>
+                <td>Free for drop-in activities</td>
+              </tr>
+              <tr>
+                <td><strong>Colorado Mountain Club</strong></td>
+                <td>Year-round (courses)</td>
+                <td>Varies by course</td>
+                <td><span class="drop-in-badge drop-in-no">No</span></td>
+                <td>Membership + course fee; enroll months ahead</td>
+              </tr>
+              <tr>
+                <td><strong>Jeffco Library (Golden)</strong></td>
+                <td>Mon–Sat</td>
+                <td>Standard library hours</td>
+                <td><span class="drop-in-badge drop-in-yes">Yes (events)</span></td>
+                <td>Free — but maker/craft programming near zero</td>
+              </tr>
+              <tr>
+                <td><strong>CONNECTs Workspace</strong></td>
+                <td>Mon–Fri only</td>
+                <td>8am–5pm only</td>
+                <td><span class="drop-in-badge drop-in-limited">Day pass only</span></td>
+                <td>Day pass fee; no maker equipment</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="access-highlight">
+          <strong>Key finding:</strong> Every existing venue in Golden either requires advance registration, restricts access to specific audiences (50+), or is only available weekday business hours. <strong>There is no flexible creative or maker access anywhere in Golden for working adults who want to just show up on an evening or weekend.</strong>
+        </div>
+      </div>
+
+      <!-- Gap Summary Cards -->
+      <div class="card grid-wide">
+        <h2>Gap Summary by Tier</h2>
+        <div class="tier-cards">
+          <div class="gap-card gap-critical">
+            <h3>Complete Gaps — Nothing Exists</h3>
+            <span class="gap-sub">High community interest &bull; Zero local options</span>
+            <div class="gap-pills">
+              <span class="gap-pill">Community Kitchen</span>
+              <span class="gap-pill">3D Printing / Design</span>
+              <span class="gap-pill">Household Repair Clinics</span>
+              <span class="gap-pill">Woodworking</span>
+              <span class="gap-pill">Metalworking / Welding</span>
+            </div>
+          </div>
+          <div class="gap-card gap-major">
+            <h3>Partial Coverage — Gated or Limited</h3>
+            <span class="gap-sub">Options exist but are inaccessible to most residents</span>
+            <div class="gap-pills">
+              <span class="gap-pill">Outdoor Skills</span>
+              <span class="gap-pill">Sewing / Fiber Arts</span>
+              <span class="gap-pill">Talks / Clubs / Community Gathering</span>
+              <span class="gap-pill">Small Business Dev</span>
+            </div>
+            <p style="font-size:0.8rem;color:#555;margin-top:12px;line-height:1.5">Outdoor skills exist at CMC but require membership and months of advance planning. Sewing is limited to one basket-weaving class at FAC. General community talks/clubs have no dedicated hub — the library does limited adult programming, and the Front Porch is seniors only. CONNECTs offers business networking but only on weekdays.</p>
+          </div>
+          <div class="gap-card gap-ok">
+            <h3>Well Served — Good Existing Options</h3>
+            <span class="gap-sub">Reasonable coverage already exists locally</span>
+            <div class="gap-pills">
+              <span class="gap-pill">Painting / Printmaking</span>
+              <span class="gap-pill">Ceramics / Pottery</span>
+            </div>
+            <p class="gap-note">Foothills Art Center covers painting, printmaking, and related studio arts well. Ceramics is offered at both FAC and the Golden Community Center across multiple skill levels. The key remaining gap here is <strong>open studio access</strong> — neither venue offers drop-in time outside of structured class sessions.</p>
+          </div>
+        </div>
+      </div>
+    </div><!-- /grid -->
+
+    <div class="tab-footer-nav">
+      <button class="tab-nav-btn" onclick="showTab(4)">&larr; Cost Analysis</button>
+      <span class="tab-progress"><strong>6</strong> / 7</span>
+      <button class="tab-nav-btn" onclick="showTab(6)">Business Plan &rarr;</button>
+    </div>
+  </div><!-- /tab-panel-5 -->
+
+  <!-- ── Tab 7: Business Plan ── -->
+  <div class="tab-panel" id="tab-panel-6">
+    <div class="section-header">
+      <h3>Business Plan</h3>
+      <p>Survey findings + local landscape + CCM research synthesized into a path forward</p>
+    </div>
+
+    <!-- Section 1: Intro -->
+    <div class="grid">
+      <div class="card grid-wide">
+        <div class="bp-intro">
+          The survey told us what Golden wants. The local landscape showed what doesn't exist. The cost analysis priced each activity. This tab synthesizes it all: a <strong>CCM-informed, survey-grounded business plan</strong> for a Golden Makerspace — one that builds on what Clear Creek Makerspace does well, while filling the gaps they don't touch.
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: CCM Profile -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>Clear Creek Makerspace — The Nearest Comparable</h3>
+      <p>Understanding CCM is essential before deciding what Golden should build</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h2>About CCM</h2>
+        <div class="venue-row"><span class="vk">Operator:</span><span>Localworks (501(c)(3) nonprofit)</span></div>
+        <div class="venue-row"><span class="vk">Founded:</span><span>2024</span></div>
+        <div class="venue-row"><span class="vk">Location:</span><span>9110 W. 44th Ave, Wheat Ridge — ~7 miles from downtown Golden</span></div>
+        <div class="venue-row"><span class="vk">Size:</span><span>7,500 sq ft &bull; $250k+ equipment</span></div>
+        <div class="venue-row"><span class="vk">Public hours:</span><span>Mon–Thu 9am–5pm only</span></div>
+        <div class="venue-row"><span class="vk">Member hours:</span><span>24/7 / 365</span></div>
+        <div class="venue-row"><span class="vk">Day pass:</span><span>$20</span></div>
+        <a class="venue-link" href="http://clearcreekmakerspace.com" target="_blank" rel="noopener">clearcreekmakerspace.com &rarr;</a>
+        <div class="bp-quote">"A professional-grade, well-equipped makerspace — but ~7 miles away, and only 2 of 88 survey respondents currently use it."</div>
+      </div>
+
+      <div class="card">
+        <h2>Membership Tiers</h2>
+        <div class="ccm-tier-cards" id="ccmTierCards">
+          <!-- rendered by JS from SITE_DATA -->
+        </div>
+        <p style="font-size:0.78rem;color:#666;margin-top:14px;line-height:1.5">All tiers include 24/7 access, all equipment, gamified training, storage, bookable rooms, 20% off events, guest passes, marketplace, and voting rights. Financial access options available: sliding scale, volunteer-for-membership, sponsored memberships.</p>
+      </div>
+
+      <div class="card">
+        <h2>Equipment &amp; Classes</h2>
+        <div class="ccm-stat-grid">
+          <div class="ccm-stat"><div class="cs-num">7,500</div><div class="cs-lbl">Sq Ft</div></div>
+          <div class="ccm-stat"><div class="cs-num">$250k+</div><div class="cs-lbl">Equipment</div></div>
+          <div class="ccm-stat"><div class="cs-num">24/7</div><div class="cs-lbl">Member Access</div></div>
+          <div class="ccm-stat"><div class="cs-num">~7 mi</div><div class="cs-lbl">From Golden</div></div>
+        </div>
+        <p style="font-size:0.8rem;color:#555;margin-top:14px;line-height:1.55">Equipment includes: 3D printers (Prusa, Matterhackers Pulse XE, Anycubic), Glowforge laser cutters, Cricut/Silhouette vinyl cutters, welding, CNC plasma/mills, lathes, woodworking (CNC router, planer, saws, sanders), Bernina embroidery, Singer serger, electronics soldering.</p>
+        <p style="font-size:0.8rem;color:#555;margin-top:10px;line-height:1.55">Sample class prices:</p>
+        <div id="ccmClassPrices" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Survey × CCM Intersection -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>Survey Demand vs. CCM Coverage</h3>
+      <p>Where does CCM already serve Golden residents — and where are the real gaps?</p>
+    </div>
+    <div class="grid">
+      <div class="card grid-wide">
+        <div class="heatmap-wrap">
+          <table class="intersection-table">
+            <thead>
+              <tr>
+                <th style="min-width:200px">Activity</th>
+                <th>Survey Interest</th>
+                <th>CCM Offers?</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cooking / Community Kitchen</strong></td>
+                <td>60% — #1 overall</td>
+                <td>No</td>
+                <td><span class="verdict-gap">Critical Gap</span></td>
+              </tr>
+              <tr>
+                <td><strong>Talks / Discussions</strong></td>
+                <td>56%</td>
+                <td>No</td>
+                <td><span class="verdict-gap">Critical Gap</span></td>
+              </tr>
+              <tr>
+                <td><strong>Outdoor Skills</strong></td>
+                <td>55%</td>
+                <td>No</td>
+                <td><span class="verdict-gap">Gap</span></td>
+              </tr>
+              <tr>
+                <td><strong>Woodworking</strong></td>
+                <td>49%</td>
+                <td>Yes — full shop</td>
+                <td><span class="verdict-overlap">Overlap — 7 mi away</span></td>
+              </tr>
+              <tr>
+                <td><strong>Metalworking / Welding</strong></td>
+                <td>49%</td>
+                <td>Yes — full shop</td>
+                <td><span class="verdict-overlap">Overlap — 7 mi away</span></td>
+              </tr>
+              <tr>
+                <td><strong>Clubs (book, film, language)</strong></td>
+                <td>40%</td>
+                <td>No</td>
+                <td><span class="verdict-gap">Gap</span></td>
+              </tr>
+              <tr>
+                <td><strong>Sewing / Fiber Arts</strong></td>
+                <td>46%</td>
+                <td>Limited (embroidery)</td>
+                <td><span class="verdict-partial">Partial — Golden can go deeper</span></td>
+              </tr>
+              <tr>
+                <td><strong>3D Printing / Design</strong></td>
+                <td>38%, but #1 priority</td>
+                <td>Yes — multiple printers</td>
+                <td><span class="verdict-overlap">Overlap — 7 mi away</span></td>
+              </tr>
+              <tr>
+                <td><strong>Community gathering / social hub</strong></td>
+                <td>Core theme</td>
+                <td>No — tools-first</td>
+                <td><span class="verdict-gap">Critical Gap</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="access-highlight" style="margin-top:14px">
+          <strong>Key insight:</strong> CCM is a professional tool facility. Golden residents want a <strong>community hub that also has tools</strong> — cooking, talks, clubs, skill swaps, repair clinics, and social gathering are the top signals, and CCM addresses none of them.
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Programming Vision -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>Programming Vision — Build What CCM Isn't</h3>
+      <p>Four programming pillars grounded in survey data</p>
+    </div>
+    <div class="grid">
+      <div class="bp-program-card bp-pc-hub card">
+        <h3>Community Hub</h3>
+        <span class="bp-card-sub">Talks &bull; Clubs &bull; Skill swaps &bull; Speaker series</span>
+        <ul>
+          <li>Monthly speaker series — local experts, entrepreneurs, naturalists</li>
+          <li>Book club, film club, language exchange</li>
+          <li>Skill-swap nights ("I teach bread, you teach Spanish")</li>
+          <li>Open coffee mornings — no agenda, just neighbors</li>
+        </ul>
+        <div class="bp-quote">"I want a place where I can just walk in and something interesting is happening."</div>
+      </div>
+      <div class="bp-program-card bp-pc-kit card">
+        <h3>Kitchen &amp; Food</h3>
+        <span class="bp-card-sub">Cooking series &bull; Bread lab &bull; Preserve &amp; pickle &bull; Community potluck</span>
+        <ul>
+          <li>Weekly cooking classes by theme — 60% survey interest, zero local options</li>
+          <li>Bread Lab — sourdough, laminated doughs, naturally leavened</li>
+          <li>Preserve &amp; Pickle — fermentation, canning, foraging</li>
+          <li>Monthly potluck — open to all, bring a dish</li>
+        </ul>
+        <div class="bp-quote">"A community kitchen would bring people together more than anything else in Golden."</div>
+      </div>
+      <div class="bp-program-card bp-pc-make card">
+        <h3>Maker Core</h3>
+        <span class="bp-card-sub">3D printing &bull; Laser cutting &bull; Sewing &bull; Open studio</span>
+        <ul>
+          <li>Gateway classes — first session free, accessible pricing</li>
+          <li>Open studio hours every evening + weekend — just show up</li>
+          <li>Sewing circles, mending clinics, natural dye workshops</li>
+          <li>3D design + print: beginner to advanced, project-based</li>
+        </ul>
+        <div class="bp-quote">"I just want somewhere I can work on projects without having to own every tool."</div>
+      </div>
+      <div class="bp-program-card bp-pc-out card">
+        <h3>Outdoor &amp; Repair</h3>
+        <span class="bp-card-sub">Gear repair &bull; Fix-It Fridays &bull; Outdoor skills</span>
+        <ul>
+          <li>Fix-It Fridays — bring a broken thing, leave with it working</li>
+          <li>Gear repair clinics — pack stitching, boot resoling, bike tuning</li>
+          <li>Outdoor skills lite — navigation, knots, wilderness first aid basics</li>
+          <li>Bike maintenance nights — open to all experience levels</li>
+        </ul>
+        <div class="bp-quote">"I'd love a repair cafe — sustainable, practical, and a great way to meet people."</div>
+      </div>
+    </div>
+
+    <!-- Section 5: Revenue Model -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>Revenue Model</h3>
+      <p>Using CCM's tier structure as a benchmark; all figures editable in golden-makerspace-data.json</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h2>Membership Revenue by Member Count</h2>
+        <div class="cost-table-wrap">
+          <table class="revenue-matrix" id="memberRevenueTable">
+            <thead>
+              <tr>
+                <th>Members</th>
+                <th class="num-col">Discounted ($30)</th>
+                <th class="num-col">Standard ($60)</th>
+                <th class="num-col">Household ($180)</th>
+                <th class="num-col">Monthly Total</th>
+              </tr>
+            </thead>
+            <tbody id="memberRevenueBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Gross Revenue Matrix (Membership + Classes + Day Passes)</h2>
+        <div class="cost-table-wrap">
+          <table class="revenue-matrix" id="grossRevenueTable">
+            <thead>
+              <tr>
+                <th>Members \ Classes/mo</th>
+                <th class="num-col">5 classes</th>
+                <th class="num-col">10 classes</th>
+                <th class="num-col">15 classes</th>
+              </tr>
+            </thead>
+            <tbody id="grossRevenueBody"></tbody>
+          </table>
+        </div>
+        <p style="font-size:0.76rem;color:#888;margin-top:8px">Class revenue = avg $40 &times; 10 attendees &times; 80% paid. Day pass = ~$660/mo (1.5/day &times; 22 days &times; $20).</p>
+      </div>
+
+      <div class="card">
+        <h2>Other Revenue Streams</h2>
+        <div class="cost-table-wrap">
+          <table class="revenue-matrix" id="otherRevenueTable">
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th class="num-col">Low/mo</th>
+                <th class="num-col">High/mo</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="otherRevenueBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Monthly Expenses</h2>
+        <div class="cost-table-wrap">
+          <table class="revenue-matrix" id="expenseTable">
+            <thead>
+              <tr>
+                <th>Expense</th>
+                <th class="num-col">Low</th>
+                <th class="num-col">High</th>
+              </tr>
+            </thead>
+            <tbody id="expenseBody"></tbody>
+          </table>
+        </div>
+        <div class="be-callout" id="breakEvenCallout" style="margin-top:16px"></div>
+      </div>
+    </div>
+
+    <!-- Section 6: Feasibility -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>Feasibility &amp; Path Forward</h3>
+    </div>
+    <div class="grid">
+      <div class="card grid-wide feasibility-card">
+        <h3>Phased Approach — Don't Build CCM in Golden. Build What CCM Isn't.</h3>
+        <div class="phase">
+          <div class="phase-title">Phase 1 — Lean Launch (~50 members + grants)</div>
+          <ul>
+            <li>Talks, events, repair clinics, sewing, 3D printing — achievable with $8–18k buildout</li>
+            <li>Target: $8–12k/mo gross at 50 members + 10 classes/mo + grants</li>
+            <li>Focus on community-first programming: talks, clubs, skill swaps, Fix-It Fridays</li>
+            <li>Nonprofit 501(c)(3) structure like Localworks is critical for grant eligibility and trust</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="phase-title">Phase 2 — Investment Milestones (100+ members)</div>
+          <ul>
+            <li><strong>Community Kitchen</strong> — $60–100k buildout; requires health dept certification, licensed HVAC/fire contractor, NSF equipment. High reward: 60% survey interest, zero competition.</li>
+            <li><strong>Woodshop</strong> — $80–150k; SawStop non-negotiable for safety. Strong demand (49%) with no local alternative.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="phase-title">Key Structural Principles</div>
+          <ul>
+            <li>Community-first, tools-second — CCM has the tools; Golden needs the gathering place</li>
+            <li>Evening + weekend hours are mandatory — 68% of survey respondents require this</li>
+            <li>Drop-in access — 72% want no commitment required; structured only programming will fail</li>
+            <li>Financial accessibility — sliding scale, volunteer hours, subsidized memberships</li>
+            <li>Don't compete with CCM on equipment depth — partner, cross-promote, refer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-footer-nav">
+      <button class="tab-nav-btn" onclick="showTab(5)">&larr; Local Landscape</button>
+      <span class="tab-progress"><strong>7</strong> / 7</span>
+      <button class="tab-nav-btn" disabled>End &check;</button>
+    </div>
+  </div><!-- /tab-panel-6 -->
 
   <footer id="footerBar"></footer>
 </div>
@@ -678,7 +1418,7 @@ function showView(v) {
 // ═══════════════════════════════════════════════════════════
 // TAB NAVIGATION
 // ═══════════════════════════════════════════════════════════
-const TAB_COUNT = 5;
+const TAB_COUNT = 7;
 let currentTab = 0;
 
 function showTab(idx) {
@@ -952,24 +1692,31 @@ function buildDashboard(rows) {
 
   // ── Cost Analysis tab ──
   buildCostTab();
+
+  // ── Business Plan tab ──
+  buildBusinessPlan();
 }
 
 // ═══════════════════════════════════════════════════════════
-// LOAD CSV
+// LOAD JSON + CSV in parallel
 // ═══════════════════════════════════════════════════════════
-Papa.parse(CSV_FILE, {
-  download: true,
-  header: true,
-  skipEmptyLines: true,
-  complete: results => {
-    if (!results.data || results.data.length === 0) {
-      showError();
-    } else {
-      buildDashboard(results.data);
-    }
-  },
-  error: () => showError()
-});
+Promise.all([
+  fetch('golden-makerspace-data.json').then(r => r.json()).catch(() => null),
+  new Promise((resolve, reject) => {
+    Papa.parse(CSV_FILE, {
+      download: true, header: true, skipEmptyLines: true,
+      complete: results => resolve(results.data),
+      error: reject,
+    });
+  }),
+]).then(([siteData, rows]) => {
+  if (siteData && siteData.activities) {
+    COST_DATA = siteData.activities;
+    SITE_DATA = siteData;
+  }
+  if (!rows || rows.length === 0) { showError(); return; }
+  buildDashboard(rows);
+}).catch(() => showError());
 
 function showError() {
   document.getElementById('loading').style.display   = 'none';
@@ -1103,9 +1850,136 @@ function setFilter(filter, btn) {
 }
 
 // ═══════════════════════════════════════════════════════════
+// BUSINESS PLAN TAB
+// ═══════════════════════════════════════════════════════════
+function buildBusinessPlan() {
+  const sd = SITE_DATA;
+  const ccm = sd.ccm || {};
+  const rm = sd.revenueModel || {};
+
+  // CCM tier cards
+  const tiers = ccm.membershipTiers || [];
+  document.getElementById('ccmTierCards').innerHTML = tiers.map(t => `
+    <div class="ccm-tier-card">
+      <h4>${t.name}</h4>
+      <span class="ctc-who">${t.who}</span>
+      <div class="ctc-price">$${t.monthly}/mo</div>
+      <div class="ctc-annual">$${t.annual}/yr</div>
+    </div>`).join('');
+
+  // CCM class price pills
+  const classes = ccm.classPriceExamples || [];
+  document.getElementById('ccmClassPrices').innerHTML = classes.map(c =>
+    `<span class="tier-badge tier-badge-2">${c.area}: $${c.low}–$${c.high}</span>`
+  ).join('');
+
+  // Membership revenue table
+  const mix = rm.memberMix || { discounted: 0.20, standard: 0.70, household: 0.10 };
+  const thresholds = rm.memberThresholds || [20, 50, 100, 500];
+  const discPrice = (tiers[0] || {}).monthly || 30;
+  const stdPrice  = (tiers[1] || {}).monthly || 60;
+  const hhPrice   = (tiers[2] || {}).monthly || 180;
+
+  document.getElementById('memberRevenueBody').innerHTML = thresholds.map(m => {
+    const d = Math.round(m * mix.discounted);
+    const s = Math.round(m * mix.standard);
+    const h = Math.round(m * mix.household);
+    const total = d * discPrice + s * stdPrice + h * hhPrice;
+    return `<tr>
+      <td><strong>${m}</strong></td>
+      <td class="num-col">${d} &times; $${discPrice} = $${(d * discPrice).toLocaleString()}</td>
+      <td class="num-col">${s} &times; $${stdPrice} = $${(s * stdPrice).toLocaleString()}</td>
+      <td class="num-col">${h} &times; $${hhPrice} = $${(h * hhPrice).toLocaleString()}</td>
+      <td class="num-col"><strong>$${total.toLocaleString()}</strong></td>
+    </tr>`;
+  }).join('');
+
+  // Gross revenue matrix
+  const classScenarios = rm.classScenarios || [5, 10, 15];
+  const classRevPerScenario = classScenarios.map(n =>
+    Math.round(n * (rm.avgClassPriceDollars || 40) * (rm.avgClassAttendees || 10) * (rm.paidClassFraction || 0.80))
+  );
+  const dayPassRev = Math.round(
+    (rm.estimatedDayPassesPerMonth || 33) * (rm.dayPassPriceDollars || 20)
+  );
+
+  document.getElementById('grossRevenueBody').innerHTML = thresholds.map(m => {
+    const d = Math.round(m * mix.discounted);
+    const s = Math.round(m * mix.standard);
+    const h = Math.round(m * mix.household);
+    const memRev = d * discPrice + s * stdPrice + h * hhPrice;
+    return `<tr>
+      <td><strong>${m} members</strong></td>
+      ${classScenarios.map((_, i) => {
+        const gross = memRev + classRevPerScenario[i] + dayPassRev;
+        return `<td class="num-col"><strong>$${gross.toLocaleString()}</strong></td>`;
+      }).join('')}
+    </tr>`;
+  }).join('');
+
+  // Other revenue table
+  const otherRev = rm.otherRevenue || [];
+  document.getElementById('otherRevenueBody').innerHTML = otherRev.map(o => `
+    <tr>
+      <td>${o.name}</td>
+      <td class="num-col">$${o.low.toLocaleString()}</td>
+      <td class="num-col">$${o.high.toLocaleString()}</td>
+      <td style="font-size:0.78rem;color:#666">${o.notes}</td>
+    </tr>`).join('');
+
+  // Expense table + totals
+  const expenses = rm.expenses || [];
+  let totalLow = 0, totalHigh = 0;
+  expenses.forEach(e => { totalLow += e.low; totalHigh += e.high; });
+
+  document.getElementById('expenseBody').innerHTML =
+    expenses.map(e => `
+      <tr>
+        <td>${e.name}</td>
+        <td class="num-col">$${e.low.toLocaleString()}</td>
+        <td class="num-col">$${e.high.toLocaleString()}</td>
+      </tr>`).join('') +
+    `<tr class="expense-row-total">
+      <td>TOTAL</td>
+      <td class="num-col">$${totalLow.toLocaleString()}</td>
+      <td class="num-col">$${totalHigh.toLocaleString()}</td>
+    </tr>`;
+
+  // Break-even callout
+  const expMid = Math.round((totalLow + totalHigh) / 2);
+  // Find the member threshold where membership alone ≥ expMid
+  let beMembers = null;
+  for (const m of thresholds) {
+    const d = Math.round(m * mix.discounted);
+    const s = Math.round(m * mix.standard);
+    const h = Math.round(m * mix.household);
+    const memRev = d * discPrice + s * stdPrice + h * hhPrice;
+    const grossWith10Classes = memRev + classRevPerScenario[1] + dayPassRev;
+    if (grossWith10Classes >= expMid) { beMembers = m; break; }
+  }
+  const callout = document.getElementById('breakEvenCallout');
+  callout.innerHTML = `
+    <h3>Break-Even Analysis</h3>
+    <p>
+      Monthly expense midpoint: <strong>$${expMid.toLocaleString()}/mo</strong><br>
+      ${beMembers
+        ? `At <strong>${beMembers} members</strong> + 10 classes/mo + day passes, gross revenue exceeds expense midpoint.`
+        : `At 500 members + 10 classes/mo, gross revenue reaches $${(
+            Math.round(500 * mix.discounted) * discPrice +
+            Math.round(500 * mix.standard)   * stdPrice  +
+            Math.round(500 * mix.household)  * hhPrice   +
+            classRevPerScenario[1] + dayPassRev
+          ).toLocaleString()}/mo — well above break-even.`
+      }<br>
+      <strong>Grants and sponsorships ($1,800–$6,000/mo combined) can bridge the gap at earlier member counts.</strong>
+    </p>`;
+}
+
+// ═══════════════════════════════════════════════════════════
 // COST ANALYSIS TAB
 // ═══════════════════════════════════════════════════════════
-const COST_DATA = [
+let SITE_DATA = {};
+let COST_DATA = [
   { name:'Outdoor Skills',         interest:55, topPriority:16, upfrontLow:5,   upfrontHigh:15,  monthlyLow:300,  monthlyHigh:700,  buildout:1, ongoing:2, tier:1 },
   { name:'Talks / Events / Clubs', interest:48, topPriority:13, upfrontLow:8,   upfrontHigh:18,  monthlyLow:150,  monthlyHigh:300,  buildout:1, ongoing:1, tier:1 },
   { name:'Small Business Dev',     interest:23, topPriority:6,  upfrontLow:3,   upfrontHigh:10,  monthlyLow:200,  monthlyHigh:400,  buildout:1, ongoing:1, tier:3 },
