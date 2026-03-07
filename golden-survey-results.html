@@ -285,6 +285,39 @@
   .access-highlight { background:#fff3cd; font-size:0.78rem; color:#5d4037; padding:10px 14px; border-radius:8px; margin-top:12px; line-height:1.5; }
   .access-highlight strong { color:#bf360c; }
 
+  /* ── Community Voice Quotes ── */
+  .quotes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; padding:16px 32px 8px; max-width:1400px; margin:0 auto; }
+  .quote-card { border-radius:14px; padding:18px 20px; position:relative; }
+  .quote-card blockquote { font-size:0.88rem; line-height:1.65; font-style:italic; color:#2d2d2d; margin:0 0 10px 0; }
+  .quote-card blockquote::before { content:'\201C'; font-size:2.2rem; line-height:0; vertical-align:-0.6rem; margin-right:3px; opacity:0.35; font-style:normal; }
+  .quote-card blockquote::after  { content:'\201D'; font-size:2.2rem; line-height:0; vertical-align:-0.6rem; margin-left:3px;  opacity:0.35; font-style:normal; }
+  .quote-meta { font-size:0.73rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; opacity:0.65; }
+  .quote-tag  { display:inline-block; font-size:0.68rem; font-weight:700; border-radius:20px; padding:2px 9px; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.4px; }
+  .qt-connect  { background:linear-gradient(135deg,#e3f2fd,#bbdefb); border:1px solid #90caf9; }
+  .qt-connect  .quote-tag  { background:#1565c0; color:white; }
+  .qt-connect  blockquote::before, .qt-connect  blockquote::after { color:#1565c0; }
+  .qt-welcome  { background:linear-gradient(135deg,#e8f5e9,#c8e6c9); border:1px solid #a5d6a7; }
+  .qt-welcome  .quote-tag  { background:#2c5f2e; color:white; }
+  .qt-welcome  blockquote::before, .qt-welcome  blockquote::after { color:#2c5f2e; }
+  .qt-design   { background:linear-gradient(135deg,#fff3e0,#ffe0b2); border:1px solid #ffcc80; }
+  .qt-design   .quote-tag  { background:#e65100; color:white; }
+  .qt-design   blockquote::before, .qt-design   blockquote::after { color:#e65100; }
+  .qt-skills   { background:linear-gradient(135deg,#f3e5f5,#e1bee7); border:1px solid #ce93d8; }
+  .qt-skills   .quote-tag  { background:#6a1b9a; color:white; }
+  .qt-skills   blockquote::before, .qt-skills   blockquote::after { color:#6a1b9a; }
+  .qt-funny    { background:linear-gradient(135deg,#fffde7,#fff9c4); border:1px solid #fff176; }
+  .qt-funny    .quote-tag  { background:#f9a825; color:white; }
+  .qt-funny    blockquote::before, .qt-funny    blockquote::after { color:#f9a825; }
+  .sentiment-card { background:#fff; border-radius:16px; padding:28px 32px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+  .sentiment-card h2 { font-size:0.95rem; font-weight:700; color:#2c5f2e; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:18px; padding-bottom:10px; border-bottom:2px solid #e8f5e9; }
+  .sentiment-section { margin-bottom:22px; }
+  .sentiment-section h4 { font-size:0.88rem; font-weight:700; color:#1a3d1c; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .sentiment-section ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px; }
+  .sentiment-section li { font-size:0.84rem; color:#3d3d3d; line-height:1.55; padding-left:20px; position:relative; }
+  .sentiment-section li::before { content:attr(data-bullet); position:absolute; left:0; }
+  .sentiment-funny { background:linear-gradient(135deg,#fffde7,#fff9c4); border-left:4px solid #f9a825; border-radius:0 12px 12px 0; padding:14px 18px; font-size:0.85rem; color:#5d4037; line-height:1.6; margin-top:10px; }
+  .sentiment-funny strong { color:#e65100; }
+
   /* ── Business Plan Tab ── */
   .bp-intro { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border-left:4px solid #2c5f2e; border-radius:0 12px 12px 0; padding:16px 20px; font-size:0.88rem; color:#1a3d1c; line-height:1.6; }
   .bp-intro strong { color:#2c5f2e; }
@@ -483,7 +516,7 @@
   <div class="tab-panel" id="tab-panel-3">
     <div class="section-header">
       <h3>Community Voice</h3>
-      <p>Most frequent words from open-ended survey responses</p>
+      <p>Word frequency, verbatim quotes, and a synthesis of what Golden residents actually said</p>
     </div>
     <div class="grid">
       <div class="card grid-wide">
@@ -516,6 +549,195 @@
         </div>
       </div>
     </div>
+    <!-- Curated quotes -->
+    <div class="section-header" style="padding-top:4px">
+      <h3>In Their Own Words</h3>
+      <p>Selected verbatim responses from the four free-text questions</p>
+    </div>
+
+    <div class="quotes-grid">
+
+      <div class="quote-card qt-connect">
+        <span class="quote-tag">Hard to feel connected</span>
+        <blockquote>Places in Golden are good for connecting with who you bring, not so much who you run into. Especially in winter.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-connect">
+        <span class="quote-tag">Hard to feel connected</span>
+        <blockquote>Nothing to break down the "stranger" wall.</blockquote>
+        <div class="quote-meta">24–34</div>
+      </div>
+
+      <div class="quote-card qt-funny">
+        <span class="quote-tag">Hard to feel connected</span>
+        <blockquote>Lack of time. (I know, I'm retired.)</blockquote>
+        <div class="quote-meta">65+</div>
+      </div>
+
+      <div class="quote-card qt-connect">
+        <span class="quote-tag">Hard to feel connected</span>
+        <blockquote>I've tried to throw gatherings and everyone's always skiing or camping or "out." People are very friendly here, but so far none of those have yielded friends — just things to do.</blockquote>
+        <div class="quote-meta">50–64</div>
+      </div>
+
+      <div class="quote-card qt-connect">
+        <span class="quote-tag">Hard to feel connected</span>
+        <blockquote>It takes time. I do a lot of one-off things at various places in Golden, but I'm not seeing the same people over and over again, so I'm not getting a chance to learn their stories and tell them my story.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-funny">
+        <span class="quote-tag">Hard to feel connected</span>
+        <blockquote>Current politics.</blockquote>
+        <div class="quote-meta">50–64 &mdash; no notes, just vibes</div>
+      </div>
+
+      <div class="quote-card qt-connect">
+        <span class="quote-tag">Hard to feel connected</span>
+        <blockquote>I'd love a family-friendly creative space — my free time is evenings and weekends with my kids. I'd like indoor options we can do TOGETHER with other families.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-welcome">
+        <span class="quote-tag">What would make it welcoming</span>
+        <blockquote>At least two couches that are actually nice to sit on for people to drink their free beer around others. Emphasis on free. Offer incentives for donors, so all are welcome to show up.</blockquote>
+        <div class="quote-meta">24–34 — a visionary, clearly</div>
+      </div>
+
+      <div class="quote-card qt-welcome">
+        <span class="quote-tag">What would make it welcoming</span>
+        <blockquote>No-appointment-needed free flow. No pressure, no commitments — but participation is encouraged through programming. Easy going, relaxed vibe.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-welcome">
+        <span class="quote-tag">What would make it welcoming</span>
+        <blockquote>I would be very drawn to someplace where I could spend time with other 20s-ish folks — early career, no kids. This has been something I've struggled to find in Golden.</blockquote>
+        <div class="quote-meta">24–34</div>
+      </div>
+
+      <div class="quote-card qt-welcome">
+        <span class="quote-tag">What would make it welcoming</span>
+        <blockquote>Even 15 minutes away is too far for me to go more than a couple times per month. Location is important — I'd like to spend time at Clear Creek Makerspace, but it's just too far.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-welcome">
+        <span class="quote-tag">What would make it welcoming</span>
+        <blockquote>Actual empathetic connection and activities accessible for my neurodivergent pre-teens — our family currently can't participate in any activities at the GCC.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-design">
+        <span class="quote-tag">How they'd design it</span>
+        <blockquote>A coffee shop + art studio + engineering/maker space all going on in one building — each inspiring the others collectively. Good natural light, electrical outlets aplenty, smaller rooms to meet and share projects.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-design">
+        <span class="quote-tag">How they'd design it</span>
+        <blockquote>Ages 0–110 doing things TOGETHER. I don't see any reason we couldn't attend a photography, cooking, or pottery class accessible to 3-year-olds, 30-year-olds, 60-year-olds, and 90-year-olds.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-funny">
+        <span class="quote-tag">How they'd design it</span>
+        <blockquote>It would look like the existing library.</blockquote>
+        <div class="quote-meta">35–49 — achievable, at least</div>
+      </div>
+
+      <div class="quote-card qt-design">
+        <span class="quote-tag">How they'd design it</span>
+        <blockquote>Open 24/7 to paying members. Ran by a strong group of core volunteers who love sharing things they're passionate about with insatiably curious people. A diverse group of all ages who want to learn, create, and share ideas.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-design">
+        <span class="quote-tag">How they'd design it</span>
+        <blockquote>Windows for fresh air; different spaces for different types of gathering; rotating art/maker exhibits from the community; outdoor space with a fire pit for winter. YMCA Estes Park Craft Center comes to mind.</blockquote>
+        <div class="quote-meta">35–49</div>
+      </div>
+
+      <div class="quote-card qt-design">
+        <span class="quote-tag">How they'd design it</span>
+        <blockquote>A welcoming feel, like your favorite coffee shop…</blockquote>
+        <div class="quote-meta">50–64</div>
+      </div>
+
+      <div class="quote-card qt-skills">
+        <span class="quote-tag">Skills they'd share</span>
+        <blockquote>Cooking, gardening, basic roommate etiquette, how to change car oil, high-energy dance parties, ecstatic dance, and avoiding scams online.</blockquote>
+        <div class="quote-meta">24–34 — we're just going to say yes to all of this</div>
+      </div>
+
+      <div class="quote-card qt-skills">
+        <span class="quote-tag">Skills they'd share</span>
+        <blockquote>My mom would share sewing, crochet, and knitting. My son would love to run D&amp;D campaigns. I could help with event planning and food safety.</blockquote>
+        <div class="quote-meta">35–49 — a complete household</div>
+      </div>
+
+      <div class="quote-card qt-skills">
+        <span class="quote-tag">Skills they'd share</span>
+        <blockquote>Welding. 3D printing. AI learning.</blockquote>
+        <div class="quote-meta">50–64 — the future is already here</div>
+      </div>
+
+      <div class="quote-card qt-skills">
+        <span class="quote-tag">Skills they'd share</span>
+        <blockquote>Less about skills and more about something fun and interesting in Golden that isn't just pizza and burgers.</blockquote>
+        <div class="quote-meta">24–34 — noted, pizza and burgers</div>
+      </div>
+
+    </div>
+
+    <!-- Sentiment summary -->
+    <div class="grid" style="margin-top:8px">
+      <div class="card grid-wide sentiment-card">
+        <h2>What We Heard — Sentiment &amp; Needs Summary</h2>
+
+        <div class="sentiment-section">
+          <h4><span>💬</span> The core feeling: friendly place, lonely people</h4>
+          <ul>
+            <li data-bullet="→">Golden residents like their town and their neighbors — but they keep not quite meeting them. People are out there, doing things, just never the same things at the same time.</li>
+            <li data-bullet="→">The dominant metaphor across dozens of responses: you can go to a brewery, a trailhead, or a coffee shop, but you'll leave with the same people you arrived with.</li>
+            <li data-bullet="→">Bars came up constantly — as the only option, and as exactly what people don't want. The community is actively craving a third space that isn't centered on alcohol.</li>
+          </ul>
+        </div>
+
+        <div class="sentiment-section">
+          <h4><span>📋</span> What they need (ranked by signal strength)</h4>
+          <ul>
+            <li data-bullet="1.">A place to just <strong>show up</strong> — drop-in, no registration, no commitment. This was the single most repeated theme.</li>
+            <li data-bullet="2."><strong>Evening and weekend hours.</strong> Most respondents work full-time. Monday–Friday 9–5 is a non-starter. (Looking at you, every existing Golden venue.)</li>
+            <li data-bullet="3."><strong>All ages together.</strong> Multiple respondents specifically said they want to be in rooms with people who aren't their age cohort. Older and younger. Kids and adults.</li>
+            <li data-bullet="4."><strong>Affordable or sliding scale</strong> — the word "pricing" appeared in nearly every welcoming response. Not free, but fair.</li>
+            <li data-bullet="5.">A reason to come back to the <strong>same place</strong> repeatedly, so relationships can actually form. One-off events don't build community; regularity does.</li>
+            <li data-bullet="6."><strong>Cooking.</strong> It's the most-requested activity and mentioned unprompted in multiple design descriptions. A community kitchen isn't a nice-to-have; it's the thing.</li>
+          </ul>
+        </div>
+
+        <div class="sentiment-section">
+          <h4><span>🏗️</span> What they'd build (the vision, distilled)</h4>
+          <ul>
+            <li data-bullet="→">Light-filled, casual, cozy — more library than warehouse, more living room than classroom.</li>
+            <li data-bullet="→">Multiple zones: quiet corners, active maker areas, a kitchen, an outdoor space. Not one big open room.</li>
+            <li data-bullet="→">Staff or volunteers who actually know what's going on and can invite people in — not just a front desk.</li>
+            <li data-bullet="→">Programming that creates <em>excuses to talk to strangers</em>: skill swaps, shared projects, repair nights, potlucks.</li>
+          </ul>
+        </div>
+
+        <div class="sentiment-funny">
+          <strong>Honorable mentions from the "makes it hard to feel connected" field:</strong>
+          "Current politics." (50–64, no elaboration) &nbsp;&bull;&nbsp;
+          "Lack of time. I know, I'm retired." (65+, self-aware king) &nbsp;&bull;&nbsp;
+          "We're all busy!" (35–49, speaking for everyone) &nbsp;&bull;&nbsp;
+          "Sean Sundermann." (50–64, we have questions) &nbsp;&bull;&nbsp;
+          And the person who wants a free beer NFC wristband system with nightlife hours and a soundproofed lower floor — you are either the target demographic or the founder. Possibly both.
+        </div>
+      </div>
+    </div>
+
     <div class="tab-footer-nav">
       <button class="tab-nav-btn" onclick="showTab(2)">&larr; Participation</button>
       <span class="tab-progress"><strong>4</strong> / 7</span>
