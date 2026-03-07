@@ -6,6 +6,8 @@
 <title>Help Shape a New Place to Gather in Golden — Survey Results</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f5f3ee; color: #2d2d2d; min-height: 100vh; }
@@ -75,7 +77,6 @@
   .spotlight-card .age-count  { font-size:0.75rem; opacity:0.75; margin-bottom:12px; display:block; }
   .spotlight-card .top-label  { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; opacity:0.7; margin-bottom:6px; }
   .spotlight-card .interest-pill { display:inline-block; background:rgba(255,255,255,0.3); border-radius:20px; padding:4px 10px; font-size:0.75rem; font-weight:600; margin:3px 2px; }
-  .spotlight-card .unique-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; opacity:0.7; margin:12px 0 6px; }
   .sp-24 { background:linear-gradient(135deg,#1a5276,#2980b9); color:white; }
   .sp-35 { background:linear-gradient(135deg,#1e8449,#27ae60); color:white; }
   .sp-50 { background:linear-gradient(135deg,#784212,#ca6f1e); color:white; }
@@ -92,6 +93,23 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   #loading p { color:#666; font-size:0.9rem; }
   #error-msg { display:none; background:#fff3cd; border:1px solid #ffc107; border-radius:12px; padding:20px 24px; margin:32px; color:#856404; font-size:0.9rem; line-height:1.6; }
+
+  /* Word cloud */
+  .wc-filter-row { display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+  .wc-filter-row label { font-size:0.8rem; color:#666; font-weight:600; text-transform:uppercase; letter-spacing:0.4px; }
+  .filter-btn { padding:6px 16px; border-radius:20px; border:2px solid #ddd; background:#f5f3ee; font-size:0.8rem; font-weight:600; cursor:pointer; transition:all 0.18s; color:#555; }
+  .filter-btn.active { background:#2c5f2e; border-color:#2c5f2e; color:white; }
+  #cloud-container { background:#f5f3ee; border-radius:12px; overflow:hidden; width:100%; }
+  #cloud-svg { display:block; width:100%; }
+  .wc-tooltip { position:fixed; background:#1a3d1c; color:white; padding:8px 14px; border-radius:10px; font-size:0.82rem; pointer-events:none; opacity:0; transition:opacity 0.15s; z-index:100; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+  .wc-tooltip .word  { font-weight:700; font-size:1rem; }
+  .wc-tooltip .count { opacity:0.75; font-size:0.78rem; margin-top:1px; }
+  .source-note { margin-top:16px; font-size:0.8rem; color:#666; line-height:1.5; }
+  .source-note strong { color:#2c5f2e; }
+  .source-fields { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .field-pill { background:#e8f5e9; color:#2c5f2e; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:600; }
+  .wc-legend { display:flex; gap:12px; margin-top:10px; flex-wrap:wrap; align-items:center; font-size:0.78rem; color:#666; }
+  .wc-legend-swatch { display:inline-block; width:24px; height:10px; border-radius:5px; margin-right:4px; vertical-align:middle; }
 
   footer { text-align:center; padding:24px; font-size:0.78rem; color:#999; border-top:1px solid #e8e4dc; margin-top:12px; }
 </style>
@@ -191,7 +209,50 @@
     <div class="card"><h2>Overall Space Interests (All Ages)</h2><div class="hbar-list" id="interestBars"></div></div>
   </div>
 
+  <!-- ── Section 4: Community Voice ── -->
+  <div class="section-header">
+    <h3>Community Voice</h3>
+    <p>Most frequent words from open-ended survey responses</p>
+  </div>
+  <div class="grid">
+    <div class="card grid-wide">
+      <h2>Word Cloud — What the Community is Saying</h2>
+      <div class="wc-filter-row">
+        <label>Show:</label>
+        <button class="filter-btn active" onclick="setFilter('all',this)">All Words</button>
+        <button class="filter-btn" onclick="setFilter('top20',this)">Top 20</button>
+        <button class="filter-btn" onclick="setFilter('top40',this)">Top 40</button>
+        <button class="filter-btn" onclick="setFilter('top80',this)">All 80</button>
+      </div>
+      <div id="cloud-container">
+        <svg id="cloud-svg" viewBox="0 0 960 520" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+      <div class="source-note">
+        <strong>Source fields</strong> — words drawn from respondents' free-text answers to:
+        <div class="source-fields">
+          <span class="field-pill">What makes it hard to feel connected?</span>
+          <span class="field-pill">What would make the space welcoming?</span>
+          <span class="field-pill">What skills could you share?</span>
+          <span class="field-pill">How would you design the space?</span>
+        </div>
+        <div class="wc-legend">
+          <span><span class="wc-legend-swatch" style="background:linear-gradient(90deg,#2c5f2e,#5ea55f)"></span> Larger / darker = mentioned more often</span>
+          <span style="color:#bbb">·</span>
+          <span>Hover a word to see its count</span>
+          <span style="color:#bbb">·</span>
+          <span>Common words &amp; survey option text removed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer id="footerBar"></footer>
+</div>
+
+<!-- Word cloud tooltip -->
+<div class="wc-tooltip" id="wc-tooltip">
+  <div class="word" id="tt-word"></div>
+  <div class="count" id="tt-count"></div>
 </div>
 
 <script>
@@ -574,6 +635,9 @@ function buildDashboard(rows) {
   // Show dashboard
   document.getElementById('loading').style.display   = 'none';
   document.getElementById('dashboard').style.display = 'block';
+
+  // ── Word cloud (init after dashboard is visible) ──────────
+  drawCloud(getWords('all'));
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -596,6 +660,132 @@ Papa.parse(CSV_FILE, {
 function showError() {
   document.getElementById('loading').style.display   = 'none';
   document.getElementById('error-msg').style.display = 'block';
+}
+
+// ═══════════════════════════════════════════════════════════
+// WORD CLOUD
+// ═══════════════════════════════════════════════════════════
+const ALL_WORDS = [
+  {"text":"pricing","count":18},{"text":"atmosphere","count":18},
+  {"text":"mix","count":13},{"text":"free","count":13},
+  {"text":"ages","count":12},{"text":"programming","count":12},{"text":"kids","count":12},
+  {"text":"open","count":11},{"text":"events","count":11},{"text":"classes","count":11},
+  {"text":"spaces","count":10},{"text":"library","count":10},{"text":"work","count":10},
+  {"text":"area","count":9},{"text":"cooking","count":9},{"text":"age","count":9},
+  {"text":"outdoor","count":8},{"text":"love","count":8},
+  {"text":"activities","count":7},{"text":"center","count":7},{"text":"learn","count":7},
+  {"text":"sewing","count":7},{"text":"art","count":7},{"text":"opportunities","count":7},
+  {"text":"location","count":7},{"text":"meet","count":7},{"text":"design","count":7},
+  {"text":"adults","count":6},{"text":"welcoming","count":6},
+  {"text":"downtown","count":5},{"text":"cozy","count":5},{"text":"beer","count":5},
+  {"text":"food","count":5},{"text":"natural","count":5},{"text":"light","count":5},
+  {"text":"music","count":5},{"text":"style","count":5},{"text":"areas","count":5},
+  {"text":"family","count":5},{"text":"accessible","count":5},{"text":"children","count":5},
+  {"text":"friends","count":5},{"text":"older","count":5},{"text":"locals","count":5},
+  {"text":"skills","count":5},{"text":"technology","count":5},{"text":"school","count":5},
+  {"text":"groups","count":5},
+  {"text":"gardening","count":4},{"text":"bike","count":4},{"text":"small","count":4},
+  {"text":"central","count":4},{"text":"nice","count":4},{"text":"kitchen","count":4},
+  {"text":"hours","count":4},{"text":"repair","count":4},{"text":"friendly","count":4},
+  {"text":"foothills","count":4},{"text":"together","count":4},{"text":"connect","count":4},
+  {"text":"students","count":4},{"text":"share","count":4},{"text":"maker","count":4},
+  {"text":"business","count":4},{"text":"woodworking","count":4},{"text":"easy","count":4},
+  {"text":"makerspace","count":4},
+  {"text":"flexible","count":3},{"text":"mixed","count":3},{"text":"couches","count":3},
+  {"text":"chairs","count":3},{"text":"places","count":3},{"text":"dance","count":3},
+  {"text":"indoor","count":3},{"text":"outside","count":3},{"text":"plants","count":3},
+  {"text":"teens","count":3},{"text":"arts","count":3},{"text":"families","count":3},
+  {"text":"residents","count":3},
+];
+
+const wcColorScale = d => {
+  if (d.count >= 14) return '#1a3d1c';
+  if (d.count >= 10) return '#2c5f2e';
+  if (d.count >= 7)  return '#3d7a3f';
+  if (d.count >= 5)  return '#5ea55f';
+  if (d.count >= 4)  return '#7ec47e';
+  return '#9ed49f';
+};
+
+const maxCount = ALL_WORDS[0].count;
+const minCount = ALL_WORDS[ALL_WORDS.length - 1].count;
+const sizeScale = d3.scaleLog()
+  .domain([minCount, maxCount])
+  .range([14, 72])
+  .clamp(true);
+
+let currentFilter = 'all';
+let layoutRunning = false;
+
+function getWords(filter) {
+  if (filter === 'top20') return ALL_WORDS.slice(0, 20);
+  if (filter === 'top40') return ALL_WORDS.slice(0, 40);
+  return ALL_WORDS;
+}
+
+const wcTooltip = document.getElementById('wc-tooltip');
+const ttWord    = document.getElementById('tt-word');
+const ttCount   = document.getElementById('tt-count');
+
+function showTooltip(e, d) {
+  ttWord.textContent  = d.text;
+  ttCount.textContent = `mentioned ${d.count} time${d.count !== 1 ? 's' : ''}`;
+  wcTooltip.style.opacity = '1';
+  moveTooltip(e);
+}
+function moveTooltip(e) {
+  wcTooltip.style.left = (e.clientX + 14) + 'px';
+  wcTooltip.style.top  = (e.clientY - 36) + 'px';
+}
+function hideTooltip() { wcTooltip.style.opacity = '0'; }
+
+const W = 960, H = 520;
+const svg = d3.select('#cloud-svg');
+let group = svg.append('g').attr('transform', `translate(${W/2},${H/2})`);
+
+function drawCloud(words) {
+  if (layoutRunning) return;
+  layoutRunning = true;
+  svg.selectAll('g').remove();
+  group = svg.append('g').attr('transform', `translate(${W/2},${H/2})`);
+
+  d3.layout.cloud()
+    .size([W, H])
+    .words(words.map(d => ({ text: d.text, count: d.count, size: sizeScale(d.count) })))
+    .padding(4)
+    .rotate(() => (Math.random() < 0.75 ? 0 : 90))
+    .font('Segoe UI, system-ui, sans-serif')
+    .fontWeight(d => d.count >= 8 ? 700 : 500)
+    .fontSize(d => d.size)
+    .on('end', placed => {
+      layoutRunning = false;
+      group.selectAll('text')
+        .data(placed)
+        .enter().append('text')
+        .style('font-size',    d => d.size + 'px')
+        .style('font-family', 'Segoe UI, system-ui, sans-serif')
+        .style('font-weight', d => d.count >= 8 ? 700 : 500)
+        .style('fill',        d => wcColorScale(d))
+        .style('cursor',      'default')
+        .attr('text-anchor', 'middle')
+        .attr('transform',   d => `translate(${d.x},${d.y}) rotate(${d.rotate})`)
+        .style('opacity', 0)
+        .text(d => d.text)
+        .on('mouseover', (e, d) => showTooltip(e, d))
+        .on('mousemove', moveTooltip)
+        .on('mouseout',  hideTooltip)
+        .transition().duration(500)
+        .delay((_, i) => i * 18)
+        .style('opacity', 1);
+    })
+    .start();
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  drawCloud(getWords(filter));
 }
 </script>
 </body>
