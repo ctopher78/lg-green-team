@@ -806,15 +806,16 @@
         <div class="tier-cards">
           <div class="tier-card tier-card-1">
             <h3>Tier 1 — Start Now</h3>
-            <span class="tier-sub">High interest &bull; Low-medium cost &bull; Simple compliance</span>
+            <span class="tier-sub">High interest &bull; Low-medium cost &bull; Simple compliance &bull; City priority</span>
             <div class="tier-pills">
               <span class="tier-pill">Talks / Events / Clubs</span>
               <span class="tier-pill">Outdoor Skills</span>
               <span class="tier-pill">Repair Clinics</span>
               <span class="tier-pill">Sewing / Fiber Arts</span>
+              <span class="tier-pill">Small Business Dev</span>
             </div>
             <p class="tier-rationale">
-              Talks and events provide foundational infrastructure every other activity shares — chairs, A/V, tables. Outdoor skills are nearly free to launch with strong, consistent community interest. Repair clinics and sewing both have solid demand, low compliance burden, and grow well incrementally.
+              Talks and events provide foundational infrastructure every other activity shares — chairs, A/V, tables. Outdoor skills are nearly free to launch with strong, consistent community interest. Repair clinics and sewing both have solid demand, low compliance burden, and grow well incrementally. <strong>Small Business Dev has the lowest startup cost of any activity</strong> ($3–10k, shares the events space) — and despite modest survey interest (23%), it's the highest-visibility activity for the city's economic development committee. A pitch night, a small biz workshop, a coworking morning: these cost almost nothing and are critical for unlocking city partnership, below-market rent, and grant eligibility.
             </p>
           </div>
           <div class="tier-card tier-card-2">
@@ -826,20 +827,19 @@
               <span class="tier-pill">Woodworking</span>
             </div>
             <p class="tier-rationale">
-              3D Printing ranks <strong>#1 in top priorities</strong> despite modest overall interest — enthusiasts are highly motivated. Painting has a strong passion-to-cost ratio; watch supply burn. Woodworking has consistent demand and manageable buildout with the right safety investment (SawStop is non-negotiable).
+              3D Printing ranks <strong>#1 in top priorities</strong> despite modest overall interest — enthusiasts are highly motivated and it's a strong commercial maker tool. Painting has a strong passion-to-cost ratio; watch supply burn. Woodworking has consistent demand, manageable buildout, and is a key enabler of the commercial maker tier — furniture makers, custom product businesses, and wood artists can run a real business from it.
             </p>
           </div>
           <div class="tier-card tier-card-3">
             <h3>Tier 3 — Long Game</h3>
-            <span class="tier-sub">High cost or compliance &bull; Or weaker demand signal</span>
+            <span class="tier-sub">High cost or compliance burden &bull; Build toward these</span>
             <div class="tier-pills">
               <span class="tier-pill">Community Kitchen</span>
               <span class="tier-pill">Ceramics</span>
               <span class="tier-pill">Metalworking / Welding</span>
-              <span class="tier-pill">Small Business Dev</span>
             </div>
             <p class="tier-rationale">
-              Community Kitchen is the most desired activity but carries the highest regulatory and capital bar — health dept certification, licensed HVAC/fire contractor, NSF equipment. Ceramics shows many curious but few committed (only 5 top-priority picks). Metalworking has the lowest passion signal and highest ongoing safety burden; revisit after woodshop is established. Small Business Dev absorbs into the events space.
+              Community Kitchen is the most desired activity but carries the highest regulatory and capital bar — health dept certification, licensed HVAC/fire contractor, NSF equipment. Yet it's also the single strongest economic development argument for cottage food producers, catering businesses, and meal-prep startups who need a licensed kitchen to operate legally. Plan for it in Phase 2. Ceramics shows many curious but few committed (only 5 top-priority picks). Metalworking has real demand but a high safety and compliance overhead; revisit after the woodshop is established.
             </p>
           </div>
         </div>
@@ -2349,15 +2349,15 @@ let SITE_DATA = {};
 let COST_DATA = [
   { name:'Outdoor Skills',         interest:55, topPriority:16, upfrontLow:5,   upfrontHigh:15,  monthlyLow:300,  monthlyHigh:700,  buildout:1, ongoing:2, tier:1 },
   { name:'Talks / Events / Clubs', interest:48, topPriority:13, upfrontLow:8,   upfrontHigh:18,  monthlyLow:150,  monthlyHigh:300,  buildout:1, ongoing:1, tier:1 },
-  { name:'Small Business Dev',     interest:23, topPriority:6,  upfrontLow:3,   upfrontHigh:10,  monthlyLow:200,  monthlyHigh:400,  buildout:1, ongoing:1, tier:3 },
+  { name:'Small Business Dev',     interest:23, topPriority:6,  upfrontLow:3,   upfrontHigh:10,  monthlyLow:200,  monthlyHigh:400,  buildout:1, ongoing:1, tier:1 },
   { name:'Repair Clinics',         interest:47, topPriority:9,  upfrontLow:8,   upfrontHigh:17,  monthlyLow:250,  monthlyHigh:500,  buildout:2, ongoing:2, tier:1 },
   { name:'Sewing / Fiber Arts',    interest:46, topPriority:9,  upfrontLow:12,  upfrontHigh:25,  monthlyLow:250,  monthlyHigh:500,  buildout:2, ongoing:2, tier:1 },
-  { name:'Painting / Printmaking', interest:39, topPriority:14, upfrontLow:8,   upfrontHigh:22,  monthlyLow:600,  monthlyHigh:1800, buildout:2, ongoing:2, tier:2 },
+  { name:'Painting / Printmaking', interest:39, topPriority:14, upfrontLow:8,   upfrontHigh:22,  monthlyLow:600,  monthlyHigh:1800, buildout:2, ongoing:4, tier:2 },
   { name:'3D Printing / Design',   interest:38, topPriority:18, upfrontLow:10,  upfrontHigh:28,  monthlyLow:400,  monthlyHigh:1000, buildout:2, ongoing:3, tier:2 },
   { name:'Ceramics',               interest:47, topPriority:5,  upfrontLow:18,  upfrontHigh:40,  monthlyLow:500,  monthlyHigh:1100, buildout:3, ongoing:3, tier:3 },
-  { name:'Woodworking',            interest:49, topPriority:11, upfrontLow:25,  upfrontHigh:50,  monthlyLow:500,  monthlyHigh:1000, buildout:4, ongoing:4, tier:2 },
-  { name:'Community Kitchen',      interest:60, topPriority:16, upfrontLow:35,  upfrontHigh:70,  monthlyLow:1000, monthlyHigh:2200, buildout:5, ongoing:4, tier:3 },
-  { name:'Metalworking / Welding', interest:49, topPriority:4,  upfrontLow:20,  upfrontHigh:45,  monthlyLow:300,  monthlyHigh:800,  buildout:5, ongoing:5, tier:3 },
+  { name:'Woodworking',            interest:49, topPriority:11, upfrontLow:25,  upfrontHigh:50,  monthlyLow:500,  monthlyHigh:1000, buildout:4, ongoing:3, tier:2 },
+  { name:'Community Kitchen',      interest:60, topPriority:16, upfrontLow:35,  upfrontHigh:70,  monthlyLow:1000, monthlyHigh:2200, buildout:5, ongoing:5, tier:3 },
+  { name:'Metalworking / Welding', interest:49, topPriority:4,  upfrontLow:20,  upfrontHigh:45,  monthlyLow:300,  monthlyHigh:800,  buildout:3, ongoing:2, tier:3 },
 ];
 
 let costSortCol = 1;   // default: interest

@@ -40,7 +40,7 @@
     {
       "name": "Small Business Dev", "interest": 23, "topPriority": 6,
       "upfrontLow": 3, "upfrontHigh": 10, "monthlyLow": 200, "monthlyHigh": 400,
-      "buildout": 1, "ongoing": 1, "tier": 3,
+      "buildout": 1, "ongoing": 1, "tier": 1,
       "setupItems": [
         { "label": "Whiteboard, flip chart, presentation gear", "low": 500, "high": 2000 },
         { "label": "Reference library & business resources", "low": 500, "high": 2000 },
@@ -101,7 +101,7 @@
     {
       "name": "Painting / Printmaking", "interest": 39, "topPriority": 14,
       "upfrontLow": 8, "upfrontHigh": 22, "monthlyLow": 600, "monthlyHigh": 1800,
-      "buildout": 2, "ongoing": 2, "tier": 2,
+      "buildout": 2, "ongoing": 4, "tier": 2,
       "setupItems": [
         { "label": "Etching / relief press", "low": 3000, "high": 8000 },
         { "label": "Ventilation improvements for solvents", "low": 2000, "high": 5000 },
@@ -167,7 +167,7 @@
     {
       "name": "Woodworking", "interest": 49, "topPriority": 11,
       "upfrontLow": 25, "upfrontHigh": 50, "monthlyLow": 500, "monthlyHigh": 1000,
-      "buildout": 4, "ongoing": 4, "tier": 2,
+      "buildout": 4, "ongoing": 3, "tier": 2,
       "setupItems": [
         { "label": "SawStop table saw (non-negotiable for safety)", "low": 4000, "high": 7000 },
         { "label": "CNC router (optional but high-value)", "low": 8000, "high": 20000 },
@@ -189,7 +189,7 @@
     {
       "name": "Community Kitchen", "interest": 60, "topPriority": 16,
       "upfrontLow": 35, "upfrontHigh": 70, "monthlyLow": 1000, "monthlyHigh": 2200,
-      "buildout": 5, "ongoing": 4, "tier": 3,
+      "buildout": 5, "ongoing": 5, "tier": 3,
       "setupItems": [
         { "label": "Commercial ranges × 2 + ovens", "low": 4000, "high": 10000 },
         { "label": "Commercial hood, fire suppression & ventilation", "low": 5000, "high": 15000 },
@@ -214,7 +214,7 @@
     {
       "name": "Metalworking / Welding", "interest": 49, "topPriority": 4,
       "upfrontLow": 20, "upfrontHigh": 45, "monthlyLow": 300, "monthlyHigh": 800,
-      "buildout": 5, "ongoing": 5, "tier": 3,
+      "buildout": 3, "ongoing": 2, "tier": 3,
       "setupItems": [
         { "label": "MIG welders × 2 (Miller, Lincoln)", "low": 1500, "high": 4000 },
         { "label": "TIG welder", "low": 2000, "high": 5000 },
