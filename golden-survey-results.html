@@ -1450,10 +1450,13 @@
     <!-- Section 6: Membership Tiers (Golden's model) -->
     <div class="section-header" style="padding-top:12px">
       <h3>Golden's Membership Model</h3>
-      <p>Priced around what people will actually pay for — all figures editable in golden-makerspace-data.json</p>
+      <p>Intentionally simple — two monthly tiers plus a day pass, similar to CCM's structure</p>
     </div>
     <div class="grid">
       <div class="card grid-wide">
+        <div class="cost-disclaimer" style="margin-bottom:18px">
+          CCM has three tiers: Discounted ($30), Standard ($60), and Household ($180 for up to 4 people). All tiers include full tool access and commercial use is permitted — CCM doesn't restrict members from selling what they make. Golden's model follows the same philosophy with two changes: we add a low-cost <strong>Community tier</strong> ($25/mo, no equipment) for people who primarily want events and classes, and we set the tool-access tier slightly higher at $65 to reflect Golden's higher cost of living. Like CCM, <strong>commercial use is included in the Maker tier</strong> — there is no separate "commercial" upsell.
+        </div>
         <div class="ccm-tier-cards" id="goldenTierCards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
           <!-- rendered by JS -->
         </div>
@@ -1468,7 +1471,6 @@
                 <th>Members</th>
                 <th class="num-col">Community ($25)</th>
                 <th class="num-col">Maker ($65)</th>
-                <th class="num-col">Commercial ($130)</th>
                 <th class="num-col">Monthly Total</th>
               </tr>
             </thead>
@@ -2243,25 +2245,21 @@ function buildBusinessPlan() {
     </tr>`).join('');
 
   // Membership revenue table — using Golden's tiers
-  const mix = rm.memberMix || { community: 0.25, maker: 0.60, commercial: 0.15 };
+  const mix = rm.memberMix || { community: 0.30, maker: 0.70 };
   const thresholds = rm.memberThresholds || [20, 50, 100, 200];
-  const communityTier   = goldenTiers.find(t => t.color === 'green')  || { monthly: 25 };
-  const makerTier       = goldenTiers.find(t => t.color === 'blue')   || { monthly: 65 };
-  const commercialTier  = goldenTiers.find(t => t.color === 'purple') || { monthly: 130 };
+  const communityTier = goldenTiers.find(t => t.color === 'green') || { monthly: 25 };
+  const makerTier     = goldenTiers.find(t => t.color === 'blue')  || { monthly: 65 };
   const cPrice = communityTier.monthly;
   const mPrice = makerTier.monthly;
-  const bPrice = commercialTier.monthly;
 
   document.getElementById('memberRevenueBody').innerHTML = thresholds.map(m => {
     const c = Math.round(m * mix.community);
     const mk = Math.round(m * mix.maker);
-    const biz = Math.round(m * mix.commercial);
-    const total = c * cPrice + mk * mPrice + biz * bPrice;
+    const total = c * cPrice + mk * mPrice;
     return `<tr>
       <td><strong>${m}</strong></td>
       <td class="num-col">${c} &times; $${cPrice} = $${(c * cPrice).toLocaleString()}</td>
       <td class="num-col">${mk} &times; $${mPrice} = $${(mk * mPrice).toLocaleString()}</td>
-      <td class="num-col">${biz} &times; $${bPrice} = $${(biz * bPrice).toLocaleString()}</td>
       <td class="num-col"><strong>$${total.toLocaleString()}</strong></td>
     </tr>`;
   }).join('');
@@ -2278,8 +2276,7 @@ function buildBusinessPlan() {
   document.getElementById('grossRevenueBody').innerHTML = thresholds.map(m => {
     const c = Math.round(m * mix.community);
     const mk = Math.round(m * mix.maker);
-    const biz = Math.round(m * mix.commercial);
-    const memRev = c * cPrice + mk * mPrice + biz * bPrice;
+    const memRev = c * cPrice + mk * mPrice;
     return `<tr>
       <td><strong>${m} members</strong></td>
       ${classScenarios.map((_, i) => {
@@ -2323,8 +2320,7 @@ function buildBusinessPlan() {
   for (const m of thresholds) {
     const c = Math.round(m * mix.community);
     const mk = Math.round(m * mix.maker);
-    const biz = Math.round(m * mix.commercial);
-    const memRev = c * cPrice + mk * mPrice + biz * bPrice;
+    const memRev = c * cPrice + mk * mPrice;
     const grossWith10Classes = memRev + classRevPerScenario[1] + dayPassRev;
     if (grossWith10Classes >= expMid) { beMembers = m; break; }
   }

@@ -273,36 +273,26 @@
       },
       {
         "name": "Community",
-        "who": "Members who want event/class pricing + community, no equipment",
+        "who": "Event & class pricing + community access — no equipment",
         "monthly": 25,
         "annual": 240,
         "toolAccess": false,
         "commercialUse": false,
         "color": "green",
-        "note": "Keeps the community accessible without inflating cost. Not the growth driver."
+        "note": "Golden-specific tier: CCM doesn't offer this because they are tools-first. We add it for people who want to participate in talks, classes, and events without paying for equipment access they won't use."
       },
       {
         "name": "Maker",
-        "who": "24/7 access to all equipment — the core membership",
+        "who": "24/7 access to all equipment, including commercial use",
         "monthly": 65,
         "annual": 600,
         "toolAccess": true,
-        "commercialUse": false,
-        "color": "blue",
-        "note": "This is why people pay. $65/mo for $250k of tools you can't own is an obvious value."
-      },
-      {
-        "name": "Commercial Maker",
-        "who": "Maker benefits + sell what you make, priority scheduling, dedicated storage",
-        "monthly": 130,
-        "annual": 1200,
-        "toolAccess": true,
         "commercialUse": true,
-        "color": "purple",
-        "note": "For cottage producers, custom product businesses, and creative entrepreneurs. Critical for city partnership."
+        "color": "blue",
+        "note": "This is why people pay — $65/mo for tools you can't afford to own. Like CCM's Standard tier ($60), commercial use is included. Cottage producers, artists, and small product businesses operate at this tier."
       }
     ],
-    "memberMix": { "community": 0.25, "maker": 0.60, "commercial": 0.15 },
+    "memberMix": { "community": 0.30, "maker": 0.70 },
     "memberThresholds": [20, 50, 100, 200],
     "classScenarios": [5, 10, 15],
     "avgClassPriceDollars": 45,
