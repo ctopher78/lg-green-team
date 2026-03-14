@@ -214,8 +214,23 @@
   .cost-table td { padding:9px 12px; border-bottom:1px solid #f0ede8; vertical-align:middle; }
   .cost-table tr:last-child td { border-bottom:none; }
   .cost-table tr:hover td { background:#f9f8f5; }
-  .cost-table .stars { color:#2c5f2e; letter-spacing:1px; white-space:nowrap; font-size:0.85rem; }
-  .cost-table .dim-stars { color:#ddd; letter-spacing:1px; }
+  .cost-table .dollars { color:#2c5f2e; letter-spacing:1px; white-space:nowrap; font-size:0.88rem; font-weight:700; }
+  .cost-table .dim-dollars { color:#ddd; letter-spacing:1px; font-size:0.88rem; }
+  .cost-table tbody tr.cost-data-row { cursor:pointer; }
+  .cost-table tbody tr.cost-data-row td:first-child::after { content:' ▸'; font-size:0.7rem; color:#aaa; margin-left:4px; transition:transform 0.2s; display:inline-block; }
+  .cost-table tbody tr.cost-data-row.open td:first-child::after { content:' ▾'; color:#2c5f2e; }
+  .cost-detail-row { display:none; }
+  .cost-detail-row.open { display:table-row; }
+  .cost-detail-row td { background:#f5f9f5; padding:0; border-bottom:2px solid #c8e6c9; }
+  .cost-detail-inner { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+  .cost-detail-col { padding:14px 18px; }
+  .cost-detail-col:first-child { border-right:1px solid #dcedc8; }
+  .cost-detail-col h4 { font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#2c5f2e; margin-bottom:8px; }
+  .cost-detail-col ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px; }
+  .cost-detail-col li { display:flex; justify-content:space-between; align-items:baseline; font-size:0.78rem; gap:12px; color:#444; }
+  .cost-detail-col li .di-label { flex:1; }
+  .cost-detail-col li .di-range { white-space:nowrap; font-weight:600; color:#1a3d1c; font-size:0.75rem; }
+  @media (max-width:600px) { .cost-detail-inner { grid-template-columns:1fr; } .cost-detail-col:first-child { border-right:none; border-bottom:1px solid #dcedc8; } }
   .tier-badge { display:inline-block; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:700; white-space:nowrap; }
   .tier-badge-1 { background:#2c5f2e; color:white; }
   .tier-badge-2 { background:#1565c0; color:white; }
@@ -755,7 +770,7 @@
       <div class="card grid-wide">
         <div class="cost-disclaimer">
           <strong>Note:</strong> All estimates cover equipment, utilities, and operational consumables only — physical space cost is excluded.
-          Equipment quality benchmark: <strong>Clear Creek Makerspace</strong> (Golden, CO), which invested $250k+ across Fab Lab, Metal Shop, and Woodshop in 7,500 sq ft.
+          Equipment quality benchmark: <strong>Clear Creek Makerspace</strong> (Wheat Ridge, CO), which invested $250k+ across Fab Lab, Metal Shop, and Woodshop in 7,500 sq ft.
           Bubble size below reflects monthly operating cost; position reflects interest vs. upfront investment.
         </div>
         <h2>Interest vs. Investment (bubble = monthly ops cost)</h2>
@@ -776,8 +791,8 @@
                 <th data-col="2">Top Priorities</th>
                 <th data-col="3">Upfront Cost</th>
                 <th data-col="4">Monthly Ops</th>
-                <th data-col="5">Buildout</th>
-                <th data-col="6">Ongoing</th>
+                <th data-col="5" title="$ = low cost/complexity, $$$$$ = high">Buildout $</th>
+                <th data-col="6" title="$ = low cost/complexity, $$$$$ = high">Ongoing $</th>
                 <th data-col="7">Tier</th>
               </tr>
             </thead>
@@ -1164,14 +1179,14 @@
   <div class="tab-panel" id="tab-panel-6">
     <div class="section-header">
       <h3>Business Plan</h3>
-      <p>Survey findings + local landscape + CCM research synthesized into a path forward</p>
+      <p>Survey findings + local landscape + CCM research synthesized into a fundable path forward</p>
     </div>
 
     <!-- Section 1: Intro -->
     <div class="grid">
       <div class="card grid-wide">
         <div class="bp-intro">
-          The survey told us what Golden wants. The local landscape showed what doesn't exist. The cost analysis priced each activity. This tab synthesizes it all: a <strong>CCM-informed, survey-grounded business plan</strong> for a Golden Makerspace — one that builds on what Clear Creek Makerspace does well, while filling the gaps they don't touch.
+          Clear Creek Makerspace is a great model and a potential partner — they've shown that people will pay a monthly membership when it means <strong>24/7 access to $250,000 worth of tools they couldn't otherwise own</strong>. Golden's model should start from the same principle: <strong>tool access is the subscription product</strong>. Community events and talks are what fill the space and keep it alive, but they're sold per-class or offered free — not bundled into a monthly fee no one will pay just for a place to hang out. And if the city is involved, the pitch isn't "community gathering space." It's <strong>economic development</strong>: small-batch manufacturing, cottage food production, product prototyping, and local business activation.
         </div>
       </div>
     </div>
@@ -1216,6 +1231,32 @@
         <div id="ccmClassPrices" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
           <!-- rendered by JS -->
         </div>
+      </div>
+    </div>
+
+    <!-- Value Prop Framework -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>The Business Model Framework</h3>
+      <p>Three distinct reasons to engage — each with a different payer and a different pitch</p>
+    </div>
+    <div class="grid">
+      <div class="card bp-pc-make" style="border-top:4px solid #1565c0">
+        <h2 style="color:#0d47a1">Why People Pay Monthly</h2>
+        <div style="font-size:2rem;font-weight:800;color:#1565c0;margin-bottom:8px">Tool Access</div>
+        <p style="font-size:0.86rem;line-height:1.65;color:#1a2a3d">24/7 access to equipment that costs $15k–$250k to own. A laser cutter, CNC router, commercial kitchen, or full woodshop is immediately worth $65/mo to anyone who uses it regularly. CCM has proven this model works in the Denver metro. <strong>Tool access is the subscription product.</strong></p>
+        <div class="bp-quote" style="margin-top:12px">"I just want somewhere I can work on projects without having to own every tool." — Survey respondent, 35–49</div>
+      </div>
+      <div class="card bp-pc-hub" style="border-top:4px solid #2c5f2e">
+        <h2 style="color:#1b5e20">Why People Show Up</h2>
+        <div style="font-size:2rem;font-weight:800;color:#2c5f2e;margin-bottom:8px">Community Programming</div>
+        <p style="font-size:0.86rem;line-height:1.65;color:#1a3d1c">Talks, classes, repair nights, skill swaps, potlucks, Fix-It Fridays. These are sold <strong>per event</strong> or offered free — not bundled into a monthly fee. They fill the space, build membership pipeline, and generate per-class revenue. They're the culture, not the product. Nobody pays $60/month to hang out.</p>
+        <div class="bp-quote" style="margin-top:12px">"I want a place where I can just walk in and something interesting is happening." — Survey respondent</div>
+      </div>
+      <div class="card bp-pc-kit" style="border-top:4px solid #e65100">
+        <h2 style="color:#bf360c">Why the City Writes a Check</h2>
+        <div style="font-size:2rem;font-weight:800;color:#e65100;margin-bottom:8px">Economic Development</div>
+        <p style="font-size:0.86rem;line-height:1.65;color:#3d1a00">Small businesses formed, local jobs created, products made and sold in Golden. The commercial kitchen unlocks cottage food production. The laser cutter enables custom product businesses. The woodshop enables local makers to go pro. <strong>These are outcomes the city can measure and fund.</strong></p>
+        <div class="bp-quote" style="margin-top:12px">"A space where businesses get started, not just where people hang out." — The pitch to city hall</div>
       </div>
     </div>
 
@@ -1288,22 +1329,22 @@
               <tr>
                 <td><strong>Community gathering / social hub</strong></td>
                 <td>Core theme</td>
-                <td>No — tools-first</td>
+                <td>No — different focus</td>
                 <td><span class="verdict-gap">Critical Gap</span></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="access-highlight" style="margin-top:14px">
-          <strong>Key insight:</strong> CCM is a professional tool facility. Golden residents want a <strong>community hub that also has tools</strong> — cooking, talks, clubs, skill swaps, repair clinics, and social gathering are the top signals, and CCM addresses none of them.
+          <strong>Key insight:</strong> CCM and a Golden makerspace serve different primary needs. Golden residents are asking for <strong>a community hub that also has tools</strong> — cooking, talks, clubs, skill swaps, repair clinics, and social gathering. The two spaces are naturally complementary, not competitive.
         </div>
       </div>
     </div>
 
     <!-- Section 4: Programming Vision -->
     <div class="section-header" style="padding-top:12px">
-      <h3>Programming Vision — Build What CCM Isn't</h3>
-      <p>Four programming pillars grounded in survey data</p>
+      <h3>Programming Vision — Golden's Distinct Identity</h3>
+      <p>Four programming pillars grounded in survey data — complementary to, not competing with, what already exists</p>
     </div>
     <div class="grid">
       <div class="bp-program-card bp-pc-hub card">
@@ -1352,12 +1393,72 @@
       </div>
     </div>
 
-    <!-- Section 5: Revenue Model -->
+    <!-- Section 5: Small Business & Economic Development -->
     <div class="section-header" style="padding-top:12px">
-      <h3>Revenue Model</h3>
-      <p>Using CCM's tier structure as a benchmark; all figures editable in golden-makerspace-data.json</p>
+      <h3>Small Business &amp; Economic Development Case</h3>
+      <p>The pitch to the City of Golden — measurable outcomes, not just community vibes</p>
     </div>
     <div class="grid">
+      <div class="card grid-wide">
+        <div class="cost-disclaimer" style="margin-bottom:20px">
+          Golden's economic development strategy needs <strong>concrete outcomes</strong>: businesses formed, jobs created, tax base growth. A makerspace with commercial-use access and a licensed kitchen delivers exactly that — and makes the space eligible for OEDIT, EDA, and CDBG grant programs that a pure community center would not qualify for.
+        </div>
+        <h2>Business Use Profiles — Who Uses It Commercially</h2>
+        <div class="cost-table-wrap">
+          <table class="revenue-matrix" id="bizProfileTable">
+            <thead>
+              <tr>
+                <th>Business Type</th>
+                <th>Tools Used</th>
+                <th>Example</th>
+                <th>Why It Works</th>
+              </tr>
+            </thead>
+            <tbody id="bizProfileBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>City Outcome Metrics</h2>
+        <p style="font-size:0.82rem;color:#555;margin-bottom:14px;line-height:1.55">These are the numbers a city economic development office can track, report, and use to justify ongoing partnership funding.</p>
+        <div class="cost-table-wrap">
+          <table class="revenue-matrix" id="cityOutcomesTable">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th class="num-col">Year 1 Est.</th>
+                <th class="num-col">Year 3 Est.</th>
+              </tr>
+            </thead>
+            <tbody id="cityOutcomesBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>City Partnership Models</h2>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;margin-top:4px">
+          <li style="font-size:0.84rem;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;font-weight:700;color:#2c5f2e">1.</span><strong>Below-market rent</strong> — City or city-adjacent property at reduced rate in exchange for economic development reporting, youth programming, and accessible pricing tiers.</li>
+          <li style="font-size:0.84rem;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;font-weight:700;color:#2c5f2e">2.</span><strong>Economic development grant</strong> — Direct city grant (e.g., from Golden's Economic Development Fund) tied to annual outcome reporting: businesses started, jobs created, products sold.</li>
+          <li style="font-size:0.84rem;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;font-weight:700;color:#2c5f2e">3.</span><strong>State/federal co-funding</strong> — 501(c)(3) status unlocks OEDIT (CO Office of Econ Dev), EDA (federal Economic Development Admin), and CDBG grants. City co-application strengthens eligibility significantly.</li>
+          <li style="font-size:0.84rem;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;font-weight:700;color:#2c5f2e">4.</span><strong>Mines partnership</strong> — Colorado School of Mines is a natural pipeline for student entrepreneurs, prototypers, and spin-out businesses. A formal partnership could bring equipment grants and student membership programs.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 6: Membership Tiers (Golden's model) -->
+    <div class="section-header" style="padding-top:12px">
+      <h3>Golden's Membership Model</h3>
+      <p>Priced around what people will actually pay for — all figures editable in golden-makerspace-data.json</p>
+    </div>
+    <div class="grid">
+      <div class="card grid-wide">
+        <div class="ccm-tier-cards" id="goldenTierCards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
       <div class="card">
         <h2>Membership Revenue by Member Count</h2>
         <div class="cost-table-wrap">
@@ -1365,9 +1466,9 @@
             <thead>
               <tr>
                 <th>Members</th>
-                <th class="num-col">Discounted ($30)</th>
-                <th class="num-col">Standard ($60)</th>
-                <th class="num-col">Household ($180)</th>
+                <th class="num-col">Community ($25)</th>
+                <th class="num-col">Maker ($65)</th>
+                <th class="num-col">Commercial ($130)</th>
                 <th class="num-col">Monthly Total</th>
               </tr>
             </thead>
@@ -1391,11 +1492,11 @@
             <tbody id="grossRevenueBody"></tbody>
           </table>
         </div>
-        <p style="font-size:0.76rem;color:#888;margin-top:8px">Class revenue = avg $40 &times; 10 attendees &times; 80% paid. Day pass = ~$660/mo (1.5/day &times; 22 days &times; $20).</p>
+        <p style="font-size:0.76rem;color:#888;margin-top:8px">Class revenue = avg $45 &times; 10 attendees &times; 80% paid. Day pass = ~$750/mo (30 passes &times; $25).</p>
       </div>
 
       <div class="card">
-        <h2>Other Revenue Streams</h2>
+        <h2>All Revenue Streams</h2>
         <div class="cost-table-wrap">
           <table class="revenue-matrix" id="otherRevenueTable">
             <thead>
@@ -1429,37 +1530,39 @@
       </div>
     </div>
 
-    <!-- Section 6: Feasibility -->
+    <!-- Section 7: Feasibility -->
     <div class="section-header" style="padding-top:12px">
       <h3>Feasibility &amp; Path Forward</h3>
     </div>
     <div class="grid">
       <div class="card grid-wide feasibility-card">
-        <h3>Phased Approach — Don't Build CCM in Golden. Build What CCM Isn't.</h3>
+        <h3>Phased Approach — Tool Access First, Community Always</h3>
         <div class="phase">
-          <div class="phase-title">Phase 1 — Lean Launch (~50 members + grants)</div>
+          <div class="phase-title">Phase 1 — Lean Launch: Maker core + city partnership (~50 members)</div>
           <ul>
-            <li>Talks, events, repair clinics, sewing, 3D printing — achievable with $8–18k buildout</li>
-            <li>Target: $8–12k/mo gross at 50 members + 10 classes/mo + grants</li>
-            <li>Focus on community-first programming: talks, clubs, skill swaps, Fix-It Fridays</li>
-            <li>Nonprofit 501(c)(3) structure like Localworks is critical for grant eligibility and trust</li>
+            <li>Start with equipment that has the clearest ROI for members: laser cutter, 3D printers, sewing/fiber arts, electronics bench</li>
+            <li>Buildout: $25–50k in equipment + infrastructure (achievable with city grant + small equipment loans)</li>
+            <li>Community programming (talks, Fix-It Fridays, skill swaps) runs from day one — free or $5–15 drop-in, no membership required</li>
+            <li>Target: 50 Maker-tier members = $3,250/mo membership base; add classes + day passes + city subsidy → break-even likely with below-market rent</li>
+            <li>Form 501(c)(3) immediately — required for OEDIT, EDA, and city grant eligibility</li>
           </ul>
         </div>
         <div class="phase">
-          <div class="phase-title">Phase 2 — Investment Milestones (100+ members)</div>
+          <div class="phase-title">Phase 2 — Commercial Kitchen (100+ members, city co-investment)</div>
           <ul>
-            <li><strong>Community Kitchen</strong> — $60–100k buildout; requires health dept certification, licensed HVAC/fire contractor, NSF equipment. High reward: 60% survey interest, zero competition.</li>
-            <li><strong>Woodshop</strong> — $80–150k; SawStop non-negotiable for safety. Strong demand (49%) with no local alternative.</li>
+            <li><strong>Commercial Kitchen</strong> — $60–100k buildout; health dept certification, licensed HVAC/fire, NSF equipment. Unlocks cottage food production, catering businesses, meal-prep startups. This is the economic development anchor the city actually cares about.</li>
+            <li><strong>Woodshop expansion</strong> — $80–150k; SawStop mandatory for liability. Enables furniture makers, contractors, and custom product businesses to operate professionally.</li>
+            <li>Commercial Maker tier ($130/mo) becomes the growth driver at this phase.</li>
           </ul>
         </div>
         <div class="phase">
-          <div class="phase-title">Key Structural Principles</div>
+          <div class="phase-title">Critical Structural Principles</div>
           <ul>
-            <li>Community-first, tools-second — CCM has the tools; Golden needs the gathering place</li>
-            <li>Evening + weekend hours are mandatory — 68% of survey respondents require this</li>
-            <li>Drop-in access — 72% want no commitment required; structured only programming will fail</li>
-            <li>Financial accessibility — sliding scale, volunteer hours, subsidized memberships</li>
-            <li>Don't compete with CCM on equipment depth — partner, cross-promote, refer</li>
+            <li><strong>Tool access drives subscriptions.</strong> Community programming drives foot traffic and per-event revenue. Don't conflate them.</li>
+            <li><strong>Evening + weekend hours are non-negotiable</strong> — 68% of survey respondents require this. A space closed after 5pm is not serving Golden.</li>
+            <li><strong>Drop-in access for community programming</strong> — 72% want no commitment. Classes and events should be walk-in; equipment access requires membership for safety and accountability.</li>
+            <li><strong>Find your distinct identity.</strong> CCM is a natural partner and referral source — cross-promote, collaborate on events, refer members who need deeper equipment access. Golden's strength is the community hub, the commercial kitchen, and the economic activation layer that CCM wasn't designed to provide.</li>
+            <li><strong>Measure economic outcomes from year one.</strong> Track businesses formed, jobs created, products sold. This data funds Phase 2 and keeps the city engaged.</li>
           </ul>
         </div>
       </div>
@@ -2084,9 +2187,9 @@ function buildBusinessPlan() {
   const ccm = sd.ccm || {};
   const rm = sd.revenueModel || {};
 
-  // CCM tier cards
-  const tiers = ccm.membershipTiers || [];
-  document.getElementById('ccmTierCards').innerHTML = tiers.map(t => `
+  // CCM tier cards (sidebar reference)
+  const ccmTiers = ccm.membershipTiers || [];
+  document.getElementById('ccmTierCards').innerHTML = ccmTiers.map(t => `
     <div class="ccm-tier-card">
       <h4>${t.name}</h4>
       <span class="ctc-who">${t.who}</span>
@@ -2100,23 +2203,65 @@ function buildBusinessPlan() {
     `<span class="tier-badge tier-badge-2">${c.area}: $${c.low}–$${c.high}</span>`
   ).join('');
 
-  // Membership revenue table
-  const mix = rm.memberMix || { discounted: 0.20, standard: 0.70, household: 0.10 };
-  const thresholds = rm.memberThresholds || [20, 50, 100, 500];
-  const discPrice = (tiers[0] || {}).monthly || 30;
-  const stdPrice  = (tiers[1] || {}).monthly || 60;
-  const hhPrice   = (tiers[2] || {}).monthly || 180;
+  // Golden's tier cards
+  const goldenTiers = rm.membershipTiers || [];
+  const tierColorClass = { grey:'tier-card-3', green:'tier-card-1', blue:'tier-card-2', purple:'tier-card-3' };
+  document.getElementById('goldenTierCards').innerHTML = goldenTiers.map(t => {
+    const cls = tierColorClass[t.color] || 'tier-card-1';
+    const priceHtml = t.monthly
+      ? `<div class="ctc-price">$${t.monthly}/mo</div><div class="ctc-annual">$${t.annual}/yr</div>`
+      : `<div class="ctc-price">$${t.perUse}/visit</div><div class="ctc-annual">No commitment</div>`;
+    const badge = t.toolAccess ? `<span class="tier-badge tier-badge-2" style="margin-top:8px;display:inline-block">Tools included</span>` : '';
+    const bizBadge = t.commercialUse ? `<span class="tier-badge tier-badge-3" style="margin-top:4px;display:inline-block">Commercial use</span>` : '';
+    const noteHtml = t.note ? `<p style="font-size:0.76rem;color:#555;margin-top:10px;line-height:1.5;border-top:1px solid rgba(0,0,0,0.08);padding-top:8px">${t.note}</p>` : '';
+    return `<div class="ccm-tier-card ${cls}" style="border-radius:14px;padding:18px 20px">
+      <h4>${t.name}</h4>
+      <span class="ctc-who">${t.who}</span>
+      ${priceHtml}
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">${badge}${bizBadge}</div>
+      ${noteHtml}
+    </div>`;
+  }).join('');
+
+  // Business use profiles table
+  const profiles = rm.businessUseProfiles || [];
+  document.getElementById('bizProfileBody').innerHTML = profiles.map(p => `
+    <tr>
+      <td><strong>${p.name}</strong></td>
+      <td><span class="tier-badge tier-badge-2" style="white-space:normal;font-size:0.73rem">${p.tools}</span></td>
+      <td style="font-size:0.81rem;color:#444">${p.example}</td>
+      <td style="font-size:0.78rem;color:#666">${p.whyItMatters}</td>
+    </tr>`).join('');
+
+  // City outcomes table
+  const outcomes = rm.cityOutcomes || [];
+  document.getElementById('cityOutcomesBody').innerHTML = outcomes.map(o => `
+    <tr>
+      <td>${o.metric}</td>
+      <td class="num-col">${o.y1}</td>
+      <td class="num-col"><strong>${o.y3}</strong></td>
+    </tr>`).join('');
+
+  // Membership revenue table — using Golden's tiers
+  const mix = rm.memberMix || { community: 0.25, maker: 0.60, commercial: 0.15 };
+  const thresholds = rm.memberThresholds || [20, 50, 100, 200];
+  const communityTier   = goldenTiers.find(t => t.color === 'green')  || { monthly: 25 };
+  const makerTier       = goldenTiers.find(t => t.color === 'blue')   || { monthly: 65 };
+  const commercialTier  = goldenTiers.find(t => t.color === 'purple') || { monthly: 130 };
+  const cPrice = communityTier.monthly;
+  const mPrice = makerTier.monthly;
+  const bPrice = commercialTier.monthly;
 
   document.getElementById('memberRevenueBody').innerHTML = thresholds.map(m => {
-    const d = Math.round(m * mix.discounted);
-    const s = Math.round(m * mix.standard);
-    const h = Math.round(m * mix.household);
-    const total = d * discPrice + s * stdPrice + h * hhPrice;
+    const c = Math.round(m * mix.community);
+    const mk = Math.round(m * mix.maker);
+    const biz = Math.round(m * mix.commercial);
+    const total = c * cPrice + mk * mPrice + biz * bPrice;
     return `<tr>
       <td><strong>${m}</strong></td>
-      <td class="num-col">${d} &times; $${discPrice} = $${(d * discPrice).toLocaleString()}</td>
-      <td class="num-col">${s} &times; $${stdPrice} = $${(s * stdPrice).toLocaleString()}</td>
-      <td class="num-col">${h} &times; $${hhPrice} = $${(h * hhPrice).toLocaleString()}</td>
+      <td class="num-col">${c} &times; $${cPrice} = $${(c * cPrice).toLocaleString()}</td>
+      <td class="num-col">${mk} &times; $${mPrice} = $${(mk * mPrice).toLocaleString()}</td>
+      <td class="num-col">${biz} &times; $${bPrice} = $${(biz * bPrice).toLocaleString()}</td>
       <td class="num-col"><strong>$${total.toLocaleString()}</strong></td>
     </tr>`;
   }).join('');
@@ -2124,17 +2269,17 @@ function buildBusinessPlan() {
   // Gross revenue matrix
   const classScenarios = rm.classScenarios || [5, 10, 15];
   const classRevPerScenario = classScenarios.map(n =>
-    Math.round(n * (rm.avgClassPriceDollars || 40) * (rm.avgClassAttendees || 10) * (rm.paidClassFraction || 0.80))
+    Math.round(n * (rm.avgClassPriceDollars || 45) * (rm.avgClassAttendees || 10) * (rm.paidClassFraction || 0.80))
   );
   const dayPassRev = Math.round(
-    (rm.estimatedDayPassesPerMonth || 33) * (rm.dayPassPriceDollars || 20)
+    (rm.estimatedDayPassesPerMonth || 30) * (rm.dayPassPriceDollars || 25)
   );
 
   document.getElementById('grossRevenueBody').innerHTML = thresholds.map(m => {
-    const d = Math.round(m * mix.discounted);
-    const s = Math.round(m * mix.standard);
-    const h = Math.round(m * mix.household);
-    const memRev = d * discPrice + s * stdPrice + h * hhPrice;
+    const c = Math.round(m * mix.community);
+    const mk = Math.round(m * mix.maker);
+    const biz = Math.round(m * mix.commercial);
+    const memRev = c * cPrice + mk * mPrice + biz * bPrice;
     return `<tr>
       <td><strong>${m} members</strong></td>
       ${classScenarios.map((_, i) => {
@@ -2144,7 +2289,7 @@ function buildBusinessPlan() {
     </tr>`;
   }).join('');
 
-  // Other revenue table
+  // All revenue streams table
   const otherRev = rm.otherRevenue || [];
   document.getElementById('otherRevenueBody').innerHTML = otherRev.map(o => `
     <tr>
@@ -2174,13 +2319,12 @@ function buildBusinessPlan() {
 
   // Break-even callout
   const expMid = Math.round((totalLow + totalHigh) / 2);
-  // Find the member threshold where membership alone ≥ expMid
   let beMembers = null;
   for (const m of thresholds) {
-    const d = Math.round(m * mix.discounted);
-    const s = Math.round(m * mix.standard);
-    const h = Math.round(m * mix.household);
-    const memRev = d * discPrice + s * stdPrice + h * hhPrice;
+    const c = Math.round(m * mix.community);
+    const mk = Math.round(m * mix.maker);
+    const biz = Math.round(m * mix.commercial);
+    const memRev = c * cPrice + mk * mPrice + biz * bPrice;
     const grossWith10Classes = memRev + classRevPerScenario[1] + dayPassRev;
     if (grossWith10Classes >= expMid) { beMembers = m; break; }
   }
@@ -2190,15 +2334,10 @@ function buildBusinessPlan() {
     <p>
       Monthly expense midpoint: <strong>$${expMid.toLocaleString()}/mo</strong><br>
       ${beMembers
-        ? `At <strong>${beMembers} members</strong> + 10 classes/mo + day passes, gross revenue exceeds expense midpoint.`
-        : `At 500 members + 10 classes/mo, gross revenue reaches $${(
-            Math.round(500 * mix.discounted) * discPrice +
-            Math.round(500 * mix.standard)   * stdPrice  +
-            Math.round(500 * mix.household)  * hhPrice   +
-            classRevPerScenario[1] + dayPassRev
-          ).toLocaleString()}/mo — well above break-even.`
-      }<br>
-      <strong>Grants and sponsorships ($1,800–$6,000/mo combined) can bridge the gap at earlier member counts.</strong>
+        ? `At <strong>${beMembers} members</strong> + 10 classes/mo + day passes, gross revenue covers expense midpoint — <em>before</em> city partnership, grants, or kitchen rental.`
+        : `Revenue grows significantly with scale; city partnership and grants bridge the early gap.`
+      }<br><br>
+      <strong>Key lever:</strong> Below-market rent from city partnership reduces the expense midpoint by $3–7k/mo, which changes the break-even equation dramatically at early member counts.
     </p>`;
 }
 
@@ -2206,6 +2345,7 @@ function buildBusinessPlan() {
 // COST ANALYSIS TAB
 // ═══════════════════════════════════════════════════════════
 let SITE_DATA = {};
+// Fallback if golden-makerspace-data.json fails to load. Breakdown items are in the JSON only.
 let COST_DATA = [
   { name:'Outdoor Skills',         interest:55, topPriority:16, upfrontLow:5,   upfrontHigh:15,  monthlyLow:300,  monthlyHigh:700,  buildout:1, ongoing:2, tier:1 },
   { name:'Talks / Events / Clubs', interest:48, topPriority:13, upfrontLow:8,   upfrontHigh:18,  monthlyLow:150,  monthlyHigh:300,  buildout:1, ongoing:1, tier:1 },
@@ -2223,8 +2363,8 @@ let COST_DATA = [
 let costSortCol = 1;   // default: interest
 let costSortDir = -1;  // -1 = desc
 
-function starsHtml(n) {
-  return '<span class="stars">' + '★'.repeat(n) + '</span><span class="dim-stars">' + '☆'.repeat(5 - n) + '</span>';
+function dollarsHtml(n) {
+  return '<span class="dollars">' + '$'.repeat(n) + '</span><span class="dim-dollars">' + '$'.repeat(5 - n) + '</span>';
 }
 
 function tierLabel(t) {
@@ -2257,17 +2397,41 @@ function renderCostTable(col, dir) {
   });
 
   const tbody = document.getElementById('costTableBody');
-  tbody.innerHTML = sorted.map(d => `
-    <tr>
+  tbody.innerHTML = sorted.map((d, i) => {
+    const hasBreakdown = (d.setupItems && d.setupItems.length) || (d.opsItems && d.opsItems.length);
+    const setupRows = (d.setupItems || []).map(item =>
+      `<li><span class="di-label">${item.label}</span><span class="di-range">$${item.low.toLocaleString()}–$${item.high.toLocaleString()}</span></li>`
+    ).join('');
+    const opsRows = (d.opsItems || []).map(item =>
+      `<li><span class="di-label">${item.label}</span><span class="di-range">$${item.low}–$${item.high}/mo</span></li>`
+    ).join('');
+    const detailHtml = hasBreakdown ? `
+      <tr class="cost-detail-row" id="cost-detail-${i}">
+        <td colspan="8">
+          <div class="cost-detail-inner">
+            <div class="cost-detail-col">
+              <h4>Setup Cost Breakdown</h4>
+              <ul>${setupRows || '<li><span class="di-label">See upfront range</span></li>'}</ul>
+            </div>
+            <div class="cost-detail-col">
+              <h4>Monthly Operating Breakdown</h4>
+              <ul>${opsRows || '<li><span class="di-label">See monthly range</span></li>'}</ul>
+            </div>
+          </div>
+        </td>
+      </tr>` : '';
+    return `
+    <tr class="cost-data-row${hasBreakdown ? '' : ''}" onclick="toggleCostDetail(${i}, this)">
       <td><strong>${d.name}</strong></td>
       <td>${d.interest}%</td>
       <td>${d.topPriority}</td>
       <td>$${d.upfrontLow}–${d.upfrontHigh}k</td>
       <td>$${d.monthlyLow.toLocaleString()}–${d.monthlyHigh.toLocaleString()}/mo</td>
-      <td>${starsHtml(d.buildout)}</td>
-      <td>${starsHtml(d.ongoing)}</td>
+      <td>${dollarsHtml(d.buildout)}</td>
+      <td>${dollarsHtml(d.ongoing)}</td>
       <td><span class="tier-badge tier-badge-${d.tier}">${tierLabel(d.tier)}</span></td>
-    </tr>`).join('');
+    </tr>${detailHtml}`;
+  }).join('');
 
   // Update sort indicators
   document.querySelectorAll('#costTable th').forEach(th => {
@@ -2280,6 +2444,13 @@ function sortCostTable(th) {
   const col = +th.dataset.col;
   const dir = (col === costSortCol) ? -costSortDir : -1;
   renderCostTable(col, dir);
+}
+
+function toggleCostDetail(idx, row) {
+  const detail = document.getElementById('cost-detail-' + idx);
+  if (!detail) return;
+  const isOpen = detail.classList.toggle('open');
+  row.classList.toggle('open', isOpen);
 }
 
 function buildCostTab() {

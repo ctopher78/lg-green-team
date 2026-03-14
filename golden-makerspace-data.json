@@ -1,16 +1,240 @@
 {
   "activities": [
-    { "name": "Outdoor Skills",         "interest": 55, "topPriority": 16, "upfrontLow": 5,  "upfrontHigh": 15, "monthlyLow": 300,  "monthlyHigh": 700,  "buildout": 1, "ongoing": 2, "tier": 1 },
-    { "name": "Talks / Events / Clubs", "interest": 48, "topPriority": 13, "upfrontLow": 8,  "upfrontHigh": 18, "monthlyLow": 150,  "monthlyHigh": 300,  "buildout": 1, "ongoing": 1, "tier": 1 },
-    { "name": "Small Business Dev",     "interest": 23, "topPriority": 6,  "upfrontLow": 3,  "upfrontHigh": 10, "monthlyLow": 200,  "monthlyHigh": 400,  "buildout": 1, "ongoing": 1, "tier": 3 },
-    { "name": "Repair Clinics",         "interest": 47, "topPriority": 9,  "upfrontLow": 8,  "upfrontHigh": 17, "monthlyLow": 250,  "monthlyHigh": 500,  "buildout": 2, "ongoing": 2, "tier": 1 },
-    { "name": "Sewing / Fiber Arts",    "interest": 46, "topPriority": 9,  "upfrontLow": 12, "upfrontHigh": 25, "monthlyLow": 250,  "monthlyHigh": 500,  "buildout": 2, "ongoing": 2, "tier": 1 },
-    { "name": "Painting / Printmaking", "interest": 39, "topPriority": 14, "upfrontLow": 8,  "upfrontHigh": 22, "monthlyLow": 600,  "monthlyHigh": 1800, "buildout": 2, "ongoing": 2, "tier": 2 },
-    { "name": "3D Printing / Design",   "interest": 38, "topPriority": 18, "upfrontLow": 10, "upfrontHigh": 28, "monthlyLow": 400,  "monthlyHigh": 1000, "buildout": 2, "ongoing": 3, "tier": 2 },
-    { "name": "Ceramics",               "interest": 47, "topPriority": 5,  "upfrontLow": 18, "upfrontHigh": 40, "monthlyLow": 500,  "monthlyHigh": 1100, "buildout": 3, "ongoing": 3, "tier": 3 },
-    { "name": "Woodworking",            "interest": 49, "topPriority": 11, "upfrontLow": 25, "upfrontHigh": 50, "monthlyLow": 500,  "monthlyHigh": 1000, "buildout": 4, "ongoing": 4, "tier": 2 },
-    { "name": "Community Kitchen",      "interest": 60, "topPriority": 16, "upfrontLow": 35, "upfrontHigh": 70, "monthlyLow": 1000, "monthlyHigh": 2200, "buildout": 5, "ongoing": 4, "tier": 3 },
-    { "name": "Metalworking / Welding", "interest": 49, "topPriority": 4,  "upfrontLow": 20, "upfrontHigh": 45, "monthlyLow": 300,  "monthlyHigh": 800,  "buildout": 5, "ongoing": 5, "tier": 3 }
+    {
+      "name": "Outdoor Skills", "interest": 55, "topPriority": 16,
+      "upfrontLow": 5, "upfrontHigh": 15, "monthlyLow": 300, "monthlyHigh": 700,
+      "buildout": 1, "ongoing": 2, "tier": 1,
+      "setupItems": [
+        { "label": "Safety gear & PPE (helmets, first aid, ropes)", "low": 1000, "high": 3000 },
+        { "label": "Navigation tools (compasses, maps, GPS units)", "low": 500, "high": 2000 },
+        { "label": "Basic camp/survival equipment", "low": 1500, "high": 4000 },
+        { "label": "Signage, waivers, and logistics materials", "low": 500, "high": 1500 },
+        { "label": "Storage and organization", "low": 500, "high": 1500 }
+      ],
+      "opsItems": [
+        { "label": "Instructor / guide stipend", "low": 150, "high": 350 },
+        { "label": "Outdoor liability insurance rider", "low": 75, "high": 150 },
+        { "label": "Consumable supplies (first aid restocking, cordage)", "low": 50, "high": 100 },
+        { "label": "Gear maintenance & replacement", "low": 25, "high": 100 }
+      ]
+    },
+    {
+      "name": "Talks / Events / Clubs", "interest": 48, "topPriority": 13,
+      "upfrontLow": 8, "upfrontHigh": 18, "monthlyLow": 150, "monthlyHigh": 300,
+      "buildout": 1, "ongoing": 1, "tier": 1,
+      "setupItems": [
+        { "label": "AV system — projector, screen, PA speakers", "low": 3000, "high": 8000 },
+        { "label": "Chairs, tables, podium, staging", "low": 2000, "high": 5000 },
+        { "label": "Whiteboards, display boards, signage", "low": 500, "high": 1500 },
+        { "label": "Livestream / recording setup (optional)", "low": 500, "high": 2000 },
+        { "label": "Décor, lighting accents", "low": 500, "high": 1500 }
+      ],
+      "opsItems": [
+        { "label": "Coffee & light refreshments for events", "low": 50, "high": 100 },
+        { "label": "AV maintenance & bulb/cable replacement", "low": 30, "high": 60 },
+        { "label": "Event consumables (name tags, printouts)", "low": 30, "high": 60 },
+        { "label": "Miscellaneous setup supplies", "low": 20, "high": 40 },
+        { "label": "Online event platform / calendar software", "low": 20, "high": 40 }
+      ]
+    },
+    {
+      "name": "Small Business Dev", "interest": 23, "topPriority": 6,
+      "upfrontLow": 3, "upfrontHigh": 10, "monthlyLow": 200, "monthlyHigh": 400,
+      "buildout": 1, "ongoing": 1, "tier": 3,
+      "setupItems": [
+        { "label": "Whiteboard, flip chart, presentation gear", "low": 500, "high": 2000 },
+        { "label": "Reference library & business resources", "low": 500, "high": 2000 },
+        { "label": "Software / SaaS subscriptions (pitch tools, design)", "low": 500, "high": 2000 },
+        { "label": "Shared coworking furniture", "low": 1000, "high": 3000 },
+        { "label": "Printer / scanner", "low": 500, "high": 1000 }
+      ],
+      "opsItems": [
+        { "label": "Guest speaker / mentor honoraria", "low": 100, "high": 200 },
+        { "label": "Software & tool subscriptions", "low": 50, "high": 100 },
+        { "label": "Printing & handout materials", "low": 30, "high": 50 },
+        { "label": "Refreshments for sessions", "low": 20, "high": 50 }
+      ]
+    },
+    {
+      "name": "Repair Clinics", "interest": 47, "topPriority": 9,
+      "upfrontLow": 8, "upfrontHigh": 17, "monthlyLow": 250, "monthlyHigh": 500,
+      "buildout": 2, "ongoing": 2, "tier": 1,
+      "setupItems": [
+        { "label": "Hand tool sets (screwdrivers, wrenches, pliers)", "low": 1000, "high": 2500 },
+        { "label": "Soldering stations & electronics gear", "low": 1000, "high": 2500 },
+        { "label": "Bike repair stand & cycling tools", "low": 500, "high": 1500 },
+        { "label": "Small appliance diagnostic tools & multimeters", "low": 500, "high": 1500 },
+        { "label": "Workbenches, vises, and storage", "low": 1500, "high": 3500 },
+        { "label": "Parts bins, fasteners, and consumable starter stock", "low": 1000, "high": 2500 },
+        { "label": "Safety signage and PPE", "low": 500, "high": 1000 }
+      ],
+      "opsItems": [
+        { "label": "Consumable parts (screws, wire, fuses, bulbs)", "low": 80, "high": 150 },
+        { "label": "Lubricants, adhesives, solvents", "low": 30, "high": 50 },
+        { "label": "Soldering consumables (solder, flux, tips)", "low": 30, "high": 60 },
+        { "label": "Tool sharpening & replacement", "low": 50, "high": 100 },
+        { "label": "Safety supplies (gloves, eye protection)", "low": 30, "high": 60 },
+        { "label": "Instructor stipend", "low": 30, "high": 80 }
+      ]
+    },
+    {
+      "name": "Sewing / Fiber Arts", "interest": 46, "topPriority": 9,
+      "upfrontLow": 12, "upfrontHigh": 25, "monthlyLow": 250, "monthlyHigh": 500,
+      "buildout": 2, "ongoing": 2, "tier": 1,
+      "setupItems": [
+        { "label": "Sewing machines × 4–6 (mid-grade)", "low": 3000, "high": 6000 },
+        { "label": "Serger / overlocker × 1–2", "low": 800, "high": 2000 },
+        { "label": "Embroidery / specialty machine (optional)", "low": 2000, "high": 5000 },
+        { "label": "Cutting tables, ironing boards, irons", "low": 1500, "high": 3000 },
+        { "label": "Dress forms, rulers, cutting mats", "low": 500, "high": 1500 },
+        { "label": "Notions & starter supplies inventory", "low": 1000, "high": 2500 },
+        { "label": "Storage and organization", "low": 500, "high": 1500 }
+      ],
+      "opsItems": [
+        { "label": "Thread, needles, bobbins & notions", "low": 60, "high": 120 },
+        { "label": "Fabric scraps & samples for classes", "low": 50, "high": 100 },
+        { "label": "Machine servicing & timing adjustments", "low": 80, "high": 150 },
+        { "label": "Pattern books & instruction resources", "low": 20, "high": 50 },
+        { "label": "Fusible interfacing, zippers, hardware", "low": 40, "high": 80 }
+      ]
+    },
+    {
+      "name": "Painting / Printmaking", "interest": 39, "topPriority": 14,
+      "upfrontLow": 8, "upfrontHigh": 22, "monthlyLow": 600, "monthlyHigh": 1800,
+      "buildout": 2, "ongoing": 2, "tier": 2,
+      "setupItems": [
+        { "label": "Etching / relief press", "low": 3000, "high": 8000 },
+        { "label": "Ventilation improvements for solvents", "low": 2000, "high": 5000 },
+        { "label": "Drying racks, lightbox, exposure unit", "low": 1000, "high": 3000 },
+        { "label": "Easels, drawing boards, palette storage", "low": 500, "high": 2000 },
+        { "label": "Starter inventory of paint, ink, paper", "low": 1500, "high": 4000 }
+      ],
+      "opsItems": [
+        { "label": "Paint & pigments (acrylic, oil, watercolor)", "low": 150, "high": 500 },
+        { "label": "Canvas, paper & printing surfaces", "low": 100, "high": 300 },
+        { "label": "Printmaking inks (water & oil-based)", "low": 100, "high": 300 },
+        { "label": "Solvents, mineral spirits, cleaners", "low": 80, "high": 200 },
+        { "label": "Press maintenance & roller upkeep", "low": 50, "high": 200 },
+        { "label": "Regulated solvent / ink waste disposal", "low": 100, "high": 300 }
+      ]
+    },
+    {
+      "name": "3D Printing / Design", "interest": 38, "topPriority": 18,
+      "upfrontLow": 10, "upfrontHigh": 28, "monthlyLow": 400, "monthlyHigh": 1000,
+      "buildout": 2, "ongoing": 3, "tier": 2,
+      "setupItems": [
+        { "label": "FDM printers × 3–5 (Bambu, Prusa, etc.)", "low": 3000, "high": 8000 },
+        { "label": "Resin printers × 1–2 (Anycubic, Elegoo)", "low": 1500, "high": 4000 },
+        { "label": "Wash & cure station, post-processing tools", "low": 500, "high": 1500 },
+        { "label": "Ventilation upgrades for resin fumes", "low": 1000, "high": 3000 },
+        { "label": "CAD workstation / design computer", "low": 1500, "high": 5000 },
+        { "label": "Software licenses (CAD, slicing, scanning)", "low": 500, "high": 3000 },
+        { "label": "3D scanner (optional)", "low": 1000, "high": 3500 }
+      ],
+      "opsItems": [
+        { "label": "PLA / PETG / TPU filament", "low": 80, "high": 200 },
+        { "label": "Resin (standard & specialty)", "low": 60, "high": 150 },
+        { "label": "Printer maintenance parts & bed adhesive", "low": 60, "high": 150 },
+        { "label": "CAD / software subscriptions", "low": 50, "high": 150 },
+        { "label": "Resin waste disposal (regulated)", "low": 50, "high": 150 },
+        { "label": "Failed print write-offs & cleanup supplies", "low": 50, "high": 100 },
+        { "label": "Isopropyl alcohol for resin washing", "low": 50, "high": 100 }
+      ]
+    },
+    {
+      "name": "Ceramics", "interest": 47, "topPriority": 5,
+      "upfrontLow": 18, "upfrontHigh": 40, "monthlyLow": 500, "monthlyHigh": 1100,
+      "buildout": 3, "ongoing": 3, "tier": 3,
+      "setupItems": [
+        { "label": "Electric kilns × 2 (Skutt, L&L)", "low": 4000, "high": 12000 },
+        { "label": "Pottery wheels × 4–8 (Brent, Shimpo)", "low": 4000, "high": 8000 },
+        { "label": "Kiln ventilation / downdraft vent system", "low": 2000, "high": 5000 },
+        { "label": "Slab roller & clay extruder", "low": 2000, "high": 5000 },
+        { "label": "Glaze spray booth & ventilation", "low": 1000, "high": 3000 },
+        { "label": "Ware boards, bat system, clay storage", "low": 1000, "high": 3000 },
+        { "label": "Starter clay, glaze & tool inventory", "low": 2000, "high": 4000 }
+      ],
+      "opsItems": [
+        { "label": "Clay (stoneware, porcelain, earthenware)", "low": 100, "high": 200 },
+        { "label": "Glazes & oxide colorants", "low": 80, "high": 150 },
+        { "label": "Kiln electricity (each firing cycle)", "low": 100, "high": 250 },
+        { "label": "Kiln element replacement (amortized)", "low": 100, "high": 250 },
+        { "label": "Kiln furniture (shelves, posts, stilts)", "low": 50, "high": 100 },
+        { "label": "Glaze chemicals & raw materials", "low": 50, "high": 100 },
+        { "label": "Glaze waste & slurry disposal", "low": 20, "high": 50 }
+      ]
+    },
+    {
+      "name": "Woodworking", "interest": 49, "topPriority": 11,
+      "upfrontLow": 25, "upfrontHigh": 50, "monthlyLow": 500, "monthlyHigh": 1000,
+      "buildout": 4, "ongoing": 4, "tier": 2,
+      "setupItems": [
+        { "label": "SawStop table saw (non-negotiable for safety)", "low": 4000, "high": 7000 },
+        { "label": "CNC router (optional but high-value)", "low": 8000, "high": 20000 },
+        { "label": "Planer, jointer, bandsaw", "low": 3000, "high": 6000 },
+        { "label": "Router table, drill press, lathe", "low": 2000, "high": 5000 },
+        { "label": "Dust collection system (mandatory)", "low": 2000, "high": 5000 },
+        { "label": "Workbenches, clamps, hand tools", "low": 2000, "high": 5000 },
+        { "label": "Safety gear, signage, fire extinguishers", "low": 500, "high": 2000 }
+      ],
+      "opsItems": [
+        { "label": "Saw blades, router bits, sandpaper", "low": 150, "high": 300 },
+        { "label": "Finishing supplies (stain, polyurethane, oil)", "low": 100, "high": 200 },
+        { "label": "Dust collector bags & filters", "low": 50, "high": 100 },
+        { "label": "Machine maintenance & alignment", "low": 100, "high": 200 },
+        { "label": "Safety supplies (respirators, ear protection)", "low": 50, "high": 100 },
+        { "label": "Lumber & sheet goods for demos", "low": 50, "high": 100 }
+      ]
+    },
+    {
+      "name": "Community Kitchen", "interest": 60, "topPriority": 16,
+      "upfrontLow": 35, "upfrontHigh": 70, "monthlyLow": 1000, "monthlyHigh": 2200,
+      "buildout": 5, "ongoing": 4, "tier": 3,
+      "setupItems": [
+        { "label": "Commercial ranges × 2 + ovens", "low": 4000, "high": 10000 },
+        { "label": "Commercial hood, fire suppression & ventilation", "low": 5000, "high": 15000 },
+        { "label": "Commercial refrigerators & freezers", "low": 3000, "high": 6000 },
+        { "label": "Commercial dishwasher (3-compartment sink req.)", "low": 2000, "high": 5000 },
+        { "label": "Health dept–compliant build-out (flooring, drains, walls)", "low": 8000, "high": 20000 },
+        { "label": "NSF-rated smallwares, cookware & utensils", "low": 3000, "high": 6000 },
+        { "label": "Prep tables, shelving, dry storage", "low": 2000, "high": 4000 },
+        { "label": "Permits & health dept licensure fees", "low": 2000, "high": 4000 }
+      ],
+      "opsItems": [
+        { "label": "Food ingredients (class supplies)", "low": 150, "high": 400 },
+        { "label": "Commercial equipment maintenance", "low": 200, "high": 400 },
+        { "label": "Health dept inspections & compliance", "low": 100, "high": 200 },
+        { "label": "NSF cleaning & sanitation supplies", "low": 100, "high": 200 },
+        { "label": "Hood cleaning (quarterly, amortized)", "low": 100, "high": 200 },
+        { "label": "Grease trap service (monthly)", "low": 100, "high": 200 },
+        { "label": "Pest control contract", "low": 75, "high": 150 },
+        { "label": "Gas & water utilities (commercial scale)", "low": 175, "high": 450 }
+      ]
+    },
+    {
+      "name": "Metalworking / Welding", "interest": 49, "topPriority": 4,
+      "upfrontLow": 20, "upfrontHigh": 45, "monthlyLow": 300, "monthlyHigh": 800,
+      "buildout": 5, "ongoing": 5, "tier": 3,
+      "setupItems": [
+        { "label": "MIG welders × 2 (Miller, Lincoln)", "low": 1500, "high": 4000 },
+        { "label": "TIG welder", "low": 2000, "high": 5000 },
+        { "label": "Plasma cutter", "low": 1000, "high": 4000 },
+        { "label": "Fume extraction / welding ventilation (code req.)", "low": 3000, "high": 8000 },
+        { "label": "Fire suppression & safety upgrades (code req.)", "low": 2000, "high": 5000 },
+        { "label": "Welding tables (cast iron / steel)", "low": 2000, "high": 5000 },
+        { "label": "Angle grinder, bench grinder, band saw for metal", "low": 1000, "high": 3000 },
+        { "label": "PPE & safety gear (helmets, gloves, curtains)", "low": 1500, "high": 3000 },
+        { "label": "Starter metal stock inventory", "low": 2000, "high": 5000 }
+      ],
+      "opsItems": [
+        { "label": "Welding wire, electrodes & filler rod", "low": 60, "high": 200 },
+        { "label": "Shielding gas (Argon, CO₂, mixed)", "low": 60, "high": 150 },
+        { "label": "Grinding & cutting discs", "low": 50, "high": 100 },
+        { "label": "PPE replenishment (lenses, gloves)", "low": 50, "high": 100 },
+        { "label": "Ventilation filter maintenance", "low": 50, "high": 150 },
+        { "label": "Metal scrap & waste disposal", "low": 30, "high": 100 }
+      ]
+    }
   ],
   "ccm": {
     "name": "Clear Creek Makerspace",
@@ -36,30 +260,117 @@
     ]
   },
   "revenueModel": {
-    "memberMix": { "discounted": 0.20, "standard": 0.70, "household": 0.10 },
-    "memberThresholds": [20, 50, 100, 500],
+    "note": "Membership value = 24/7 access to equipment you cannot afford to own. Community programming is the hook that fills the space and sells per-class revenue; it is not the subscription product.",
+    "membershipTiers": [
+      {
+        "name": "Day Pass",
+        "who": "Visitors, one-time projects, try-before-you-buy",
+        "monthly": null,
+        "perUse": 25,
+        "toolAccess": true,
+        "commercialUse": false,
+        "color": "grey"
+      },
+      {
+        "name": "Community",
+        "who": "Members who want event/class pricing + community, no equipment",
+        "monthly": 25,
+        "annual": 240,
+        "toolAccess": false,
+        "commercialUse": false,
+        "color": "green",
+        "note": "Keeps the community accessible without inflating cost. Not the growth driver."
+      },
+      {
+        "name": "Maker",
+        "who": "24/7 access to all equipment — the core membership",
+        "monthly": 65,
+        "annual": 600,
+        "toolAccess": true,
+        "commercialUse": false,
+        "color": "blue",
+        "note": "This is why people pay. $65/mo for $250k of tools you can't own is an obvious value."
+      },
+      {
+        "name": "Commercial Maker",
+        "who": "Maker benefits + sell what you make, priority scheduling, dedicated storage",
+        "monthly": 130,
+        "annual": 1200,
+        "toolAccess": true,
+        "commercialUse": true,
+        "color": "purple",
+        "note": "For cottage producers, custom product businesses, and creative entrepreneurs. Critical for city partnership."
+      }
+    ],
+    "memberMix": { "community": 0.25, "maker": 0.60, "commercial": 0.15 },
+    "memberThresholds": [20, 50, 100, 200],
     "classScenarios": [5, 10, 15],
-    "avgClassPriceDollars": 40,
+    "avgClassPriceDollars": 45,
     "avgClassAttendees": 10,
     "paidClassFraction": 0.80,
-    "dayPassPriceDollars": 20,
-    "estimatedDayPassesPerMonth": 33,
+    "dayPassPriceDollars": 25,
+    "estimatedDayPassesPerMonth": 30,
     "otherRevenue": [
-      { "name": "Tool certifications",    "low": 100,  "high": 300,  "notes": "$20 per cert; grows with membership" },
-      { "name": "Space / event rental",   "low": 300,  "high": 800,  "notes": "$100–200 per booking, 3–5/mo" },
-      { "name": "Grants (nonprofit)",     "low": 1500, "high": 4000, "notes": "Equiv. $20–50k/yr; highly variable" },
-      { "name": "Corporate sponsorships", "low": 500,  "high": 2000, "notes": "Local businesses; requires outreach" },
-      { "name": "Marketplace / sales",    "low": 200,  "high": 500,  "notes": "Member work, supplies, consumables" },
-      { "name": "Donations",              "low": 300,  "high": 1000, "notes": "Especially during launch campaigns" }
+      { "name": "Commercial kitchen rental",          "low": 350,  "high": 1750, "notes": "$35/hr; cottage food producers, caterers, meal-prep startups" },
+      { "name": "Equipment rental (non-member)",      "low": 200,  "high": 600,  "notes": "$50–100/session; businesses needing one-off production runs" },
+      { "name": "City economic dev partnership",      "low": 1000, "high": 3000, "notes": "Below-market rent or direct grant tied to ED outcome reporting" },
+      { "name": "State/federal grants (OEDIT, EDA)",  "low": 1500, "high": 5000, "notes": "Equiv. $18–60k/yr; economic dev nonprofits are competitive applicants" },
+      { "name": "Corporate memberships",              "low": 300,  "high": 1500, "notes": "$150–300/mo per business; prototyping, employee skill-building" },
+      { "name": "Classes & workshops",                "low": 1200, "high": 3600, "notes": "$45 avg × 10 attendees × 80% paid; 5–15 classes/mo" },
+      { "name": "Space / event rental",               "low": 200,  "high": 600,  "notes": "$100–200 per booking, 2–4/mo" }
     ],
     "expenses": [
       { "name": "Rent (2,500–5,000 sqft industrial/flex in Golden)", "low": 5000, "high": 14000 },
       { "name": "Utilities (power-heavy for maker equipment)",        "low": 1200, "high": 2500  },
-      { "name": "Insurance (equipment, liability)",                   "low": 500,  "high": 1000  },
+      { "name": "Insurance (equipment, liability, food service)",     "low": 600,  "high": 1200  },
       { "name": "Staffing (1 FT + part-time)",                       "low": 4500, "high": 9000  },
-      { "name": "Equipment maintenance",                             "low": 400,  "high": 1000  },
-      { "name": "Software / payment / admin",                        "low": 300,  "high": 500   },
-      { "name": "Consumables / supplies",                            "low": 300,  "high": 800   }
+      { "name": "Equipment maintenance & consumables",                "low": 600,  "high": 1500  },
+      { "name": "Software / payment / admin",                        "low": 300,  "high": 500   }
+    ],
+    "businessUseProfiles": [
+      {
+        "name": "Cottage Food Producer",
+        "tools": "Commercial kitchen",
+        "example": "Artisan hot sauce, preserves, specialty baked goods — sold at Golden's farmers market, First Friday Art Walks, and online",
+        "whyItMatters": "CO Cottage Food Act caps home-kitchen sales; a licensed commercial kitchen unlocks full market access and higher-volume production"
+      },
+      {
+        "name": "Visual Artist / Maker",
+        "tools": "Laser cutter, vinyl cutter, 3D printer, sewing",
+        "example": "Laser-engraved art prints, custom gallery merchandise, edition prints, hand-finished ceramics for First Friday and gallery shows",
+        "whyItMatters": "Golden has a thriving gallery scene — artists who already sell work can add reproducible products without buying $30–80k in equipment"
+      },
+      {
+        "name": "Metal Artist & Fabricator",
+        "tools": "MIG/TIG welder, plasma cutter, angle grinder, metalworking bench",
+        "example": "Sculptural metalwork, custom art installations, decorative ironwork, architectural metal accents for local galleries, restaurants, and homeowners",
+        "whyItMatters": "Welding and plasma equipment is expensive, loud, and space-intensive — impossible for most artists to own. A commercial membership gives professional access without a full shop buildout"
+      },
+      {
+        "name": "Wood Artist & Custom Furniture",
+        "tools": "CNC router, full woodshop",
+        "example": "Sculptural wood art, custom furniture commissions, gallery display fixtures, hand-crafted home goods",
+        "whyItMatters": "Golden's creative community includes furniture makers and wood artists with demand but no local shop access; commercial tier enables professional production and delivery"
+      },
+      {
+        "name": "Product Prototyper / Inventor",
+        "tools": "3D printer, CNC mill, electronics bench",
+        "example": "Hardware startup prototyping, product iteration before manufacturing; Mines graduates with spin-out ideas",
+        "whyItMatters": "Prototype locally instead of outsourcing to Denver or online services; Colorado School of Mines is the obvious pipeline"
+      },
+      {
+        "name": "Repair / Service Business",
+        "tools": "Electronics bench, welding, sewing/upholstery",
+        "example": "Outdoor gear repair, appliance repair, custom upholstery, clothing alterations — Golden's outdoor culture creates steady demand",
+        "whyItMatters": "Low overhead business launch; space and tools are provided, the member brings the skill"
+      }
+    ],
+    "cityOutcomes": [
+      { "metric": "Businesses launched or incubated",    "y1": "3–8",   "y3": "15–30" },
+      { "metric": "Local jobs created (FT equivalent)",  "y1": "2–5",   "y3": "10–20" },
+      { "metric": "Products sold in Golden economy",     "y1": "low",   "y3": "measurable" },
+      { "metric": "Mines/student entrepreneurship",      "y1": "pilot", "y3": "program" },
+      { "metric": "Downtown foot traffic generated",     "y1": "est. 200–400 visits/mo", "y3": "est. 800–1,500/mo" }
     ]
   }
 }
