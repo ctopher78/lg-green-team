@@ -166,6 +166,9 @@
   .spotlight-card .age-count  { font-size:0.75rem; opacity:0.75; margin-bottom:12px; display:block; }
   .spotlight-card .top-label  { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; opacity:0.7; margin-bottom:6px; }
   .spotlight-card .interest-pill { display:inline-block; background:rgba(255,255,255,0.3); border-radius:20px; padding:4px 10px; font-size:0.75rem; font-weight:600; margin:3px 2px; }
+  .sp-u13 { background:linear-gradient(135deg,#7b241c,#e74c3c); color:white; }
+  .sp-13  { background:linear-gradient(135deg,#922b21,#e74c3c); color:white; }
+  .sp-18  { background:linear-gradient(135deg,#c0392b,#e67e22); color:white; }
   .sp-24 { background:linear-gradient(135deg,#1a5276,#2980b9); color:white; }
   .sp-35 { background:linear-gradient(135deg,#1e8449,#27ae60); color:white; }
   .sp-50 { background:linear-gradient(135deg,#784212,#ca6f1e); color:white; }
@@ -1654,9 +1657,9 @@ const INTEREST_SHORTS = [
   'Woodworking','Sewing','Clubs','Painting','3D Print','Small Biz'
 ];
 
-const AGE_ORDER  = ['24-34','35-49','50-64','65+'];
-const AGE_LABELS = ['24–34','35–49','50–64','65+'];
-const AGE_COLORS = ['#2980b9','#27ae60','#ca6f1e','#8e44ad'];
+const AGE_ORDER  = ['Under 13','13-17','18-24','24-34','35-49','50-64','65+'];
+const AGE_LABELS = ['Under 13','13–17','18–24','24–34','35–49','50–64','65+'];
+const AGE_COLORS = ['#e74c3c','#c0392b','#e67e22','#2980b9','#27ae60','#ca6f1e','#8e44ad'];
 
 // ═══════════════════════════════════════════════════════════
 // HELPERS
@@ -1984,7 +1987,7 @@ function buildDashboard(rows) {
 
   // ── Age spotlights (dynamic top interests per group) ──────
   const spotlightEl = document.getElementById('spotlightGrid');
-  const spClass = ['sp-24','sp-35','sp-50','sp-65'];
+  const spClass = ['sp-u13','sp-13','sp-18','sp-24','sp-35','sp-50','sp-65'];
   AGE_ORDER.forEach((age, i) => {
     const topInterests = ageByInterest
       .map(d => ({ label: d.interest, pct: ageN[age] ? Math.round(d.byAge[age]/ageN[age]*100) : 0 }))
