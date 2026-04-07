@@ -55,8 +55,33 @@
   }
   .controls button:hover { background: var(--w15); }
   .slide-counter { opacity: 0.55; min-width: 34px; text-align: center; }
-  .speed-wrap { display: flex; align-items: center; gap: 6px; }
-  .speed-wrap input[type=range] { width: 72px; accent-color: var(--gold); cursor: pointer; }
+
+
+  /* ── Per-slide timer pill ───────────────────────── */
+  .slide-dur {
+    position: fixed; bottom: 18px; right: 24px;
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(6,13,24,0.75); backdrop-filter: blur(10px);
+    border: 1px solid rgba(245,197,24,0.2); border-radius: 20px;
+    padding: 5px 13px; z-index: 200;
+    font-size: 0.7rem; color: rgba(255,255,255,0.35);
+    opacity: 0.3; transition: opacity 0.25s;
+  }
+  .slide-dur:hover { opacity: 1; }
+  .slide-dur input[type=number] {
+    width: 34px; background: none; border: none;
+    border-bottom: 1px solid rgba(245,197,24,0.45);
+    color: var(--gold); font-size: 0.7rem; font-weight: 700;
+    font-family: var(--font); text-align: center; outline: none;
+    -moz-appearance: textfield;
+  }
+  .slide-dur input[type=number]::-webkit-inner-spin-button,
+  .slide-dur input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .slide-dur .dur-clear {
+    cursor: pointer; opacity: 0.4; font-size: 0.65rem; line-height: 1;
+    background: none; border: none; color: inherit; padding: 0 0 0 2px;
+  }
+  .slide-dur .dur-clear:hover { opacity: 1; }
 
   /* ── Shared components ──────────────────────────── */
   .corner-logo {
@@ -249,9 +274,23 @@
 <div class="deck">
 
   <!-- ══════════════════════════════════════════════
-       SLIDE 1 — Hero + Age Distribution
+       SLIDE 1 — Title
   ══════════════════════════════════════════════ -->
-  <div class="slide active" id="s1">
+  <div class="slide active" id="s0" data-duration="6" style="background:linear-gradient(135deg,#f5c518 0%,#e8b800 60%,#d4a800 100%);">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;padding:0 60px;">
+      <img src="golden-makers-sticker.png" alt="Golden Makers" style="height:120px;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.2));margin-bottom:8px;">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:3.5px;color:var(--navy);opacity:0.6;">Golden, Colorado</div>
+      <div style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:var(--navy-dark);line-height:1.1;letter-spacing:-0.5px;">Community Survey<br>Results</div>
+      <div style="width:60px;height:3px;background:var(--navy);border-radius:2px;opacity:0.3;"></div>
+      <div style="font-size:clamp(0.85rem,1.5vw,1.05rem);color:var(--navy);opacity:0.6;font-style:italic;">What Golden residents told us about their vision for a community makerspace</div>
+      <div style="margin-top:12px;font-size:0.68rem;font-weight:700;letter-spacing:3.5px;color:var(--navy);opacity:0.4;text-transform:uppercase;">Dream &nbsp;·&nbsp; Learn &nbsp;·&nbsp; Make &nbsp;·&nbsp; Share</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SLIDE 2 (was 1) — Hero + Age Distribution
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s1" data-duration="14">
     <div class="s1-left">
       <img class="gm-logo" src="golden-makers-sticker.png" alt="Golden Makers">
       <div class="gm-tagline">Dream &nbsp;·&nbsp; Learn &nbsp;·&nbsp; Make &nbsp;·&nbsp; Share</div>
@@ -273,7 +312,7 @@
   <!-- ══════════════════════════════════════════════
        SLIDE 2 — Community Connection
   ══════════════════════════════════════════════ -->
-  <div class="slide" id="s2">
+  <div class="slide" id="s2" data-duration="18">
     <img class="corner-logo" src="golden-makers-sticker.png" alt="Golden Makers">
     <div class="slide-eyebrow">What We Heard</div>
     <div class="slide-headline">Golden Is Great — And We Can Add More</div>
@@ -331,10 +370,10 @@
   <!-- ══════════════════════════════════════════════
        SLIDE 3 — What You Want to Make
   ══════════════════════════════════════════════ -->
-  <div class="slide" id="s3">
+  <div class="slide" id="s3" data-duration="16">
     <img class="corner-logo" src="golden-makers-sticker.png" alt="Golden Makers">
     <div class="slide-eyebrow">What You Want to Do Here</div>
-    <div class="slide-headline">Golden Wants a Place to Create</div>
+    <div class="slide-headline">Golden's Next Creative Frontier</div>
     <div class="gold-rule"></div>
     <div class="s3-cols">
 
@@ -367,7 +406,7 @@
   <!-- ══════════════════════════════════════════════
        SLIDE 4 — Join Us
   ══════════════════════════════════════════════ -->
-  <div class="slide" id="s4">
+  <div class="slide" id="s4" data-duration="18">
     <img class="corner-logo" src="golden-makers-sticker.png" alt="Golden Makers">
     <div class="slide-eyebrow">Get Involved</div>
     <div class="slide-headline">Help Us Make It Happen</div>
@@ -404,6 +443,192 @@
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════════
+       SLIDE 5 — TRANSITION: Survey Results → What We're Building
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s5" data-duration="6" style="background:linear-gradient(135deg,#f5c518 0%,#e8b800 60%,#d4a800 100%);">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:22px;max-width:700px;text-align:center;padding:0 48px;">
+      <img src="golden-makers-sticker.png" alt="Golden Makers" style="height:86px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2));">
+      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--navy);opacity:0.55;">Now In Progress</div>
+      <div style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--navy-dark);line-height:1.1;letter-spacing:-0.5px;">What We're Building</div>
+      <div style="width:56px;height:3px;background:var(--navy);border-radius:2px;opacity:0.25;"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SLIDES 6–9 — Golden Makers presentation screenshots
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s6" style="background:#111c2e;padding:0;">
+    <img src="gm-ppt-01.png" alt="Golden Makers Tool Box — Our Roadmap"
+         style="max-width:98%;max-height:96vh;width:auto;height:auto;display:block;border-radius:4px;box-shadow:0 6px 32px rgba(0,0,0,0.5);">
+  </div>
+
+  <div class="slide" id="s7" style="background:#111c2e;padding:0;">
+    <img src="gm-ppt-02.png" alt="Current Status"
+         style="max-width:98%;max-height:96vh;width:auto;height:auto;display:block;border-radius:4px;box-shadow:0 6px 32px rgba(0,0,0,0.5);">
+  </div>
+
+  <div class="slide" id="s8" style="background:#111c2e;padding:0;">
+    <img src="gm-ppt-03.png" alt="Tools Collected So Far"
+         style="max-width:98%;max-height:96vh;width:auto;height:auto;display:block;border-radius:4px;box-shadow:0 6px 32px rgba(0,0,0,0.5);">
+  </div>
+
+  <div class="slide" id="s9" style="background:#111c2e;padding:0;">
+    <img src="gm-ppt-04.png" alt="Community in Action"
+         style="max-width:98%;max-height:96vh;width:auto;height:auto;display:block;border-radius:4px;box-shadow:0 6px 32px rgba(0,0,0,0.5);">
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SLIDE 11 — TRANSITION: Inspirational Models
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s10" data-duration="6" style="background:linear-gradient(135deg,#f5c518 0%,#e8b800 60%,#d4a800 100%);">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:22px;max-width:700px;text-align:center;padding:0 48px;">
+      <img src="golden-makers-sticker.png" alt="Golden Makers" style="height:82px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2));">
+      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--navy);opacity:0.55;">Section 3</div>
+      <div style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--navy-dark);line-height:1.1;letter-spacing:-0.5px;">Inspirational Models</div>
+      <div style="width:56px;height:3px;background:var(--navy);border-radius:2px;opacity:0.25;"></div>
+      <div style="font-size:clamp(0.85rem,1.5vw,1.05rem);color:var(--navy);opacity:0.6;font-style:italic;">Community spaces around the world that show what's possible</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;margin-top:8px;">
+        <div style="padding:16px;background:rgba(0,0,0,0.08);border-radius:10px;text-align:center;">
+          <div style="font-size:1.4rem;margin-bottom:6px;">🇺🇸</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--navy-dark);">U.S. Examples</div>
+          <div style="font-size:0.68rem;color:var(--navy);opacity:0.5;margin-top:3px;">6 communities</div>
+        </div>
+        <div style="padding:16px;background:rgba(0,0,0,0.14);border-radius:10px;text-align:center;">
+          <div style="font-size:1.4rem;margin-bottom:6px;">🌍</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--navy-dark);">International</div>
+          <div style="font-size:0.68rem;color:var(--navy);opacity:0.5;margin-top:3px;">5 countries</div>
+        </div>
+        <div style="padding:16px;background:rgba(0,0,0,0.08);border-radius:10px;text-align:center;">
+          <div style="font-size:1.4rem;margin-bottom:6px;">💡</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--navy-dark);">What's Possible</div>
+          <div style="font-size:0.68rem;color:var(--navy);opacity:0.5;margin-top:3px;">For Golden</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SLIDE 12 — U.S. Examples (PDF page 1)
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s11" data-duration="25" style="background:#f5f5f0;padding:0;">
+    <img src="gm-inspo-01.png" alt="U.S. Community Space Examples"
+         style="max-width:92%;max-height:90vh;width:auto;height:auto;display:block;box-shadow:0 6px 32px rgba(0,0,0,0.3);">
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SLIDE 13 — International Examples (PDF page 2)
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s12" data-duration="25" style="background:#f5f5f0;padding:0;">
+    <img src="gm-inspo-02.png" alt="International Community Space Examples"
+         style="max-width:92%;max-height:90vh;width:auto;height:auto;display:block;box-shadow:0 6px 32px rgba(0,0,0,0.3);">
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SLIDE 14 — TRANSITION: City Grant Award
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s13" data-duration="6" style="background:linear-gradient(135deg,#f5c518 0%,#e8b800 60%,#d4a800 100%);">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;padding:0 60px;">
+      <img src="golden-makers-sticker.png" alt="Golden Makers" style="height:82px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2));">
+      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--navy);opacity:0.55;">Section 4</div>
+      <div style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--navy-dark);line-height:1.1;letter-spacing:-0.5px;">City Grant Award</div>
+      <div style="width:56px;height:3px;background:var(--navy);border-radius:2px;opacity:0.25;"></div>
+      <div style="font-size:clamp(0.85rem,1.5vw,1.05rem);color:var(--navy);opacity:0.6;font-style:italic;">City of Golden Arts &amp; Culture Commission</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SLIDE 15 — Grant Hero
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s14" data-duration="16" style="background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 55%,var(--navy-dark) 100%);padding:52px 64px;">
+    <img class="corner-logo" src="golden-makers-sticker.png" alt="Golden Makers">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;width:100%;max-width:1040px;align-items:center;">
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="slide-eyebrow" style="text-align:left;">Think with your Hands — Golden Makers Project</div>
+        <div style="font-size:clamp(3.5rem,7vw,5.5rem);font-weight:800;color:var(--gold);line-height:1;letter-spacing:-2px;">$5,500</div>
+        <div style="font-size:clamp(0.9rem,1.6vw,1.15rem);font-weight:700;color:white;line-height:1.3;">City of Golden<br>Arts &amp; Culture Commission Grant</div>
+        <div style="width:44px;height:3px;background:var(--gold);border-radius:2px;"></div>
+        <div style="font-size:clamp(0.75rem,1.2vw,0.9rem);color:var(--w70);line-height:1.6;">A full year of active programming, outreach, and community-led planning — moving us from pop-up outreach into a structured, community-anchored phase.</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);opacity:0.7;margin-bottom:2px;">What this grant enables</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy-dark);font-size:0.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div>
+          <div style="font-size:clamp(0.78rem,1.2vw,0.9rem);color:var(--w70);line-height:1.5;">Formalize our brand, digital presence &amp; community outreach</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy-dark);font-size:0.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div>
+          <div style="font-size:clamp(0.78rem,1.2vw,0.9rem);color:var(--w70);line-height:1.5;">Host a flagship maker event + two community outreach events</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy-dark);font-size:0.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div>
+          <div style="font-size:clamp(0.78rem,1.2vw,0.9rem);color:var(--w70);line-height:1.5;">Run a community feasibility &amp; strategic planning session</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy-dark);font-size:0.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div>
+          <div style="font-size:clamp(0.78rem,1.2vw,0.9rem);color:var(--w70);line-height:1.5;">Seed fund for tools &amp; portable storage for recurring events</div>
+        </div>
+        <div style="margin-top:6px;padding:14px 18px;background:var(--gold-faint);border:1px solid var(--gold-dim);border-radius:10px;">
+          <div style="font-size:clamp(0.76rem,1.1vw,0.87rem);color:white;line-height:1.5;font-style:italic;">"Lays the groundwork for formalizing our organization, identifying potential physical spaces, and launching foundational fundraising for a permanent location."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SLIDE 16 — Grant Funded Activities
+  ══════════════════════════════════════════════ -->
+  <div class="slide" id="s15" data-duration="20" style="background:linear-gradient(145deg,var(--navy-dark) 0%,var(--navy-mid) 55%,#0a1828 100%);padding:46px 56px 54px;">
+    <img class="corner-logo" src="golden-makers-sticker.png" alt="Golden Makers">
+    <div class="slide-eyebrow">$5,500 ACC Grant — 2026 Plan</div>
+    <div class="slide-headline">What the Grant Funds</div>
+    <div class="gold-rule"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px;width:100%;max-width:1060px;">
+
+      <div style="background:var(--w08);border:1px solid var(--w15);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:6px;">🎨</div>
+        <div style="font-size:clamp(0.82rem,1.3vw,0.95rem);font-weight:700;color:var(--gold);margin-bottom:5px;">Community Branding &amp; Outreach</div>
+        <div style="font-size:clamp(0.71rem,1.05vw,0.82rem);color:var(--w70);line-height:1.5;">Revised logo, print collateral, Facebook &amp; Instagram campaigns to reach Golden's diverse residents.</div>
+      </div>
+
+      <div style="background:var(--w08);border:1px solid var(--w15);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:6px;">📱</div>
+        <div style="font-size:clamp(0.82rem,1.3vw,0.95rem);font-weight:700;color:var(--gold);margin-bottom:5px;">Digital Outreach Platform</div>
+        <div style="font-size:clamp(0.71rem,1.05vw,0.82rem);color:var(--w70);line-height:1.5;">Community engagement tool to promote events, track attendance, collect feedback &amp; manage volunteers.</div>
+      </div>
+
+      <div style="background:var(--w08);border:1px solid var(--w15);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:6px;">🪵</div>
+        <div style="font-size:clamp(0.82rem,1.3vw,0.95rem);font-weight:700;color:var(--gold);margin-bottom:5px;">Flagship Maker Event</div>
+        <div style="font-size:clamp(0.71rem,1.05vw,0.82rem);color:var(--w70);line-height:1.5;">Public hands-on event — e.g. woodworking pop-up at the Golden Farmers Market. Free or low-cost for all ages.</div>
+      </div>
+
+      <div style="background:var(--w08);border:1px solid var(--w15);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:6px;">🛠️</div>
+        <div style="font-size:clamp(0.82rem,1.3vw,0.95rem);font-weight:700;color:var(--gold);margin-bottom:5px;">Two Outreach Events</div>
+        <div style="font-size:clamp(0.71rem,1.05vw,0.82rem);color:var(--w70);line-height:1.5;">Kids workshop, DIY Fix It Repair Fair, or a "Meet the Makers" social at a local brewery or community hall.</div>
+      </div>
+
+      <div style="background:var(--w08);border:1px solid var(--w15);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:6px;">🗺️</div>
+        <div style="font-size:clamp(0.82rem,1.3vw,0.95rem);font-weight:700;color:var(--gold);margin-bottom:5px;">Community Planning Session</div>
+        <div style="font-size:clamp(0.71rem,1.05vw,0.82rem);color:var(--w70);line-height:1.5;">Q4 2026 facilitated feasibility study — artists, engineers, educators &amp; city officials mapping the path forward.</div>
+      </div>
+
+      <div style="background:var(--w08);border:1px solid var(--w15);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:6px;">📦</div>
+        <div style="font-size:clamp(0.82rem,1.3vw,0.95rem);font-weight:700;color:var(--gold);margin-bottom:5px;">Seed Fund: Tools &amp; Storage</div>
+        <div style="font-size:clamp(0.71rem,1.05vw,0.82rem);color:var(--w70);line-height:1.5;">Core woodworking &amp; hand tools, craft &amp; electronics kits, safety gear, and modular mobile storage.</div>
+      </div>
+
+    </div>
+  </div>
+
 </div><!-- .deck -->
 
 <!-- ── Controls ─────────────────────────────────────── -->
@@ -411,12 +636,15 @@
   <button id="btnPrev">&#8249;</button>
   <button id="btnPlay">&#9646;&#9646;</button>
   <button id="btnNext">&#8250;</button>
-  <span class="slide-counter" id="slideCounter">1 / 4</span>
-  <div class="speed-wrap">
-    <span style="opacity:0.45">&#9654;</span>
-    <input type="range" id="speedSlider" min="5" max="30" value="12" step="1">
-    <span id="speedLabel">12s</span>
-  </div>
+  <span class="slide-counter" id="slideCounter">1 / 16</span>
+
+</div>
+
+<div class="slide-dur" id="slideDur">
+  <span>slide</span>
+  <input type="number" id="slideDurInput" min="1" max="120" step="1">
+  <span>s</span>
+  <button class="dur-clear" id="slideDurClear" title="Reset to global default">✕</button>
 </div>
 
 <script>
@@ -489,8 +717,8 @@ function initChartsForSlide(idx) {
   chartsInited.add(idx);
   const { rows, n, connCounts, freqCounts, monthly } = SLIDE_DATA;
 
-  // ── Slide 1: Age donut ────────────────────────────────────
-  if (idx === 0) {
+  // ── Slide 2: Age donut ────────────────────────────────────
+  if (idx === 1) {
     const buckets = { 'Under 24': 0, '24–34': 0, '35–49': 0, '50–64': 0, '65+': 0 };
     rows.forEach(r => {
       const a = (r[COLS.age]||'').trim();
@@ -532,8 +760,8 @@ function initChartsForSlide(idx) {
     });
   }
 
-  // ── Slide 2: Connection horizontal bar chart ───────────────
-  if (idx === 1) {
+  // ── Slide 3: Connection horizontal bar chart ───────────────
+  if (idx === 2) {
     const labels = ['Yes, very connected', 'Somewhat connected', 'Not really', 'Not connected'];
     const keys   = ['Yes, very',           'Somewhat',           'Not really', 'No'];
     const data   = keys.map(k => connCounts[k] || 0);
@@ -566,8 +794,8 @@ function initChartsForSlide(idx) {
     });
   }
 
-  // ── Slide 3: Frequency donut ──────────────────────────────
-  if (idx === 2) {
+  // ── Slide 4: Frequency donut ──────────────────────────────
+  if (idx === 3) {
     const lessOften = (freqCounts['A few times a year']||0) + (freqCounts['Special events only']||0);
     const notSure   = freqCounts['Not sure'] || 0;
     const data = [monthly, lessOften, notSure];
@@ -660,13 +888,44 @@ let intervalId    = null;
 let progressRaf   = null;
 let progressStart = null;
 
-const speedSlider  = document.getElementById('speedSlider');
-const speedLabel   = document.getElementById('speedLabel');
+const DEFAULT_DURATION = 8;
 const slideCounter = document.getElementById('slideCounter');
 const progressBar  = document.getElementById('progressBar');
 const btnPlay      = document.getElementById('btnPlay');
 
-function getDelay() { return parseInt(speedSlider.value, 10) * 1000; }
+function getDelay() {
+  const custom = slides[current].dataset.duration;
+  return (custom !== undefined ? parseInt(custom, 10) : DEFAULT_DURATION) * 1000;
+}
+
+const slideDurInput = document.getElementById('slideDurInput');
+const slideDurClear = document.getElementById('slideDurClear');
+
+function updateSpeedLabel() {
+  const custom = slides[current].dataset.duration;
+  if (custom !== undefined) {
+    slideDurInput.value = custom;
+    slideDurClear.style.visibility = 'visible';
+  } else {
+    slideDurInput.value = DEFAULT_DURATION;
+    slideDurClear.style.visibility = 'hidden';
+  }
+}
+
+slideDurInput.addEventListener('change', () => {
+  const val = parseInt(slideDurInput.value, 10);
+  if (!isNaN(val) && val > 0) {
+    slides[current].dataset.duration = val;
+    slideDurClear.style.visibility = 'visible';
+    if (playing) startTimer();
+  }
+});
+
+slideDurClear.addEventListener('click', () => {
+  delete slides[current].dataset.duration;
+  updateSpeedLabel();
+  if (playing) startTimer();
+});
 
 function goTo(idx) {
   slides[current].classList.remove('active');
@@ -674,14 +933,19 @@ function goTo(idx) {
   slides[current].classList.add('active');
   slideCounter.textContent = (current + 1) + ' / ' + TOTAL;
   initChartsForSlide(current);
+  updateSpeedLabel();
   resetProgress();
 }
 
 function resetProgress() {
   cancelAnimationFrame(progressRaf);
+  clearTimeout(intervalId);
   progressBar.style.transition = 'none';
   progressBar.style.width = '0%';
-  if (playing) startProgress();
+  if (playing) {
+    intervalId = setTimeout(() => goTo(current + 1), getDelay());
+    startProgress();
+  }
 }
 
 function startProgress() {
@@ -695,13 +959,9 @@ function startProgress() {
   progressRaf = requestAnimationFrame(tick);
 }
 
-function startTimer() {
-  clearInterval(intervalId);
-  intervalId = setInterval(() => goTo(current + 1), getDelay());
-  startProgress();
-}
+function startTimer() { resetProgress(); }
 
-function stopTimer() { clearInterval(intervalId); cancelAnimationFrame(progressRaf); }
+function stopTimer() { clearTimeout(intervalId); cancelAnimationFrame(progressRaf); }
 
 function setPlaying(val) {
   playing = val;
@@ -712,7 +972,7 @@ function setPlaying(val) {
 document.getElementById('btnPrev').addEventListener('click', () => { goTo(current - 1); if (playing) startTimer(); });
 document.getElementById('btnNext').addEventListener('click', () => { goTo(current + 1); if (playing) startTimer(); });
 btnPlay.addEventListener('click', () => setPlaying(!playing));
-speedSlider.addEventListener('input', () => { speedLabel.textContent = speedSlider.value + 's'; if (playing) startTimer(); });
+
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT') return;
   if (e.key === 'ArrowRight' || e.key === ' ') { goTo(current + 1); if (playing) startTimer(); }
@@ -726,6 +986,7 @@ Papa.parse(CSV_FILE, {
   complete: results => {
     buildSlides(results.data);
     initChartsForSlide(0);   // init slide 1 charts immediately
+    updateSpeedLabel();
     setPlaying(true);
   },
   error: () => setPlaying(true),
